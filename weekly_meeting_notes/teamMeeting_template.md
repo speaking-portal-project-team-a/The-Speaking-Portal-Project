@@ -23,7 +23,7 @@
 - Member #4
   
 
-## Backlog/Kanban Board Update 
+## Backlog/Kanban Board Update
 
 
 ## This Week  
