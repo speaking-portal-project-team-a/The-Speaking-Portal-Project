@@ -1,5 +1,11 @@
 # 🚀 Weekly Team Meeting Minutes
 
+**Start Time**
+
+**End Time**
+
+**Location**
+
 **Date** Sept 16th 2022
 
 ## 👋 Attendence
@@ -15,18 +21,12 @@
 
 - Dad joke of the day
 
-## Last Week
+## Announcements
 
-- Member #1
-- Member #2
-- Member #3
-- Member #4
-  
-
-## Backlog/Kanban Board Update
-
+## Last Week (Restrospective)
 
 ## This Week  
 
+## Client Meeting
 
 ## Additional Notes
