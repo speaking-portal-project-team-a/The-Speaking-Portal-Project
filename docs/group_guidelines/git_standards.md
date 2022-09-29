@@ -32,7 +32,7 @@ PR names and branch names will follow a similar syntax, as everything is based o
 Pull request names should follow a similar syntax to branch names. They should start with the issue # which they aim to 
 close, and then continue on to provide a short informative summary of what the pull request accomplishes. Below is the
 naming scheme we should follow for all pull requests: 
-<issue-id>_<short-PR-summary>
+<issue-id> <short PR summary>
 ### Description:
 Above all else, please ensure you use the closing keyword within your PR description, this ensures that the issue tagged 
 is successfully resolved. If your PR does not close an issue, explain why. Your description should explain what you did,
