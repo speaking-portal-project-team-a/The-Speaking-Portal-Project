@@ -17,7 +17,7 @@ For each source, 1-3 points are added which are either quotes or summaries of wh
 - [Microsoft Neural TSS](#microsoft-neural-tss) (recommended read)
 - [AI LipGAN](#ai-lipgan) (recommended read)
 - [Rhubarb](#rhubarb-lip-sync) (recommended read)
-- [Papagayo]()
+- [Papagayo](#papagayo)
 
 <br>
 
