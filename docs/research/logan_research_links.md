@@ -37,6 +37,8 @@ once the english language is implemented, it should be relatively easy to build 
 - I know its a wiki article, but there is information in here that is very useful. 
   - The main question which I have already raised is what synthesis technique kukarella uses? this is important for us 
     to figure out how we will need to proceed
+[Phoneme to Viseme Mapping](https://arxiv.org/pdf/1805.02934.pdf)
+
 
 
 # Video Generation Research
