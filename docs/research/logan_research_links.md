@@ -45,3 +45,7 @@ once the english language is implemented, it should be relatively easy to build 
 - This gives me ideas for how we could generate MP4s from a CSS animation, however, we would still need to figure out
   how to sync the audio onto the video. Ideally, the video and audio are the same lengths and we don't have to more than
   simply attach the audio to the video.
+
+- How is this going to work for multiple speakers? What is the video supposed to look like? do we just generate a 
+  talking face? Should the rest of the body be visible? pose-able? These are questions we need to ask Kukarella, we need
+  a concrete example of what a table read video is expected to look like.
