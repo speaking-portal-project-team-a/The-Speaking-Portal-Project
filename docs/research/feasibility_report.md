@@ -55,12 +55,31 @@ This is a library from Microsofts text-to-speech platform that enables users to 
 
 ### 2. RuBard
 
+#### Pro 
+
+- Simple and powerful. Lets user run `rhubarb -o output.txt my-recording.wav` from command line. This generates an output file from a .wav or .ogg file. 
+- Output is in `.txt`, `.tsv`, `.xml` or `.json` format
+- MIT License 
+
+#### Con
+- This library only handles animation mapping timestamps, another library will be required to generate an actual animation 
+- Library only handles lip syncing. Animated facial expresions are not included. 
+
+*More to be added WIP* 
+
 ### 3. Lip GAN
 
 ## Conclusion
 
 - which approach is best and why?
 
+# IDEAS
+- Possibly deliver everything as an API?
+- Use punctuation and sentament analysis libraries for 
+
+
 ## Questions
 
 - Does client already have software in place to create phonames and timestamps ?
+
+
