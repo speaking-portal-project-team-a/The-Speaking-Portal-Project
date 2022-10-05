@@ -23,15 +23,36 @@ Main objectives:
 
 ### 1. Microsoft Azure Viseme
 
- Viseme is the visual depiction of a phoneme in a spoken languange. Defines the position of the face and month while someone is speaking
 
-This is a library from Microsofts text-to-speech platform that enables users to create simple animated graphics that talk in real time. This library uses Visemes, which are visual depictions of a phoneme in a spoken language. This visemes can be used to control the movement of 2D and 3D models.
+<https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/how-to-speech-synthesis-viseme?pivots=programming-language-csharp&tabs=visemeid>
 
-- This approach resolves the first two objectives
+This library uses Viseme's to create drive character text-to-speech animations. Viseme's are visual descriptions of phonemes in a spoken languange which define the position of the face and mouth while someone is speaking.
 
-- Viseme Link: <https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/how-to-speech-synthesis-viseme?pivots=programming-language-csharp&tabs=visemeid>
+This engine acceptes text or SSML text (Speech Synthesis Markup Language) which is a XML based markup language that lets developers specify how input text can be converted into synthesised speech.
 
-- Phoneme positions: <https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/how-to-speech-synthesis-viseme?pivots=programming-language-javascript&tabs=visemeid#map-phonemes-to-visemes>
+This text input is converted into a set viseme ID's, audio offset, and speech which are used to observe the timed speech in sequence. This text-audio conversion uses Microsofts Neural Text-to-Speech. The text and speech is processed through an engine with three main compoents.
+
+1. Text Analysis: Text is analyzed to extract phonames for each work.  
+2. TTS Acoustic Predictor: The time duration for each phoname is predicted.
+3. TTS Viseme Generator: The sequence of each phoname is predicted.
+
+The outputs of this generator are as follows:
+
+1. Viseme ID Sequence:
+
+```
+(Viseme), Viseme ID: 1, Audio offset: 200ms.
+```
+
+2. 2D SVG
+
+```<svg width= "1200px" height= "1200px" ..>
+  <g id= "front_start" stroke= "none" stroke-width= "1" fill= "none" fill-rule= "evenodd">
+    <animate attributeName= "d" begin= "d_dh_front_background_1_0.end" dur= "0.27500
+    ...
+```
+
+For 2D animations the output uses user made SVG's which can be easily incorporated onto any 2D animation.
 
 ### 2. RuBard
 
@@ -48,11 +69,13 @@ This is a library from Microsofts text-to-speech platform that enables users to 
 
 #### Con
 
+- Will require the use of Microsoft's speech to text platorm
+- May not ingerate well with the your already made text-to-speech platform
 - This library comes at a cost
 - There might be extra work in animation process
   - The output is a Viseme ID with a timestamp
 - May require the need to create mouth assets
-
+  
 ### 2. RuBard
 
 ### 3. Lip GAN
