@@ -99,6 +99,7 @@ The output that would be intresting for this project would be the 2D SVG output.
 # Ideas 
 
 - Possibly deliver everything as an API?
+  - Would the user group in this case be an API?
 - Use punctuation and sentament analysis libraries for
 
 ## Questions
