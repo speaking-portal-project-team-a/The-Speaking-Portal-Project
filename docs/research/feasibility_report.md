@@ -72,22 +72,23 @@ The output that would be intresting for this project would be the 2D SVG output.
 - Will require the use of Microsoft's Neural text-to-speech platorm
 - May not ingerate well with the your already made text-to-speech platform
 - There might be extra work in animation process that is unknown
-- Requires mouth asset drawings 
+- Requires mouth asset drawings
 - Cost $$$
   
 ### 2. RuBard
 
-#### Pro 
+#### Pro
 
-- Simple and powerful. Lets user run `rhubarb -o output.txt my-recording.wav` from command line. This generates an output file from a .wav or .ogg file. 
+- Simple and powerful. Lets user run `rhubarb -o output.txt my-recording.wav` from command line. This generates an output file from a .wav or .ogg file.
 - Output is in `.txt`, `.tsv`, `.xml` or `.json` format
-- MIT License 
+- MIT License
 
 #### Con
-- This library only handles animation mapping timestamps, another library will be required to generate an actual animation 
-- Library only handles lip syncing. Animated facial expresions are not included. 
 
-*More to be added WIP* 
+- This library only handles animation mapping timestamps, another library will be required to generate an actual animation
+- Library only handles lip syncing. Animated facial expresions are not included.
+
+*More to be added WIP*
 
 ### 3. Lip GAN
 
@@ -95,13 +96,13 @@ The output that would be intresting for this project would be the 2D SVG output.
 
 - which approach is best and why?
 
-# IDEAS
-- Possibly deliver everything as an API?
-- Use punctuation and sentament analysis libraries for 
+# Ideas 
 
+- Possibly deliver everything as an API?
+- Use punctuation and sentament analysis libraries for
 
 ## Questions
 
 - Does client already have software in place to create phonames and timestamps ?
 
-
+- What animations/avatars will we have access too ? What is the file type ?
