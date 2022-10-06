@@ -23,18 +23,17 @@ Main objectives:
 
 ### 1. Microsoft Azure Viseme
 
-
 <https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/how-to-speech-synthesis-viseme?pivots=programming-language-csharp&tabs=visemeid>
 
-This library uses Viseme's to create drive character text-to-speech animations. Viseme's are visual descriptions of phonemes in a spoken languange which define the position of the face and mouth while someone is speaking.
+This library uses Viseme's to drive character text-to-speech animations. Viseme's are visual descriptions of phonemes in a spoken languange which define the position of the face and mouth while someone is speaking.
 
 This engine acceptes text or SSML text (Speech Synthesis Markup Language) which is a XML based markup language that lets developers specify how input text can be converted into synthesised speech.
 
-This text input is converted into a set viseme ID's, audio offset, and speech which are used to observe the timed speech in sequence. This text-audio conversion uses Microsofts Neural Text-to-Speech. The text and speech is processed through an engine with three main compoents.
+This text input is converted into a set viseme ID's and timed audio offset values. Each of these values can also be accompanied with speech using Microsoft's Neural text-to-speech library. In order to create these outputs the text is first process through an engine with three main components.
 
-1. Text Analysis: Text is analyzed to extract phonames for each work.  
-2. TTS Acoustic Predictor: The time duration for each phoname is predicted.
-3. TTS Viseme Generator: The sequence of each phoname is predicted.
+1. **Text Analysis**: Text is analyzed to extract phonames for each work.  
+2. **TTS Acoustic Predictor**: The time duration for each phoname is predicted.
+3. **TTS Viseme Generator:** The sequence of each phoname is predicted.
 
 The outputs of this generator are as follows:
 
@@ -52,7 +51,7 @@ The outputs of this generator are as follows:
     ...
 ```
 
-For 2D animations the output uses user made SVG's which can be easily incorporated onto any 2D animation.
+The output that would be intresting for this project would be the 2D SVG output. This would require the user to draw the SVG's for each Viseme ID.
 
 ### 2. RuBard
 
@@ -64,17 +63,17 @@ For 2D animations the output uses user made SVG's which can be easily incorporat
 
 #### Pro
 
-- Auto converts text into phoname text with timestamps
-- Output is a series XML files
-
+- This library maps text, phonames, and images in sequence
+- Should be easy to render into a video
+- Well used and well-documented
+  
 #### Con
 
-- Will require the use of Microsoft's speech to text platorm
+- Will require the use of Microsoft's Neural text-to-speech platorm
 - May not ingerate well with the your already made text-to-speech platform
-- This library comes at a cost
-- There might be extra work in animation process
-  - The output is a Viseme ID with a timestamp
-- May require the need to create mouth assets
+- There might be extra work in animation process that is unknown
+- Requires mouth asset drawings 
+- Cost $$$
   
 ### 2. RuBard
 
