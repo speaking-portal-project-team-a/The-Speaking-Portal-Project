@@ -99,7 +99,7 @@ of different talking faces.
 - Requires mouth asset drawings
 - Cost $$$
   
-### 2. RuBard
+### 2. Rhubarb
 
 #### Pro
 
@@ -110,11 +110,15 @@ output file from a .wav or .ogg file.
 
 #### Con
 
-- This library only handles animation mapping timestamps, another library will be required to generate an actual 
-animation
+- This library only handles animation mapping timestamps, another library will be required to generate an actual animation
 - Library only handles lip-syncing. Animated facial expressions are not included.
 
-*More to be added WIP*
+#### **Aside: Gentle**
+*This library offers a similar but limited functionality to Rhubarb. That being said:*
+ - *it doesn't have built in lip sync mapping.*
+ - *doesn't read or write as many file types.*
+*It's still worth mentioning however in case we need a library for speech-to-text timestamps*
+
 
 ### 3. Artificial Intelligence Approach
 
