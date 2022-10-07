@@ -26,11 +26,15 @@ Main objectives:
 
 <https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/how-to-speech-synthesis-viseme?pivots=programming-language-csharp&tabs=visemeid>
 
-This library uses Viseme's to drive character text-to-speech animations. Viseme's are visual descriptions of phonemes in a spoken languange which define the position of the face and mouth while someone is speaking.
+This library uses Viseme's to drive character text-to-speech animations. Viseme's are visual descriptions of phonemes in
+a spoken languange which define the position of the face and mouth while someone is speaking.
 
-This engine acceptes text or SSML text (Speech Synthesis Markup Language) which is a XML based markup language that lets developers specify how input text can be converted into synthesised speech.
+This engine acceptes text or SSML text (Speech Synthesis Markup Language) which is a XML based markup language that lets
+developers specify how input text can be converted into synthesised speech.
 
-This text input is converted into a set viseme ID's and timed audio offset values. Each of these values can also be accompanied with speech using Microsoft's Neural text-to-speech library. In order to create these outputs the text is first process through an engine with three main components.
+This text input is converted into a set viseme ID's and timed audio offset values. Each of these values can also be 
+accompanied by speech using Microsoft's Neural text-to-speech library. In order to create these outputs the text is 
+first process through an engine with three main components.
 
 1. **Text Analysis**: Text is analyzed to extract phonames for each work.  
 2. **TTS Acoustic Predictor**: The time duration for each phoname is predicted.
@@ -52,7 +56,8 @@ The outputs of this generator are as follows:
     ...
 ```
 
-The output that would be intresting for this project would be the 2D SVG output. This would require the user to draw the SVG's for each Viseme ID.
+The output that would be interesting for this project would be the 2D SVG output. This would require the user to draw 
+the SVG's for each Viseme ID.
 
 ### 2. RuBard
 
@@ -73,7 +78,7 @@ audio file.
 
 - This library maps text, phonames, and images in sequence
 - Should be easy to render into a video
-- Well used and well-documented
+- Well-used and well-documented
   
 #### Con
 
