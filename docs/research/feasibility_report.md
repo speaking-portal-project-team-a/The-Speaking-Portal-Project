@@ -7,18 +7,21 @@ application so that the user can both watch and listen to an avatar speaking the
 
 Main objectives:
 
-1) Convert text and audio into phonames with timestamps  
-2) Create a live animation that combines, phonames, audio, and animation
-3) Allow the user to view and download animation onto local machine
+1) Convert text and audio into phonemes with timestamps  
+2) Create a video of an animated avatar that combines the audio, text, phonemes, and visemes
+3) Allow the user to view the video online and download it to their local machine
+
+Note: Depending on the decided approach, #1 and #2 could be combined into creating an animated avatar based on the
+audio and avatar alone.
 
 ## Criteria and Constraints
 
 - Time constraint: 8 month Capstone
-- Labour constraint: Students
-- Animation constraints:
-  - We are not animators
-  - Unaware of representation animation during speech
-  - Cannot create animations
+- Labour constraint: 4 students
+- Other constraints:
+  - none of us have animation experience
+  - we have limited knowledge of linguistics
+  - we might be underestimating the work required to animate an avatar to appear "realistic"
 
 ## Potential Approaches
 
@@ -59,7 +62,41 @@ The outputs of this generator are as follows:
 The output that would be interesting for this project would be the 2D SVG output. This would require the user to draw 
 the SVG's for each Viseme ID.
 
-### 2. RuBard
+### 2. Three-Step Direct Approach
+
+In this approach, the main objectives are each completed in their own step. The approach involves audio recognition
+models, hard-coding an animation from still images, and hard-coding the user interface for showing the video with a
+download option.
+
+For the first step, we found a specific library released under the MIT Licence (free of charge and without limitation)
+that analyzes audio files with their dialog texts to automatically generate lip sync information.
+
+It uses two recognizers: one speech recognition library for English, and the other that is language-independent because
+it recognizes individual sounds and syllables. After analyzing the audio, it produces a file (TSV, XML, or JSON) that
+provides you with timestamps along with which mouth shape to display.
+
+For example:
+
+```
+{
+  "metadata": {
+    "soundFile": "C:\\Users\\user\\Desktop\\test.wav",
+    "duration": 0.47
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.05, "value": "X" },
+    { "start": 0.05, "end": 0.27, "value": "D" },
+    { "start": 0.27, "end": 0.31, "value": "C" },
+    { "start": 0.31, "end": 0.43, "value": "B" },
+    { "start": 0.43, "end": 0.47, "value": "X" }
+  ]
+}
+```
+
+For step two, we would use 2 libraries to create a series of images with the appropriate mouth on the selected avatar's
+face, and then generate a video from the still images with its audio.
+
+Finally, for step three, we would create a simple web element to view and download the video file. 
 
 ### 3. Artificial Intelligence Approach
 Generative modeling is an unsupervised learning task in machine learning that involves automatically discovering and
@@ -99,26 +136,39 @@ of different talking faces.
 - Requires mouth asset drawings
 - Cost $$$
   
-### 2. Rhubarb
+### 2. Three-Step Direct Approach
 
 #### Pro
 
-- Simple and powerful. Lets user run `rhubarb -o output.txt my-recording.wav` from command line. This generates an 
-output file from a .wav or .ogg file.
-- Output is in `.txt`, `.tsv`, `.xml` or `.json` format
-- MIT License
+- No cost (free with MIT License)
+- The library for step 1...
+    - is simple and powerful with a command-line interface
+    - various output formats available: `.txt`, `.tsv`, `.xml`, and `.json`
+    - can be integrated with animation software, such as Adobe After Effecs, Spine, and more
+    - is currently being used by video game developers
+    - can be used for multiple languages
+    - provides 9 mouth positions (rather than the basic 6)
+    - runs quickly, based on our testing
+- Feasible for animated or "selected" avatars from the Kukarella Table Reads options
+- Step 2's library for creating a video from multiple still images ensures we have complete control over the avatar's
+expressions (no weird or creepy faces)
 
 #### Con
 
-- This library only handles animation mapping timestamps, another library will be required to generate an actual animation
-- Library only handles lip-syncing. Animated facial expressions are not included.
+- It is unclear how the libraries' process times will scale to larger audio and text files
+- This approach is not feasible for any images of real people or any images uploaded by the user
+- Step 2 requires face and mouth assets (lip images for each sound and for each specific avatar, along with each
+avatar's face with no mouth)
+- The resulting video will only have mouth movements on a still face; animated facial expressions are not included
+<i>(potential optional feature!)</i>
+- Step 1's library can only receive `.wav` or `.ogg` files for input, and file conversion can result in file corruption
+if the Kukarella TTS output is not one of these formats
 
 #### **Aside: Gentle**
-*This library offers a similar but limited functionality to Rhubarb. That being said:*
+*This library offers a similar but limited functionality to the library above for step 1. That being said:*
  - *it doesn't have built in lip sync mapping.*
  - *doesn't read or write as many file types.*
 *It's still worth mentioning however in case we need a library for speech-to-text timestamps*
-
 
 ### 3. Artificial Intelligence Approach
 
@@ -152,6 +202,8 @@ output file from a .wav or .ogg file.
 
 ## Questions
 
-- Does client already have software in place to create phonames and timestamps ?
+- Does the Kukarella TTS app already have software in place to create phonames and timestamps?
 
-- What animations/avatars will we have access too ? What is the file type ?
+- What animations/avatars will we have access too ? What is the file type?
+
+- What is the current output file type for the audio produced from the Kukarella TTS app?
