@@ -2,7 +2,8 @@
 
 ## Introduction
 
-We will design, develop, and implement a lip-syncing animation add-on for the Kukarella text-to-speech Table Reads web application so that the user can both watch and listen to an avatar speaking the user-provided text.
+We will design, develop, and implement a lip-syncing animation add-on for the Kukarella text-to-speech Table Reads web 
+application so that the user can both watch and listen to an avatar speaking the user-provided text.
 
 Main objectives:
 
@@ -55,7 +56,14 @@ The output that would be intresting for this project would be the 2D SVG output.
 
 ### 2. RuBard
 
-### 3. Lip GAN
+### 3. Artificial Intelligence Approach
+Generative modeling is an unsupervised learning task in machine learning that involves automatically discovering and
+learning the regularities or patterns in input data in such a way that the model can be used to generate or output
+new examples that plausibly could have been drawn from the original dataset.  
+
+There exists a generative model which is covered under the MIT license. This model, given an image of a face, along with
+a speech divided into multiple segments, is able to generate a sequence of frames that depict the face speaking the
+audio file.
 
 ## Evaluation
 
@@ -90,8 +98,25 @@ The output that would be intresting for this project would be the 2D SVG output.
 
 *More to be added WIP*
 
-### 3. Lip GAN
+### 3. Artificial Intelligence Approach
 
+#### Pros
+- **Generates talking video from a single face image**
+- Would accept an audio file, and an image file as inputs.
+- Pretrained models are available
+- Works with multiple languages
+- Can handle in-the-wild face poses and expressions.
+- Can handle speech in any language and is robust to background noise.
+#### Cons
+- Matlab / Python dependencies do not directly align with Kukarella tech stack
+  - This can be resolved by creating an api which would return the generated video to the Kukarella tech stack.
+- Repository last updated September 2020
+  - May require some package updates
+  - A new and improved model is available, however it is not permitted for commercial use without contacting the 
+  creators, and likely paying some form of usage fee
+- Generated videos do not contain much emotion
+  - This is likely to be the case with the other approaches as well, and further work will need to be done to understand
+    how emotion can be added to the faces.
 ## Conclusion
 
 - which approach is best and why?
@@ -100,7 +125,7 @@ The output that would be intresting for this project would be the 2D SVG output.
 
 - Possibly deliver everything as an API?
   - Would the user group in this case be an API?
-- Use punctuation and sentament analysis libraries for
+- Use punctuation and sentiment analysis libraries for further features
 
 ## Questions
 
