@@ -70,6 +70,17 @@ There exists a generative model which is covered under the MIT license. This mod
 a speech divided into multiple segments, is able to generate a sequence of frames that depict the face speaking the
 audio file.
 
+This model works via two networks; the generator network, and the discriminator network.
+1. Generator Network
+The generator network consists of three main components: The face encoder, the audio encoder, and the face decoder. The
+face and audio encoders are concatenated and fed into the face decoder. 
+2. Discriminator Network
+The discriminator network encodes the input face and audio into fixed representation. The face and audio encoder are the
+same ones used within the generator network.
+
+The proposed model was pretrained using 4 NVIDIA Titan X GPUs on the LRS 2 dataset. This dataset contains over 29 hours 
+of different talking faces.
+
 ## Evaluation
 
 ### 1. Microsoft Azure Viseme
@@ -83,7 +94,7 @@ audio file.
 #### Con
 
 - Will require the use of Microsoft's Neural text-to-speech platorm
-- May not ingerate well with the your already made text-to-speech platform
+- May not integrate well with the already made text-to-speech platform
 - There might be extra work in animation process that is unknown
 - Requires mouth asset drawings
 - Cost $$$
@@ -92,14 +103,16 @@ audio file.
 
 #### Pro
 
-- Simple and powerful. Lets user run `rhubarb -o output.txt my-recording.wav` from command line. This generates an output file from a .wav or .ogg file.
+- Simple and powerful. Lets user run `rhubarb -o output.txt my-recording.wav` from command line. This generates an 
+output file from a .wav or .ogg file.
 - Output is in `.txt`, `.tsv`, `.xml` or `.json` format
 - MIT License
 
 #### Con
 
-- This library only handles animation mapping timestamps, another library will be required to generate an actual animation
-- Library only handles lip syncing. Animated facial expresions are not included.
+- This library only handles animation mapping timestamps, another library will be required to generate an actual 
+animation
+- Library only handles lip-syncing. Animated facial expressions are not included.
 
 *More to be added WIP*
 
@@ -108,7 +121,7 @@ audio file.
 #### Pros
 - **Generates talking video from a single face image**
 - Would accept an audio file, and an image file as inputs.
-- Pretrained models are available
+- Pretrained model
 - Works with multiple languages
 - Can handle in-the-wild face poses and expressions.
 - Can handle speech in any language and is robust to background noise.
@@ -122,6 +135,7 @@ audio file.
 - Generated videos do not contain much emotion
   - This is likely to be the case with the other approaches as well, and further work will need to be done to understand
     how emotion can be added to the faces.
+- Retraining the pretrained model would likely require resources not at our disposal.
 ## Conclusion
 
 - which approach is best and why?
