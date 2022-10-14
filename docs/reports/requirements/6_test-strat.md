@@ -1,5 +1,10 @@
 # Test Strategy
 
-Section 6 of the Requirements Report
+## Test Strategy - GitHub Actions
 
-An explanation of how you will test the developed features of your system (in accordance with the tech stack chosen) as well as the method you will adopt to ensure continuous integration. Don't just use a technical term to describe the method; write a few sentences to explain the tools and techniques that will be involved. Read up on regression testing, and develop a feasiable plan that ensures when new code is added to your project that your project didn't break anything that was working before.
+- GitHub workflows will be created to build and test scripts
+- Frequently up-to-date YAML files that include build and test scripts will be included in GitHub repository
+- Tests will run a Node JS build
+- Triggers on GitHub workflow scripts will be triggered during each new pull request to ensure continuous integration process is followed
+- Test report will be provided on each new PR. All tests must pass in order to merge PR
+
