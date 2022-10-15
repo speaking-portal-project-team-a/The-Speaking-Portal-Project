@@ -1,9 +1,25 @@
 # Data Flow Diagrams
 
-Section 2 of the Requirements Report
 
-An overview of your system architecture presented as a data flow diagram (DFD), at both levels 0 and level 1, along with accompanying descriptions for each diagram. You must be very specific in this DFD so to design it in a way that supports an incremental and iterative development process. You can read an intro on DFDs and adopt its notation. Remember that a process does something, so be sure to use a verb to label your processes. In describing your DFD, highlight clearly which components will be delivered for each of the following milestones: peer testing #1, peer testing #2, and the final product. You may additionally wish to include extra components and label them as bonus features that may be developed if time allows.
+## Level 0 DFD 
 
-Diagrams will be incorporated into the PDF report.
+![](dfd_0.png)
 
-This markdown file will be used for the diagram descriptions.
+
+
+
+- Four main groups listed in this DFD: user, kukurella Web App, Animation Process, and Assets library
+- The web app is already in place, will be creating an animation add-on that receives inputs from this web app
+- Assets library will include avatar images mouth assets, and coordinates to indicate where to place mouth assets onto the avatar 
+
+## Level 1 DFD
+
+![](dfd_1.png)
+
+- The kukurella web app can be divided into a web app and an api endpoint that we will be touching
+- The API will provide User text, language, and audio for our phoneme generation process
+- The phoneme factory will provide the animation processor with a phoneme text file
+- The animation processor will map phonemes with mouth assets found in the assets directory
+- The processor will then sequence these mouth assets over a 2d animation avatar
+- The output will be an animation file that will be sent back to the front-end
+
