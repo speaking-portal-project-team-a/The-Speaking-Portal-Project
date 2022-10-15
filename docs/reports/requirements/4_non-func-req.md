@@ -2,4 +2,8 @@
 
 Section 4 of the Requirements Report
 
-A detailed list of non-functional requirements and environmental constraints for the overall project. The environmental constrains are similar to non-functional requirements and explains the constrains related to system’s environment. Some examples are interfaces to other systems, COTS components, programming language, system's location, size, power consumption, humidity, maintenance accessibility, ...etc.
+Feature must be portable, i.e, packaged as an API or something similar 
+Feature must be relatively quick. 3 minutes of audio should not take longer than 1 minute to process. 
+Animation images should be of good quality: i.e high quality images or models created by a professional artist
+Animation should appear crisp. (minimum 24 frames per second.) 
+
