@@ -28,11 +28,11 @@ generated video from. Research done as a group has provided us with three separa
 tech stacks identified are outlined in the table below, and discussion and rational for our chosen tech stack (bolded)
 will follow.
 
-| Tech Stack             | Group Familiarity | Feasibile with selected approach | Easily integrates into tech stack                             | Quality Documentation Available |
-|------------------------|-------------------|----------------------------------|---------------------------------------------------------------|---------------------------------|
-| *Node.Js + Typescript* | 2/4               | Yes                              | Yes - Aligns with Kukarella Tech & can be delivered as an API | Yes                             |
-| Django + Python        | 1/4               | Yes                              | Yes - Deliverable as an API                                   | Yes                             |
-| Laravel + PHP          | 1/4               | Yes                              | Yes - Deliverable as an API                                   | Yes                             |
+| Tech Stack               | Group Familiarity | Feasibile with selected approach | Easily integrates into tech stack                             | Quality Documentation Available |
+|--------------------------|-------------------|----------------------------------|---------------------------------------------------------------|---------------------------------|
+| **Node.Js + Typescript** | 2/4               | Yes                              | Yes - Aligns with Kukarella Tech & can be delivered as an API | Yes                             |
+| Django + Python          | 1/4               | Yes                              | Yes - Deliverable as an API                                   | Yes                             |
+| Laravel + PHP            | 1/4               | Yes                              | Yes - Deliverable as an API                                   | Yes                             |
 
 ## Node.Js + Typescript
 
