@@ -1,6 +1,6 @@
 # Data Flow Diagrams
 
-These diagrams are generalizations about how our system will interact with data from the user, Kukarella Web App, and our Animation Add-On. The level 0 DFD highlights a high overview of the system and the level 1 DFD breaks down the system in more detail. The system we are building is working alongside an existing system. Items highlighted in red represent the parts of the system that are already in place and items highlighted in blue  are parts of the system that are being added by our new Animation Add-On.
+These diagrams are generalizations about how our system will interact with data from the user, Kukarella Web App, and our Animation Add-On. The level 0 DFD highlights a high overview of the system and the level 1 DFD breaks down the system in more detail. The system we are building is working alongside an existing system. Items highlighted in red represent the parts of the system that are already in place and items highlighted in blue are parts of the system that are being added by our new Animation Add-On.
 
 ## Level 0 
 
