@@ -53,7 +53,7 @@ will follow.
 - Documentation is widely accessible
 ### Cons:
 - Only one member of our group has experience with Django
-- Does not align with the Kukarella tech stack (though can be delivered as an API)
+- Does not align with the Kukarella tech stack, although it can be delivered as an API
 
 ## Laravel + PHP
 
