@@ -48,7 +48,7 @@ will follow.
 ## Django + Python
 
 ### Pros:
-- Python is very familiar to many of our group members
+- Our group members are very familiar with Python
 - Lots of external libraries are available
 - Documentation is widely accessible
 ### Cons:
