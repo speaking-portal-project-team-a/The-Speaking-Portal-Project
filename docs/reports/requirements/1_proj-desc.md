@@ -72,7 +72,7 @@ this system so that the user can both listen to and watch their avatar speak the
 
 In this project, there are two main user groups who will be using the software: general users and developers. The
 general users are the general public who use the Kukarella web application; this could be anyone who would like to
-listen to rather than read some text in any language with a customized avatar. The developers are the Kukarella
+have a more immersive text-to-speech experience where an animated avatar reads aloud user text.
 employees who will be responsible for incorporating the API into their current system and adding more customizable
 assets for the avatars in the future.
 
