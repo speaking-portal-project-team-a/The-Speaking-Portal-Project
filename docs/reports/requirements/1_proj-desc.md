@@ -80,7 +80,7 @@ In the current Kukarella Table Reads TTS web application, the first step is for 
 The user gives the actor a name, selects a voice from a list of voices they can preview, selects a language from the
 list of approximately 150 languages, and selects or uploads an image of the actor. After creating the actor and
 entering the text they want to listen to, the user presses the play button, and then waits for the application to
-process and generate the audio, which is then auto-played once the audio is complete.
+process and generate the audio.
 
 Once our API is incorporated into this system, if the user would like to both watch and listen to their avatar speak
 the provided text, the only difference in the user interface is that the user will select one of the "premium" avatar
