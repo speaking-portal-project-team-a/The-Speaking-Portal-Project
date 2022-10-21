@@ -9,7 +9,7 @@ Typescript for our backend implementation.
 ### Front-End
 HTML & CSS
 In order to maintain simplicity, any front-end development which may be required should be done in simple HTML/CSS
-Styling must stay consistent with Kukarella’s - if additional frameworks such as React are required, they may be added.
+styling must stay consistent with Kukarella’s - if additional frameworks such as React are required, they may be added.
 Kukarella does not currently request a front-end, though did mention it may be an additional feature if time permits.
 ### Back-End
 Node.js & Typescript
