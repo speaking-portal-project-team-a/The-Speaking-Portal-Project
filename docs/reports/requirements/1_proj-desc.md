@@ -62,7 +62,7 @@ Note: the User section will be color-coded to show what's already in place and w
 
 ## PDF Report
 
-### High-level Description (about one paragraph)
+### High-level Description
 
 The objective for the Speaking Portal Project is to design, develop, and deploy a lip-sync animation (LSA) API for the
 Kukarella Table Reads text-to-speech (TTS) web application. This API will serve as an animation generating add-on for
