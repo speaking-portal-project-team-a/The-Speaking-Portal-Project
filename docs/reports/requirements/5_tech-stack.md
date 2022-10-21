@@ -66,7 +66,7 @@ will follow.
 
 For our implementation, we have decided to move forward in building our application using Node.Js and Typescript. We
 feel it makes the most sense to stick with what a majority of us have experience with, especially if it is the same tech
-stack that Kukarella uses within their own codebase. The reasoning behind our desire to maintaining one homogenous tech
+stack that Kukarella uses within their own codebase. The reasoning behind our desire to maintain one homogenous tech
 stack is that should our system require any maintenance in the future, it will be easier for Kukarella engineers to
 maintain provided they are already familiar with the tech it is built using.
 
