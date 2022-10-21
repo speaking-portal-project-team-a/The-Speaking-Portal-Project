@@ -90,9 +90,9 @@ synchronized to the sounds produced in its speech.
 As for the developers, they will need to call the API within the Kukarella application. After receiving the user input
 and after the text is converted to speech in an audio file, the developer will call our API. When calling our API, the
 user-selected actor image, the user-selected language, the user-provided text, and the Kukarella-generated audio will
-be passed in, and then the API will provide the animated video as output. At this point, the Kukarella developer shows
-the video in the web application's user interface and provides the option to download the video file.
+be passed in. Next, the API will provide the animated video as output, and the then it will be presented in the web
+application's user interface along with the option to download the video file.
 
-When Kukarella decides to add more "premium" avatars, the developer will need to include the head, mouth, eye, and
-eyebrow assets, along with their general coordinates to the directory/database. In this way, the developer can add,
-change, or remove the "premium" avatars and allow further customization options for the user.
+When Kukarella decides to add more avatars compatible with our API, the developer will need to include the head,
+mouth, eye, and eyebrow assets, along with their general coordinates to the directory/database. In this way, the
+developer can add, change, or remove the compatible avatars and allow further customization options for the user.
