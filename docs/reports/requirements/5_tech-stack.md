@@ -38,8 +38,9 @@ will follow.
 
 ### Pros:
 - Our group has more familiarity with Node and Typescript compared to the other potential approaches
-- The existing Kukarella tech stack is build using Node and Typescript. This means, if desired, our application could be
-  built into Kukarellas existing systems rather than being left as an external API.
+- The existing Kukarella tech stack is built using Node and Typescript. This enables our application to be
+  built into Kukarellas existing systems rather than left as an external API, should they desire to do so in the 
+  future.
 - Both Node and Typescript have outstanding documentation, as well as numerous resources for learning available online.
 
 ### Cons:
@@ -67,12 +68,14 @@ will follow.
 For our implementation, we have decided to move forward in building our application using Node.Js and Typescript. We
 feel it makes the most sense to stick with what a majority of us have experience with, especially if it is the same tech
 stack that Kukarella uses within their own codebase. The reasoning behind our desire to maintain one homogenous tech
-stack is that it will be easier for Kukarella engineers to maintain, should our system require any maintenance in the future, as they are already familiar with Node.js and TypeScript.
-maintain provided they are already familiar with the tech it is built using.
+stack is that it will be easier for Kukarella engineers to maintain, should our system require any maintenance in the 
+future, as they are already familiar with Node.js and TypeScript.
 
-Given our current requirements, our application is purely a backend application. This means we do not currently expect
-to develop any front-end UI. Should future tasks be identified which require front-end development, we will use simple
-HTML/CSS, alongside any styling libraries which may be required by the client in order to maintain their cohesive look.
+Given our current requirements, our application is purely a back-end application. This means we do not currently expect
+to develop any front-end UI. Although unlikely, there is a small chance that front-end development may be required for
+peer testing purposes, or for bonus deliverables should our team progress faster than expected. If tasks requiring front
+-end development are identified, we will use simple HTML/CSS. Additionally, if aesthetic consistency is a concern for 
+our client, we will use styling libraries upon request.
 
 Another key part of our tech stack is the Rhubarb Lip Sync Library. Rhubarb is a command line tool which enables the
 generation of phoneme and speech timings given an input which contains audio, text, and language. Rhubarb is open-source
