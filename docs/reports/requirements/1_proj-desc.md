@@ -85,7 +85,7 @@ process and generate the audio.
 Once our API is incorporated into this system, if the user would like to both watch and listen to their avatar speak
 the provided text, the only difference in the user interface is that the user will select one of the "premium" avatar
 images for their actor. After pressing the play button, the user will wait for the Kukarella application and the API to
-process and generate a video of their avatar speaking the text with lips synchronized to the sounds produced in their
+process and generate a video of their avatar speaking the text with lips synchronized to the sounds produced from their text-to-speech API ```
 generated speech.
 
 As for the developers, they will need to call the API within the Kukarella application. After receiving the user input
