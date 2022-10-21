@@ -10,4 +10,4 @@ Continuous integration will be implemented using the CI/CD GitHub workflows. The
 
 ## API Testing
 
-This project also requires an API build which will require separate testing to ensure that our product integrates with the client’s system. Postman will be the framework used to build and run tests for our API. This framework allows mock client requests to be made directly to our API. This framework will also ensure that our API is delivering contents correctly.
+This project also requires an API build which will require separate testing to ensure that our product integrates with the client’s system. Postman will be the framework used to build and run tests for our API. This framework allows mock client requests to be made directly to our API, and it ensures that our API is delivering contents correctly.
