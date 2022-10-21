@@ -8,7 +8,7 @@ The level 0 data flow diagrams give a high level view of how our system will be 
 
 ![](dfd_0.png)
 
-The user will first access Kukurella’s text-to-speech front end and type in a text input. The user will also select a voice and an avatar they would like to use for their text-speech animation. From the front-end the text and other user selections will be sent over to our Animation Add-On. The Animator will then query an avatar image, avatar coordinates, and mouth animation assets from a database. The Animator will produce an animation of an avatar reading the user’s text in the user selected voice. This animation will be sent to Kukeralla's web application and then will be sent to the user.  
+The user will first access Kukurella’s text-to-speech front end and type in a text input. The user will also select a voice and an avatar they would like to use for their text-to-speech animation. From the front-end the text and other user selections will be sent over to our Animation Add-On. The Animator will then query an avatar image, avatar coordinates, and mouth animation assets from a database. The Animator will produce an animation of an avatar reading the user’s text in the user selected voice. This animation will be sent to Kukeralla's web application and then will be sent to the user.  
 
 ## Level 1
 
