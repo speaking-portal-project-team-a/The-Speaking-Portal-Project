@@ -23,7 +23,7 @@ a command line tool controllable by various programming languages. Its last upda
 
 There are numerous approaches which could be taken when determining what the best course of action for this
 project could be. Due to this, Kukarella has left our choice of tech stack open. The only requirement they have is that
-it is either easily integrated into their existing tech stack, or built as an API which they may call and receive a
+it must either integrate easily into their existing tech stack or it be an API which they may call and receive a
 generated video from. Research done as a group has provided us with three separate tech stacks which could be used. The
 tech stacks identified are outlined in the table below, and discussion and rational for our chosen tech stack (bolded)
 will follow.
