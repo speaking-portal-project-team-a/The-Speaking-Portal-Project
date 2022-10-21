@@ -41,7 +41,7 @@ will follow.
 - The existing Kukarella tech stack is built using Node and Typescript. This enables our application to be
   built into Kukarellas existing systems rather than left as an external API, should they desire to do so in the 
   future.
-- Both Node and Typescript have outstanding documentation, as well as numerous resources for learning available online.
+- Both Node.Js and Typescript have outstanding documentation, as well as numerous resources for learning available online.
 
 ### Cons:
 - Not all members of the group are familiar with Typescript (though all are familiar with Javascript).
