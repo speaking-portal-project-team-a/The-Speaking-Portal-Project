@@ -62,4 +62,37 @@ Note: the User section will be color-coded to show what's already in place and w
 
 ## PDF Report
 
-I will write my PDF report section here to later be incorporated into the full document.
+### High-level Description
+
+The objective for the Speaking Portal Project is to design, develop, and deploy a lip-sync animation (LSA) API for the
+Kukarella text-to-speech (TTS) web application. This API will serve as an animation generating add-on for
+this system so that the user can both listen to and watch their avatar speak the user-provided text.
+
+### User groups
+
+In this project, there are two main user groups who will be using the software: users and developers. The users are the
+general public who use the Kukarella web application; this could be anyone who would like to have a more immersive
+text-to-speech experience where an animated avatar reads user text aloud. The developers are the Kukarella employees
+who will be responsible for incorporating the API into their current system and adding more customizable assets for the
+avatars in the future.
+
+In the current Kukarella TTS web application, the first step is for the user to create one or more actors.
+The user gives the actor a name, selects a voice from a list of voices they can preview, selects a language from the
+list of approximately 150 languages, and selects or uploads an image of the actor. After creating the actor and
+entering the text they want to listen to, the user presses the play button, and then waits for the application to
+process and generate the audio.
+
+Once our API is incorporated into this system, the enhanced experience of being able to both listen and watch the
+avatar speak will only be available with specific avatars. After pressing the play button, the user will wait for the
+Kukarella application and the API to process and generate a video of their avatar speaking the text with lips
+synchronized to the sounds produced in its speech.
+
+As for the developers, they will need to call the API within the Kukarella application. After receiving the user input
+and after the text is converted to speech in an audio file, the developer will call our API. When calling our API, the
+user-selected actor image, the user-selected language, the user-provided text, and the Kukarella-generated audio will
+be passed in. Next, the API will provide the animated video as output, and the then it will be presented in the web
+application's user interface along with the option to download the video file.
+
+When Kukarella decides to add more avatars compatible with our API, the developer will need to include the head,
+mouth, eye, and eyebrow assets, along with their general coordinates to the directory/database. In this way, the
+developer can add, change, or remove the compatible avatars and allow further customization options for the user.
