@@ -481,6 +481,6 @@ fabric.properties
 
 # Rhubard Testing Files 
 
-docs/research/rhubarb_test/**/**/**
+docs/research/rhubarb_test/src/rhubarb
 
 
