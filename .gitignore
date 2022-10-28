@@ -478,3 +478,7 @@ fabric.properties
 
 # Mac specific files
 .ds_store
+
+
+# Rhubarb Ignore
+/docs/research/rhubarb
