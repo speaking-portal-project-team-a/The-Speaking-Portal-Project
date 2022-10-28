@@ -12,7 +12,7 @@ try {
 catch (err) {
     console.log("Error message: ".concat(err));
 }
-(0, node_child_process_1.exec)("chmod a+x ./rhubarb.exe", function (error, stout) {
+(0, node_child_process_1.exec)("chmod +x ./rhubarb.exe", function (error, stout) {
     if (error) {
         throw error;
     }
@@ -21,7 +21,7 @@ catch (err) {
     }
 });
 (0, node_process_1.cwd)();
-(0, node_child_process_1.exec)('"./rhubarb.exe" -o output.txt en-Amber.wav', function (error, stdout, stderr) {
+(0, node_child_process_1.exec)('"./rhubarb" -o output.txt amber.wav', function (error, stdout, stderr) {
     if (error) {
         throw error;
     }
@@ -29,7 +29,7 @@ catch (err) {
         console.log(stdout);
     }
 });
-// //  exec('"./rhubarb.exe" ./rhubarb -o output.txt en-Amber.wav', (error,stdout,stderr) => {
+//  exec("./rhubarb -o output.txt en-Amber.wav", (error,stdout,stderr) => {
 //      if (error) {
 //             throw error;
 //        }

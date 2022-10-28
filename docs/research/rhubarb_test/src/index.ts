@@ -14,7 +14,7 @@ try {
     console.log(`Error message: ${err}`)
 }
 
-exec("chmod a+x ./rhubarb.exe", (error,stout) => {
+exec("chmod +x ./rhubarb.exe", (error,stout) => {
     if (error) {
         throw error } else {
             console.log(stdout)
@@ -23,14 +23,14 @@ exec("chmod a+x ./rhubarb.exe", (error,stout) => {
 
 cwd()
 
-exec('"./rhubarb.exe" -o output.txt en-Amber.wav', (error,stdout,stderr) => {
+exec('"./rhubarb.exe" -o output.txt amber.wav', (error,stdout,stderr) => {
       if (error) {
         throw error;
        } else {
       console.log(stdout);
      }});
 
-// //  exec('"./rhubarb.exe" ./rhubarb -o output.txt en-Amber.wav', (error,stdout,stderr) => {
+//  exec("./rhubarb -o output.txt en-Amber.wav", (error,stdout,stderr) => {
 //      if (error) {
 //             throw error;
 //        }
