@@ -23,7 +23,7 @@ exec("chmod +x ./rhubarb.exe", (error,stout) => {
 
 cwd()
 
-exec('"./rhubarb.exe" -o output.txt amber.wav', (error,stdout,stderr) => {
+exec('"rhubarb.exe" -o output.txt -r pocketSphinx -d text.txt --extendedShapes GX amber.wav', (error,stdout,stderr) => {
       if (error) {
         throw error;
        } else {
