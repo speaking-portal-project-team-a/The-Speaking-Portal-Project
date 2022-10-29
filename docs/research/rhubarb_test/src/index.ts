@@ -1,7 +1,7 @@
 import { exec } from 'node:child_process'
 import { stdout, chdir, cwd } from 'node:process';
 
-console.log("Start Rhubard....")
+console.log("Start Rhubarb....")
 
 console.log(`Starting directory: $${cwd()}`)
 
