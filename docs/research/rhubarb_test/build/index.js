@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var node_child_process_1 = require("node:child_process");
 var node_process_1 = require("node:process");
-console.log("Start Rhubard....");
+console.log("Start Rhubarb....");
 console.log("Starting directory: $".concat((0, node_process_1.cwd)()));
 (0, node_process_1.cwd)();
 try {
