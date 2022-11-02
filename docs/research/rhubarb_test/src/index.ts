@@ -30,12 +30,7 @@ exec('"rhubarb.exe" -o output.txt -r pocketSphinx -d text.txt --extendedShapes G
       console.log(stdout);
      }});
 
-//  exec("./rhubarb -o output.txt en-Amber.wav", (error,stdout,stderr) => {
-//      if (error) {
-//             throw error;
-//        }
-//       console.log(stdout);
-//      });
+
 
 
 
