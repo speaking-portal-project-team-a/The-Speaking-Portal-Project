@@ -19,6 +19,12 @@ async function rhubarbProcessor (audio_file_name : string, text_file_name ? : st
 
     const {stout, stderr} = await exec(`"./rhubarb" -o output.json --exportFormat json -r pocketSphinx -d ${text_file_name} --extendedShapes GX ${audio_file_name}`)
 
+    //  exec("./rhubarb -o output.txt en-Amber.wav", (error,stdout,stderr) => {
+//      if (error) {
+//             throw error;
+//        }
+//       console.log(stdout);
+//      });
     const data = fs.readFileSync('output.json', 'utf8')
 
     const mouthCues = JSON.parse(data)
