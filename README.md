@@ -96,7 +96,7 @@ npm package versions:
 ## How it Works
 
 The Kurkarella TTS app creates the synthesized speech file from the user’s voice and text input. The Animation Add-On
-is broken down into two main components: the phoneme factor and the animation processor. The phoneme factory is in
+is broken down into two main components: the phoneme factory and the animation processor. The phoneme factory is in
 charge of mapping spoken language from an audio file into a series of phonemes, which are units of sound that
 distinguish one word from another. In order to make this process as accurate as possible, the phoneme factory also
 receives the user text file and language selection.
