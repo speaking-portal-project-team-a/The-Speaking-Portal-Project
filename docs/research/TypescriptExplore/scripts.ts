@@ -1,3 +1,4 @@
+import SVG from '@svgdotjs/svg.js';
 var input = document.querySelector('input[type=text]')
 var draw = SVG().addTo('#drawing').viewbox(0, 0, 300, 140)
 var text = draw.text(function(add) {
