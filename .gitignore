@@ -481,4 +481,5 @@ fabric.properties
 
 
 # Rhubarb Ignore
-/docs/research/rhubarb
+
+**/rhubarb
