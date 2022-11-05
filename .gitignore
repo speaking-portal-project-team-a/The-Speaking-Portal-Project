@@ -481,4 +481,4 @@ fabric.properties
 
 
 # Rhubarb Ignore
-speaking-portal-project/rhubarb
+**/rhubarb
