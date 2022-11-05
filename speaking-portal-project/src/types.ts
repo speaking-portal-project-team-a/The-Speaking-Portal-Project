@@ -1,11 +1,14 @@
-
-interface AudioFile {
+export interface AudioFile {
     soundFile : string 
     audioDuraion: number
 }
 
-interface MouthCue {
+export type MouthCue =  {
     start : number
     end   : number
     value : string
 }
+
+export type MouthCueArray = Array<MouthCue>
+
+

@@ -45,11 +45,10 @@ var fs_1 = __importDefault(require("fs"));
 var exec = node_util_1.default.promisify(require('node:child_process').exec);
 function rhubarbProcessor(audio_file_name, text_file_name) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, stout, stderr, data, mouthCues;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var stderr, json, mouthCues;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
-                    console.log("Starting Rhubarb....");
                     console.log("Starting directory: $".concat((0, node_process_1.cwd)()));
                     try {
                         (0, node_process_1.chdir)('./rhubarb');
@@ -58,15 +57,21 @@ function rhubarbProcessor(audio_file_name, text_file_name) {
                     catch (err) {
                         console.log("Error message: ".concat(err));
                     }
+                    console.log("Starting Rhubarb....");
                     return [4, exec("\"./rhubarb\" -o output.json --exportFormat json -r pocketSphinx -d ".concat(text_file_name, " --extendedShapes GX ").concat(audio_file_name))];
                 case 1:
-                    _a = _b.sent(), stout = _a.stout, stderr = _a.stderr;
-                    data = fs_1.default.readFileSync('output.json', 'utf8');
-                    mouthCues = JSON.parse(data);
-                    return [2];
+                    stderr = (_a.sent()).stderr;
+                    console.log("Rhubarb Complete....");
+                    if (stderr) {
+                        console.log(stderr);
+                    }
+                    console.log("Extracting File Contents....");
+                    json = JSON.parse(fs_1.default.readFileSync('output.json', 'utf8'));
+                    mouthCues = json.mouthCues;
+                    return [2, mouthCues];
             }
         });
     });
 }
-rhubarbProcessor('en-Amber.wav', 'en-text.txt');
+var phoneme = rhubarbProcessor('en-Amber.wav', 'en-text.txt');
 //# sourceMappingURL=index.js.map
