@@ -3,5 +3,8 @@
     "@svgdotjs/svg.js": "^3.1.2",
     "awesome-typescript-loader": "^5.2.1",
     "source-map-loader": "^4.0.1"
+  },
+  "devDependencies": {
+    "jest": "^29.2.2"
   }
 }
