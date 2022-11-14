@@ -57,7 +57,7 @@ function rhubarbProcessor(audio_file_name, text_file_name) {
                     catch (err) {
                         console.log("Error message: ".concat(err));
                     }
-                    console.log("Starting Rhubarb....");
+                    console.log("Starsdting Rhubarb....");
                     return [4, exec("\"./rhubarb\" -o output.json --exportFormat json -r pocketSphinx -d ".concat(text_file_name, " --extendedShapes GX ").concat(audio_file_name))];
                 case 1:
                     stderr = (_a.sent()).stderr;
