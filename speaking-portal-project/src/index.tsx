@@ -10,7 +10,4 @@ async function main () {
     console.log(phonemeContents)
 
 }
-
-
-
 main()
