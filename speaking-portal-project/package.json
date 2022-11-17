@@ -6,7 +6,7 @@
   "scripts": {
     "start:dev": "nodemon",
     "start": "npm run build && node build/index.js",
-    "build": "rimraf build && tsc",
+    "build": "tsc",
     "test": "echo \"Error: no tests specified\" && exit 1",
     "lint": "eslint . --ext .ts,.tsx",
     "format": "eslint . --ext .ts,.tsx --fix"
