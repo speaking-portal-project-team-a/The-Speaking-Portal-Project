@@ -483,10 +483,6 @@ fabric.properties
 # Rhubarb Ignore
 **/rhubarb
 
-# FFmpeg ignore
-**/ffmpeg
-speaking-portal-project/ffmpeg/
-
 # Ignore Build/Dist Dir
 speaking-portal-project/build
 
