@@ -1,4 +1,5 @@
 import { stdout, chdir, cwd } from 'node:process'
+import { spawnSync } from 'node:child_process'
 import util from 'node:util'
 import fs from 'fs'
 import { MouthCue, MouthCueArray } from '../types'
@@ -20,14 +21,16 @@ export async function rhubarbProcessor (selected_language : string, audio_file_n
     var recognizer:string;
     selected_language.toLowerCase().includes('english') ? recognizer = 'pocketSphinx' : recognizer = 'phonetic'
 
-    // Run Rhubarb child process
-    const rhubarbCommand:string = `"./rhubarb" -o output.json --exportFormat json -r ${recognizer} -d ${text_file_name} --extendedShapes GX ${audio_file_name}`
-    console.log(`Running command: + ${rhubarbCommand}`)
-    const {stderr} = await exec(rhubarbCommand)
+    const args = [
+        "-o ","output.json",
+        "--exportFormat","json",
+        "-r ",`${recognizer}`,
+        "-d",`${text_file_name}`,
+        "--extendedShapes", "GX", `${audio_file_name}`
+    ]
 
-    if (stderr) {
-        console.log(stderr)
-    }
+    const rhubarbProc = spawnSync('./rhubarb', args)
+
     const json = JSON.parse(fs.readFileSync('output.json', 'utf8'))
     const mouthCues: MouthCue[] = json.mouthCues as MouthCue[]
 
