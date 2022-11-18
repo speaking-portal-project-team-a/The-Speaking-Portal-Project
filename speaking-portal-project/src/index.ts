@@ -32,7 +32,6 @@ async function main () {
     } catch (err: any) {
         console.log(`Error message: ${err}`)
     }
-
 }
 
 main()
