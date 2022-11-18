@@ -13,11 +13,12 @@ export async function mouthCuesToInputFile({
     await fs.promises.writeFile(outputPath, generateMouthData(mouthCues), {
       flag: 'w',
     })
-    // Lines 10-16 for testing purposes only
+    /* Lines 17-20 for testing purposes only
     const contents = await fs.promises.readFile(outputPath, 'utf-8')
-    //console.log(contents);
+    console.log(contents);
 
     return contents
+    */
   } catch (err) {
     console.log(err)
     return 'Something went wrong'
