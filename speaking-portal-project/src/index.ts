@@ -1,6 +1,8 @@
 import { chdir, cwd, kill } from 'node:process'
 import { rhubarbProcessor } from "./phonemeFactory/rhubarb"
 import { checkFiles } from "./test/file_check"
+import {mouthCuesToInputFile} from "./phonemeFactory/mouthCueProcessor";
+
 
 // Main Function
 async function main () {
@@ -26,7 +28,7 @@ async function main () {
         console.log(`Error message: ${err}`)
     }
 
-
+    console.log(mouthCuesToInputFile({mouthCues : phonemeContents}))
 
 }
 
