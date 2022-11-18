@@ -1,4 +1,5 @@
 import { rhubarbProcessor} from "./phonemeFactory/rhubarb"
+import {mouthCuesToInputFile} from "./phonemeFactory/mouthCueProcessor";
 
 
 async function main () {
@@ -9,7 +10,7 @@ async function main () {
 
     console.log(phonemeContents)
 
-
+    console.log(mouthCuesToInputFile({mouthCues : phonemeContents}))
 
 }
 main()
