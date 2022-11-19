@@ -1,6 +1,8 @@
 import { chdir, cwd, kill } from 'node:process'
 import { rhubarbProcessor } from "./phonemeFactory/rhubarb"
 import { checkFiles } from "./test/file_check"
+import {mouthCuesToInputFile} from "./phonemeFactory/mouthCueProcessor";
+import { ffmpegProcessor } from './animationFactory/ffmpeg'
 
 // Main Function
 async function main () {
@@ -22,10 +24,14 @@ async function main () {
         console.log("Printing phoneme timings from json file...")
         console.log(phonemeContents)
 
+        console.log("Converting timings to input file...")
+        console.log(mouthCuesToInputFile({ mouthCues: phonemeContents }))
+        console.log("Generating output video...")
+        await ffmpegProcessor('../rhubarb/en-Amber.wav', 'input.txt')
+
     } catch (err: any) {
         console.log(`Error message: ${err}`)
     }
-
 }
 
 main()
