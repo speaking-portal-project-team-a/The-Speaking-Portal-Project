@@ -2,7 +2,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ development ]
+    branches: [ development, github_workflows ]
   pull_request:
     branches: [ developement ]
 
