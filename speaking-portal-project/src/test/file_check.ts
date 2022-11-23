@@ -26,7 +26,7 @@ export async function checkFiles(audio_file_name : string, text_file_name : stri
 
 }
 
-function checkFileExistence(file : string) {
+export function checkFileExistence(file : string) {
     /**
      * Checks for the existence of the specified file in the current directory
      *
@@ -38,7 +38,7 @@ function checkFileExistence(file : string) {
      */
     fs.access(file, fs.constants.F_OK, (err) => { // TODO: should we separate these checks?
         if(err){
-            throw Error(`${file} does not exist in ${cwd()}`)
+            throw Error(`FileNotFound`)
         } else {
             console.log(`${file} exists`)
             return true
@@ -46,7 +46,7 @@ function checkFileExistence(file : string) {
     });
 }
 
-function checkFileReadAccess(file : string){
+export function checkFileReadAccess(file : string){
     /**
      * Checks for the read permission of the specified file in the current directory
      *
@@ -58,14 +58,14 @@ function checkFileReadAccess(file : string){
      */
     fs.access(file, fs.constants.R_OK, (err) => { // TODO: should we separate these checks?
         if(err)
-            throw Error(`${file} is not readable`)
+            throw Error(`FileNotReadable`)
         else
             console.log(`${file} is readable`)
             return true
     });
 }
 
-function checkWavFile(file : string){
+export function checkWavFile(file : string){
     // TODO: Should we be checking the name that is given or look for a .wav file in the directory?
     if (file.toLowerCase().includes('.wav')){
         console.log(`Audio file ${file} has .wav extension.`)
@@ -80,12 +80,12 @@ function checkWavFile(file : string){
 
 }
 
-function checkTextFile(file : string){
+export function checkTextFile(file : string){
     // TODO: Should we be checking the name that is given or look for a .txt file in the directory?
     if (file.toLowerCase().includes('.txt')){
         console.log(`Input text file ${file} has .txt extension.`)
     } else {
-        throw Error(`Supposed text file ${file} is not a .txt file.`)
+        throw Error(`InvalidTextFile`)
     }
 
     // TODO: should we check if it's corrupted? how?
@@ -97,7 +97,7 @@ function checkTextFile(file : string){
             console.log(`Text file ${file} is not empty`)
             return true
         } else {
-            throw Error(`Text file ${file} is empty. It should not be used in the phoneme factory.`)
+            throw Error(`InvalidWavFile`)
         }
     })
 
