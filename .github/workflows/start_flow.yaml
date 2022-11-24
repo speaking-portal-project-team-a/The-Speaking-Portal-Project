@@ -17,7 +17,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         working-directory: ./speaking-portal-project
-        with:
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
