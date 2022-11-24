@@ -21,6 +21,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with: 
-      - run: npm ci
-      - run: npm run build --if-present
-      - run: npm test
+        - run: npm ci
+        - run: npm run build --if-present
+        - run: npm test
