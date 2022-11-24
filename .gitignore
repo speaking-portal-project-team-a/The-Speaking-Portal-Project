@@ -478,3 +478,13 @@ fabric.properties
 
 # Mac specific files
 .ds_store
+
+
+# Rhubarb Ignore
+**/rhubarb
+
+# Ignore Build/Dist Dir
+speaking-portal-project/build
+
+speaking-portal-project/package-lock.json
+speaking-portal-project/tsconfig.tsbuildinfo

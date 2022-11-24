@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+#drawing {
+	width: 100%;
+	height: 300px;
+}
+tspan {
+	fill: #e5e5e5;
+	stroke: #f06;
+	stroke-width: 0.85;
+  font-family: 'Inconsolata';
+}
+input[type=text] {
+	width: 100%;
+  font-family: 'Inconsolata';
+  font-size: 14px;
+  outline: none;
+  color: #666;
+}
