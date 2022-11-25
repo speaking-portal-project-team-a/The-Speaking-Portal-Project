@@ -90,8 +90,11 @@ npm package versions:
     4. Download the text file
 4. Move the Kukarella files to `speaking-portal-project\rhubarb`
 5. In the terminal, navigate to `speaking-portal-project`
-6. Run `npm install`
-7. Run `npm start`
+6. Install ffmpeg
+   1. Follow the steps on [adamtheautomator.com](https://adamtheautomator.com/install-ffmpeg/) for your corresponding
+   operating system. We recommend the Powershell approach for Windows users.
+7. Run `npm install`
+8. Run `npm start`
 
 ## How it Works
 
