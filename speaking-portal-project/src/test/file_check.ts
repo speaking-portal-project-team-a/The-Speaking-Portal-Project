@@ -1,7 +1,7 @@
 import { chdir, cwd } from 'node:process'
 import fs from 'fs'
 
-export async function checkFiles(audio_file_name : string, text_file_name : string){
+export async function checkFiles(audio_file_name: string, text_file_name: string) {
     /**
      * Checks the file in the Rhubarb directory: existence, read permissions, valid files .wav and .txt
      *
@@ -10,7 +10,11 @@ export async function checkFiles(audio_file_name : string, text_file_name : stri
      *
      * @param file_name - The name of the file to check
      */
-    chdir('./rhubarb') // should we do this here?
+    try {
+        chdir('./rhubarb')
+    } catch (err) {
+        console.log(`Error message: ${err}`)
+    }
 
     // Check Audio File
     checkFileExistence(audio_file_name)
@@ -21,12 +25,14 @@ export async function checkFiles(audio_file_name : string, text_file_name : stri
     checkFileExistence(text_file_name)
     checkFileReadAccess(text_file_name)
     checkTextFile(text_file_name)
-
-    // TODO: chdir() back to original directory? or do we do this after running Rhubarb? should it be here, in index.ts or in rhubarb.ts?
-
+    try {
+        chdir('../')
+    } catch (err) {
+        console.log(`Error message: ${err}`)
+    }
 }
 
-export function checkFileExistence(file : string) {
+export function checkFileExistence(file: string) {
     /**
      * Checks for the existence of the specified file in the current directory
      *
@@ -36,17 +42,18 @@ export function checkFileExistence(file : string) {
      *
      * @param file - The name of the file to check
      */
-    fs.access(file, fs.constants.F_OK, (err) => { // TODO: should we separate these checks?
-        if(err){
+    fs.access(file, fs.constants.F_OK, (err) => {
+        // TODO: should we separate these checks?
+        if (err) {
             throw Error(`FileNotFound`)
         } else {
             console.log(`${file} exists`)
             return true
         }
-    });
+    })
 }
 
-export function checkFileReadAccess(file : string){
+export function checkFileReadAccess(file: string) {
     /**
      * Checks for the read permission of the specified file in the current directory
      *
@@ -56,18 +63,17 @@ export function checkFileReadAccess(file : string){
      *
      * @param file - The name of the file to check
      */
-    fs.access(file, fs.constants.R_OK, (err) => { // TODO: should we separate these checks?
-        if(err)
-            throw Error(`FileNotReadable`)
-        else
-            console.log(`${file} is readable`)
-            return true
-    });
+    fs.access(file, fs.constants.R_OK, (err) => {
+        // TODO: should we separate these checks?
+        if (err) throw Error(`FileNotReadable`)
+        else console.log(`${file} is readable`)
+        return true
+    })
 }
 
-export function checkWavFile(file : string){
+export function checkWavFile(file: string) {
     // TODO: Should we be checking the name that is given or look for a .wav file in the directory?
-    if (file.toLowerCase().includes('.wav')){
+    if (file.toLowerCase().includes('.wav')) {
         console.log(`Audio file ${file} has .wav extension.`)
     } else {
         throw Error(`Supposed audio file ${file} is not a .wav file.`)
@@ -77,12 +83,11 @@ export function checkWavFile(file : string){
     // should we do this manually or with this module? https://www.npmjs.com/package/wav-file-info
 
     // TODO: check if audio is 0 seconds long
-
 }
 
-export function checkTextFile(file : string){
+export function checkTextFile(file: string) {
     // TODO: Should we be checking the name that is given or look for a .txt file in the directory?
-    if (file.toLowerCase().includes('.txt')){
+    if (file.toLowerCase().includes('.txt')) {
         console.log(`Input text file ${file} has .txt extension.`)
     } else {
         throw Error(`InvalidTextFile`)
@@ -92,13 +97,12 @@ export function checkTextFile(file : string){
 
     // TODO: check if text file is empty
     fs.readFile(file, 'utf8', (err, data) => {
-        if (err) throw Error(`Unable to read ${file}`);
-        if (data.length > 0){
+        if (err) throw Error(`Unable to read ${file}`)
+        if (data.length > 0) {
             console.log(`Text file ${file} is not empty`)
             return true
         } else {
             throw Error(`InvalidWavFile`)
         }
     })
-
 }

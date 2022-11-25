@@ -1,25 +1,38 @@
 import { stdout, chdir, cwd } from 'node:process'
 import util from 'node:util'
 import { MouthCue, MouthCueArray } from '../types'
+import { spawnSync } from 'node:child_process'
 
-const exec = util.promisify(require('node:child_process').exec)
-// TODO: Update parameters
-export async function ffmpegProcessor(audio_file_name: string, text_file_name: string) {
-  // Need child process verbose ? check out -> https://stackoverflow.com/questions/14332721/node-js-spawn-child-process-and-get-terminal-output-live
-  try {
-    chdir('../ffmpeg')
-  } catch (err) {
-    console.log(`Error message: ${err}`)
-  }
-  console.log(cwd())
-  // Run ffmpeg child process
-  // Warning: Command may not be correct for audio input
-  const { stderr } = await exec(`ffmpeg -f concat -i ${text_file_name} -i ${audio_file_name} -r 24 -pix_fmt yuv420p output.mp4`)
+export async function ffmpegProcessor(audio_file: string, text_file: string) {
+    try {
+        chdir('./ffmpeg')
+    } catch (error) {
+        console.log(`Error message: ${error}`)
+    }
+    const args = [
+        '-f',
+        'concat',
+        '-i',
+        `${text_file}`,
+        '-i',
+        `${audio_file}`,
+        '-r',
+        '24',
+        '-pix_fmt',
+        'yuv420p',
+        'output.mp4',
+    ]
+    const ffmpegProc = spawnSync('ffmpeg', args)
+    if (ffmpegProc.stderr) {
+        //throw Error(`${ffmpegProc.stderr}`)
+    }
 
-  if (stderr) {
-    console.log(stderr)
-  }
-  //Todo: Return output
+    try {
+        chdir('../')
+    } catch (error) {
+        console.log(`Error message: ${error}`)
+    }
 
-  return
+    // TODO: Change return type to the generated video file
+    return
 }
