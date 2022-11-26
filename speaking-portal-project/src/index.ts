@@ -6,7 +6,7 @@ import { ffmpegProcessor } from './animationFactory/ffmpeg'
 
 // Sets language option for testing based
 const text_file_options: string[] = ['en-text.txt', 'fr-text.txt', 'jp-text.txt']
-const audio_file_options: string[] = ['en-Amber.wav', 'fr-Claude.wav', 'jp-Ayumi.wav']
+const audio_file_options: string[] = ['en-Amber.wav', 'fr-Claude.wav', 'jp-Ayumi.wav','badformat.mp3','corruptedfile.wav','chipmunk.wav','reverse.wav','signalloss.wav','cursed.wav']
 const recognizer_options: string[] = ['English (U.S.)', 'French', 'Japanese']
 
 // Main Function
