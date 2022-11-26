@@ -9,7 +9,7 @@ async function main () {
 
     // Received files will be saved in the Rhubarb directory
     // The following variables will also be received:
-    const audio_file_name:string = 'Cursed.wav'
+    const audio_file_name:string = 'en-Amber.wav'
     const text_file_name:string = 'en-text.txt'
     const selected_language:string = 'English (U.S.)'
 
@@ -27,7 +27,7 @@ async function main () {
         console.log("Converting timings to input file...")
         console.log(mouthCuesToInputFile({ mouthCues: phonemeContents }))
         console.log("Generating output video...")
-        await ffmpegProcessor('../rhubarb/Cursed.wav', 'input.txt')
+        await ffmpegProcessor('../rhubarb/en-Amber.wav', 'input.txt')
 
     } catch (err: any) {
         console.log(`Error message: ${err}`)
