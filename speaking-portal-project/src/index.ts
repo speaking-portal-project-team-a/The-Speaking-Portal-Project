@@ -27,7 +27,7 @@ const audio_file_options: string[] = [
     'signalloss.wav',
     'cursed.wav',
 ]
-const recognizer_options: string[] = ['English (U.S.)', 'French', 'Japanese']
+const recognizer_options: string[] = ['English (U.S.)', 'French', 'Japanese','English (U.S.)','English (U.S.)','English (U.S.)','English (U.S.)','English (U.S.)','English (U.S.)']
 
 // Main Function
 async function main() {
