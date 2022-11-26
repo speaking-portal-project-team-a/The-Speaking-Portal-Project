@@ -5,9 +5,29 @@ import { mouthCuesToInputFile } from './phonemeFactory/mouthCueProcessor'
 import { ffmpegProcessor } from './animationFactory/ffmpeg'
 
 // Sets language option for testing based
-const text_file_options: string[] = ['en-text.txt', 'fr-text.txt', 'jp-text.txt']
-const audio_file_options: string[] = ['en-Amber.wav', 'fr-Claude.wav', 'jp-Ayumi.wav']
-const recognizer_options: string[] = ['English (U.S.)', 'French', 'Japanese']
+const text_file_options: string[] = [
+    'en-text.txt',
+    'fr-text.txt',
+    'jp-text.txt',
+    'en-text.txt',
+    'en-text.txt',
+    'en-text.txt',
+    'en-text.txt',
+    'en-text.txt',
+    'en-text.txt',
+]
+const audio_file_options: string[] = [
+    'en-Amber.wav',
+    'fr-Claude.wav',
+    'jp-Ayumi.wav',
+    'badformat.mp3',
+    'corruptedfile.wav',
+    'chipmunk.wav',
+    'reverse.wav',
+    'signalloss.wav',
+    'cursed.wav',
+]
+const recognizer_options: string[] = ['English (U.S.)', 'French', 'Japanese','English (U.S.)','English (U.S.)','English (U.S.)','English (U.S.)','English (U.S.)','English (U.S.)']
 
 // Main Function
 async function main() {
