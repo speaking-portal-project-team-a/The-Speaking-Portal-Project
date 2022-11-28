@@ -15,12 +15,12 @@ export async function mouthCuesToInputFile({
         /* Lines 17-20 for testing purposes only
         const contents = await fs.promises.readFile(outputPath, 'utf-8')
         console.log(contents);
-    
+
         return contents
         */
     } catch (err) {
         console.log(err)
-        return 'Something went wrong'
+        return Error("MouthCuesFileError")
     }
 }
 
