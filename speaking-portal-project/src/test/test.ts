@@ -1,20 +1,20 @@
 import {test,expect} from '@jest/globals'
-import { checkFileExistence,checkFileReadAccess,checkWavFile,checkTextFile } from "./file_check";
+import { doesFileExist,isFileReadable,isWavFile,isTextFileValid } from "./file_check";
 
 
 
-test('File Not Found', () => { 
-    expect(() =>checkFileExistence('test.wav')).toThrow('FileNotFound')
+test('File Not Found', () => {
+    expect(() =>doesFileExist('test.wav')).toThrow('FileNotFound')
  })
 
- test('File Not Readable', () => { 
-    expect(() =>checkFileReadAccess('test.wav')).toThrow('FileNotReadable')
+ test('File Not Readable', () => {
+    expect(() =>isFileReadable('test.wav')).toThrow('FileNotReadable')
  })
 
- test('Check Text File ', () => { 
-    expect(() =>checkTextFile('test.wav')).toThrow('InvalidTextFile')
+ test('Check Text File ', () => {
+    expect(() =>isTextFileValid('test.wav')).toThrow('InvalidTextFile')
  })
 
- test('Check Wav File ', () => { 
-    expect(() =>checkWavFile('test.wav')).toThrow('InvalidWavFile')
+ test('Check Wav File ', () => {
+    expect(() =>isWavFile('test.wav')).toThrow('InvalidWavFile')
  })
