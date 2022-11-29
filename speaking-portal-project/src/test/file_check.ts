@@ -1,5 +1,7 @@
 import { chdir, cwd } from 'node:process'
 import fs from 'fs'
+import { rejects, throws } from 'node:assert'
+import { info } from 'node:console'
 
 var wavFileInfo = require('wav-file-info')
 
@@ -50,10 +52,14 @@ export async function doesFileExist(file: string) {
      *
      * @param file - The name of the file to check
      */
-    fs.access(file, fs.constants.F_OK, (err) => {
-        if (err) throw Error(`FileNotFound`)
-    })
+    
+    try {
+        await fs.promises.access(file,fs.constants.F_OK)
+    } catch (err) {
+        throw  Error ('FileNotFound')
+    }
     console.log(`${file} exists`)
+    
     return true
 }
 
@@ -67,9 +73,14 @@ export async function isFileReadable(file: string) {
      *
      * @param file - The name of the file to check
      */
-    fs.access(file, fs.constants.R_OK, (err) => {
-        if (err) throw Error(`FileNotReadable`)
-    })
+
+    try {
+        fs.promises.access(file, fs.constants.R_OK)
+    } catch (err) {
+        console.log(err)
+        throw Error('FileNotReadable')
+    }
+ 
     console.log(`${file} is readable`)
     return true
 }
@@ -100,10 +111,12 @@ export async function isWavFileValid(file: string) {
      *
      * @param file - The name of the file to check
      */
+    
     wavFileInfo.infoByFilename(file, function(err:any, info:any){
         if (err) throw Error("CorruptedWavFile");
         console.log(info);
       });
+    
     console.log("Wav file is not corrupted.")
     return true
 }
