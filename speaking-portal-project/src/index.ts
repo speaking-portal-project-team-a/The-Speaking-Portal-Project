@@ -15,17 +15,20 @@ const text_file_options: string[] = [
     'en-text.txt',
     'en-text.txt',
     'en-text.txt',
+    'en-text.txt',
 ]
 const audio_file_options: string[] = [
     'en-Amber.wav',
     'fr-Claude.wav',
     'jp-Ayumi.wav',
+    'fake.wav',
     'badformat.mp3',
     'corruptedfile.wav',
     'chipmunk.wav',
     'reverse.wav',
     'signalloss.wav',
     'cursed.wav',
+    
 ]
 const recognizer_options: string[] = ['English (U.S.)', 'French', 'Japanese','English (U.S.)','English (U.S.)','English (U.S.)','English (U.S.)','English (U.S.)','English (U.S.)']
 
