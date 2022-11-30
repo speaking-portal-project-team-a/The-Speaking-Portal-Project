@@ -32,7 +32,7 @@ const recognizer_options: string[] = ['English (U.S.)', 'French', 'Japanese','En
 // Main Function
 async function main() {
     // TODO: Change case number during peer testing
-    // English = 0, French = 1, Japanese = 2
+    // English = 0, French = 1, Japanese = 2, Wrong file = 3, Corrupted file = 4, Unique files = 5|6|7|8
     const case_number: number = 0
 
     // Received files are saved in the Rhubarb directory
