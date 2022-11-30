@@ -23,9 +23,14 @@ export async function ffmpegProcessor(audio_file: string, text_file: string) {
         'output.mp4',
     ]
     const ffmpegProc = spawnSync('ffmpeg', args)
-    if (ffmpegProc.stderr) {
-        //throw Error(`${ffmpegProc.stderr}`)
-    }
+    
+    //TODO: Need to fix ffmpeg Error Handeling
+    
+    // if (ffmpegProc.stderr) {
+         //throw Error(`${ffmpegProc.stderr}`)
+    // } else {
+    //     console.log("Output video generated sucessfully")
+    // }
 
     try {
         chdir('../')

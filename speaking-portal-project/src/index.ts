@@ -31,15 +31,15 @@ const recognizer_options: string[] = ['English (U.S.)', 'French', 'Japanese','En
 
 // Main Function
 async function main() {
-    // TODO: Change language_selection based on desired language
+    // TODO: Change case number during peer testing
     // English = 0, French = 1, Japanese = 2
-    const language_selection: number = 0
+    const case_number: number = 0
 
     // Received files are saved in the Rhubarb directory
     // The following variables will also be received:
-    let audio_file_name: string = audio_file_options[language_selection]
-    let text_file_name: string = text_file_options[language_selection]
-    let selected_language: string = recognizer_options[language_selection]
+    let audio_file_name: string = audio_file_options[case_number]
+    let text_file_name: string = text_file_options[case_number]
+    let selected_language: string = recognizer_options[case_number]
 
     if (!audio_file_name || !text_file_name || !selected_language) {
         console.log('Language Selection out of bounds\nLanguage set to English (U.S.)')
@@ -62,7 +62,7 @@ async function main() {
         console.log('Generating output video...')
         await ffmpegProcessor(`../rhubarb/${audio_file_name}`, 'input.txt')
     } catch (err: any) {
-        console.log(`Error message: ${err}`)
+        console.log(`${err}`)
     }
 }
 

@@ -20,13 +20,11 @@ export async function checkFiles(audio_file_name: string, text_file_name: string
 
     // Check Audio File
     await doesFileExist(audio_file_name)
-    await isFileReadable(audio_file_name)
     await isWavFile(audio_file_name)
     await isWavFileValid(audio_file_name)
 
     // Check Text File
     await doesFileExist(text_file_name)
-    await isFileReadable(text_file_name)
     await isTextFileValid(text_file_name)
     await isTextEmpty(text_file_name)
 
@@ -138,6 +136,7 @@ export async function isTextEmpty(file: string) {
         fs.readFile(file,'utf8',(err,data)=> {
             if (data.length == 0) {reject(new Error('EmptyTextFile'))
         } else {
+            console.log('Text file is not empty')
             resolve(true)
         }
         })
