@@ -1,7 +1,5 @@
-import { chdir, cwd } from 'node:process'
+import { chdir } from 'node:process'
 import fs from 'fs'
-import { rejects, throws } from 'node:assert'
-import { info } from 'node:console'
 
 var wavFileInfo = require('wav-file-info')
 
@@ -30,6 +28,7 @@ export async function checkFiles(audio_file_name: string, text_file_name: string
     await doesFileExist(text_file_name)
     await isFileReadable(text_file_name)
     await isTextFileValid(text_file_name)
+    await isTextEmpty(text_file_name)
 
     // Return to original directory
     try {
@@ -56,7 +55,7 @@ export async function doesFileExist(file: string) {
     try {
         await fs.promises.access(file,fs.constants.F_OK)
     } catch (err) {
-        throw  Error ('FileNotFound')
+        throw new Error ('FileNotFound')
     }
     console.log(`${file} exists`)
     
@@ -77,11 +76,10 @@ export async function isFileReadable(file: string) {
     try {
         fs.promises.access(file, fs.constants.R_OK)
     } catch (err) {
-        console.log(err)
-        throw Error('FileNotReadable')
+        throw Error('FileReadAccessDenied')
     }
  
-    console.log(`${file} is readable`)
+    console.log(`Reading permission granted for ${file} `)
     return true
 }
 
@@ -103,7 +101,7 @@ export async function isWavFile(file: string) {
 }
 
 export async function isWavFileValid(file: string) {
-    /**
+        /**
      * Checks if the specified .wav file is corrupted
      *
      * @remarks
@@ -111,14 +109,17 @@ export async function isWavFileValid(file: string) {
      *
      * @param file - The name of the file to check
      */
-    
-    wavFileInfo.infoByFilename(file, function(err:any, info:any){
-        if (err) throw Error("CorruptedWavFile");
-        console.log(info);
-      });
-    
-    console.log("Wav file is not corrupted.")
-    return true
+
+    return new Promise<boolean | Error >((resolve,reject) => {
+        
+    wavFileInfo.infoByFilename(file,(err:any, info:any) => {
+        if(err) {
+            reject(new Error('CorruptedWavFile')) 
+        } else {
+            resolve(true)
+        }
+    })
+    })
 }
 
 export async function isTextFileValid(file: string) {
@@ -126,20 +127,33 @@ export async function isTextFileValid(file: string) {
     if (file.toLowerCase().includes('.txt')) {
         console.log(`Input text file ${file} has .txt extension`)
     } else {
-        throw Error(`InvalidTextFile`)
+        throw Error(`TextNotTxtFile`)
     }
-
-    // Check if text file is readable in utf8 format and check if empty
-    fs.readFile(file, 'utf8', (err, data) => {
-        if (err) throw Error(`UnableToReadTextFile`)
-        console.log(`Text file ${file} is valid`)
-        if (data.length > 0) {
-            console.log(`Text file ${file} is not empty`)
-            return true
-        } else {
-            throw Error(`EmptyTextFile`)
-        }
-    })
-
     return true
 }
+
+export async function isTextEmpty(file: string) {
+    // Check if text file is readable in utf8 format and check if empty
+    return new Promise<boolean | Error>((resolve,reject) => {
+        fs.readFile(file,'utf8',(err,data)=> {
+            if (data.length == 0) {reject(new Error('EmptyTextFile'))
+        } else {
+            resolve(true)
+        }
+        })
+    })
+
+}
+
+// TODO: See if rhubarb already checks for this
+
+// export async function isTextEmpty(file: string) {
+//     const data = fs.promises.readFile(file,'utf8')
+
+//     if (data > 0) {
+//             console.log(`Text file ${file} is not empty`)
+//             return true
+//         } else {
+//             throw Error(`EmptyTextFile`)
+//         }
+//     }

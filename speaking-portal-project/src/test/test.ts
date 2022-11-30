@@ -1,41 +1,37 @@
 import {test,expect,describe} from '@jest/globals'
-import { doesFileExist,isFileReadable,isWavFile,isTextFileValid, isWavFileValid } from "./file_check";
+import { doesFileExist,isWavFile,isTextFileValid, isWavFileValid, isTextEmpty } from "./file_check";
 import {} from 'fs'
-
 
 describe('Peer Testing Unit Tests', () => {
 
-test('File not found func test', async () => {
-    await expect(() =>doesFileExist('./test_files/fileDoesNotExist.wav')).rejects.toThrow('FileNotFound')
+    test('Case #1: Missing File Test', async () => {
+        await expect(() =>doesFileExist('./src/test/test_files/FileDoesNotExist.wav')).rejects.toThrow('FileNotFound')
+    })
+
+    test('Case #2: Wrong .wav File Test', async () => {
+        await expect(() =>isWavFile('./src/test/test_files/BadFormat.mp3')).rejects.toThrow('AudioNotWavFile')
+    })
+
+    test('Case #3: Corrupted File Test', async () =>{
+        await expect(() =>isWavFileValid('./src/test/test_files/CorruptedFile.wav')).rejects.toThrow('CorruptedWavFile')
+    })
+    
+    test('Case #4: Wrong Text File Test', async() => {
+        await expect(() =>isTextFileValid('./src/test/test_files/BadFormatTxt.json')).rejects.toThrow('TextNotTxtFile')
+    })
+
+    test('Case #5: Text File Empty Test', async () => {
+        await expect(() =>isTextEmpty('./src/test/test_files/empty.txt')).rejects.toThrow('EmptyTextFile')
+    })
+
 })
 
-test('Does .txt have correct extension check', async() => {
-    await expect(() =>isTextFileValid('./test_files/unreadableTextFile.json')).rejects.toThrow('InvalidTextFile')
- })
-
-test('Check is .wav File has correct extension', async () => {
-    await expect(() =>isWavFile('BadFormat.mp3')).rejects.toThrow('AudioNotWavFile')
- })
-
-// test('Check if .wav file is valid ', async () =>{
-//   await expect(() =>isWavFileValid('CorruptedFile.wav')).toThrowError('CorruptedWavFile')
-//  })
-
-
-})
+// TODO: Decide if needed later
+    // test('Case #6: Text File UTF8 Content Test', async () => {
+    //     await expect(() =>isTextContentValid('./src/test/test_files/wrong_encode.txt')).rejects.toThrow('TxtContentsNotUTF8')
+    // })
 
 
 
-// test('File Not Readable', async () => {
-   //         await expect(() =>isFileReadable('./test_files/unreadableTextFile.txt')).rejects.toThrow('FileNotReadable')
-   //   })
 
 
-//  test('Check is .wav File has correct extension', async () => {
-//     await expect(() =>isWavFile('BadFormat.mp3')).rejects.toThrow('AudioNotWavFile')
-//  })
-
-
-//  test('Check if .wav file is valid ', async () =>{
-//   await expect(() =>isWavFileValid('CorruptedFile.wav')).toThrowError('CorruptedWavFile')
-//  })
