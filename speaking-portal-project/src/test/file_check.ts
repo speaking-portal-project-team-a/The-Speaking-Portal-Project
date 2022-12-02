@@ -1,7 +1,9 @@
-import { chdir, cwd } from 'node:process'
+import { chdir } from 'node:process'
 import fs from 'fs'
 
-export async function checkFiles(audio_file_name : string, text_file_name : string){
+var wavFileInfo = require('wav-file-info')
+
+export async function checkFiles(audio_file_name: string, text_file_name: string) {
     /**
      * Checks the file in the Rhubarb directory: existence, read permissions, valid files .wav and .txt
      *
@@ -10,23 +12,34 @@ export async function checkFiles(audio_file_name : string, text_file_name : stri
      *
      * @param file_name - The name of the file to check
      */
-    chdir('./rhubarb') // should we do this here?
+    try {
+        chdir('./rhubarb')
+    } catch (err) {
+        console.log(`Error message: ${err}`)
+    }
 
     // Check Audio File
-    checkFileExistence(audio_file_name)
-    checkFileReadAccess(audio_file_name)
-    checkWavFile(audio_file_name)
+    await doesFileExist(audio_file_name)
+    await isWavFile(audio_file_name)
+    await isWavFileValid(audio_file_name)
 
     // Check Text File
-    checkFileExistence(text_file_name)
-    checkFileReadAccess(text_file_name)
-    checkTextFile(text_file_name)
+    await doesFileExist(text_file_name)
+    await isTextFileValid(text_file_name)
+    await isTextEmpty(text_file_name)
 
-    // TODO: chdir() back to original directory? or do we do this after running Rhubarb? should it be here, in index.ts or in rhubarb.ts?
+    // Return to original directory
+    try {
+        chdir('../')
+    } catch (err) {
+        console.log(`Error message: ${err}`)
+    }
 
+    // Promise cannot be void
+    return true
 }
 
-function checkFileExistence(file : string) {
+export async function doesFileExist(file: string) {
     /**
      * Checks for the existence of the specified file in the current directory
      *
@@ -36,17 +49,18 @@ function checkFileExistence(file : string) {
      *
      * @param file - The name of the file to check
      */
-    fs.access(file, fs.constants.F_OK, (err) => { // TODO: should we separate these checks?
-        if(err){
-            throw Error(`${file} does not exist in ${cwd()}`)
-        } else {
-            console.log(`${file} exists`)
-            return true
-        }
-    });
+    
+    try {
+        await fs.promises.access(file,fs.constants.F_OK)
+    } catch (err) {
+        throw new Error ('FileNotFound')
+    }
+    console.log(`${file} exists`)
+    
+    return true
 }
 
-function checkFileReadAccess(file : string){
+export async function isFileReadable(file: string) {
     /**
      * Checks for the read permission of the specified file in the current directory
      *
@@ -56,49 +70,89 @@ function checkFileReadAccess(file : string){
      *
      * @param file - The name of the file to check
      */
-    fs.access(file, fs.constants.R_OK, (err) => { // TODO: should we separate these checks?
-        if(err)
-            throw Error(`${file} is not readable`)
-        else
-            console.log(`${file} is readable`)
-            return true
-    });
+
+    try {
+        fs.promises.access(file, fs.constants.R_OK)
+    } catch (err) {
+        throw Error('FileReadAccessDenied')
+    }
+ 
+    console.log(`Reading permission granted for ${file} `)
+    return true
 }
 
-function checkWavFile(file : string){
-    // TODO: Should we be checking the name that is given or look for a .wav file in the directory?
-    if (file.toLowerCase().includes('.wav')){
-        console.log(`Audio file ${file} has .wav extension.`)
+export async function isWavFile(file: string) {
+    /**
+     * Checks if the specified audio file is .wav
+     *
+     * @remarks
+     * Ensure checkFileExistence() and checkFileReadAccess() are completed prior to this check
+     *
+     * @param file - The name of the file to check
+     */
+    if (file.toLowerCase().includes('.wav')) {
+        console.log(`Audio file ${file} has .wav extension`)
     } else {
-        throw Error(`Supposed audio file ${file} is not a .wav file.`)
+        throw Error(`AudioNotWavFile`)
     }
-
-    // TODO: Check if files are valid/not corrupted
-    // should we do this manually or with this module? https://www.npmjs.com/package/wav-file-info
-
-    // TODO: check if audio is 0 seconds long
-
+    return true
 }
 
-function checkTextFile(file : string){
-    // TODO: Should we be checking the name that is given or look for a .txt file in the directory?
-    if (file.toLowerCase().includes('.txt')){
-        console.log(`Input text file ${file} has .txt extension.`)
-    } else {
-        throw Error(`Supposed text file ${file} is not a .txt file.`)
-    }
+export async function isWavFileValid(file: string) {
+        /**
+     * Checks if the specified .wav file is corrupted
+     *
+     * @remarks
+     * Ensure checkFileExistence(), checkFileReadAccess(), and checkWavFile() are completed prior to this check
+     *
+     * @param file - The name of the file to check
+     */
 
-    // TODO: should we check if it's corrupted? how?
-
-    // TODO: check if text file is empty
-    fs.readFile(file, 'utf8', (err, data) => {
-        if (err) throw Error(`Unable to read ${file}`);
-        if (data.length > 0){
-            console.log(`Text file ${file} is not empty`)
-            return true
+    return new Promise<boolean | Error >((resolve,reject) => {
+        
+    wavFileInfo.infoByFilename(file,(err:any, info:any) => {
+        if(err) {
+            reject(new Error('CorruptedWavFile')) 
         } else {
-            throw Error(`Text file ${file} is empty. It should not be used in the phoneme factory.`)
+            resolve(true)
         }
+    })
+    })
+}
+
+export async function isTextFileValid(file: string) {
+    // Check if specified text file is .txt
+    if (file.toLowerCase().includes('.txt')) {
+        console.log(`Input text file ${file} has .txt extension`)
+    } else {
+        throw Error(`TextNotTxtFile`)
+    }
+    return true
+}
+
+export async function isTextEmpty(file: string) {
+    // Check if text file is readable in utf8 format and check if empty
+    return new Promise<boolean | Error>((resolve,reject) => {
+        fs.readFile(file,'utf8',(err,data)=> {
+            if (data.length == 0) {reject(new Error('EmptyTextFile'))
+        } else {
+            console.log('Text file is not empty')
+            resolve(true)
+        }
+        })
     })
 
 }
+
+// TODO: See if rhubarb already checks for this
+
+// export async function isTextEmpty(file: string) {
+//     const data = fs.promises.readFile(file,'utf8')
+
+//     if (data > 0) {
+//             console.log(`Text file ${file} is not empty`)
+//             return true
+//         } else {
+//             throw Error(`EmptyTextFile`)
+//         }
+//     }
