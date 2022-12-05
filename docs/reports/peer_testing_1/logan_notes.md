@@ -4,6 +4,8 @@
 
 **Participant**: Quinn Marshall
 
+**We accidentally forgot to record this session, and with the permission of Gema, chose not to rerun it.**
+
 # Introduction to Environment & Files:
 
 - Participant seems to fully grasp project flow & understands how the system works. No particular remarks at this stage.
