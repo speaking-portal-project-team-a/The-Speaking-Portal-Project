@@ -1,5 +1,9 @@
 # Peer Testing I Notes
 
+- Admin: Veronica Jack
+
+- Participant: Minh Bui
+
 ## Series of Events
 
 - Explained the purpose of our program
