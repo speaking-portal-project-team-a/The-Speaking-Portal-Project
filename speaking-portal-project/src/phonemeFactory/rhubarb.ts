@@ -49,10 +49,8 @@ export async function rhubarbProcessor(
     }
 
     // Convert JSON to mouth cues
-    console.log(rhubarbProc.status)
     const json = JSON.parse(fs.readFileSync(`../tmp/${output_file_name}`, 'utf8'))
     const mouthCues: MouthCue[] = json.mouthCues as MouthCue[]
-
     // Return to original directory
     try {
         chdir('../')

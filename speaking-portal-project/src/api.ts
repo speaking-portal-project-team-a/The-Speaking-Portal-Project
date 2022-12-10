@@ -75,7 +75,7 @@ app.post(
                 // Once all files have been converted we can start the rhubarb process
                 // Return not required
                 try {
-                    await main(audioPath, textPath, recognizer, filename)
+                    await Promise.all([main(audioPath, textPath, recognizer, filename)])
                     res.set('Content-Type', 'video/mp4')
                     // Read the video file from the file system and return it as the response
                     res.sendFile(`${filename}.mp4`, { root: './tmp' })
