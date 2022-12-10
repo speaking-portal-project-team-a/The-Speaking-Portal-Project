@@ -15,7 +15,7 @@ const upload = multer({
 })
 
 app.post(
-    '/api/generate-video',
+    '/kukarella/generate-video',
     upload.fields([
         { name: 'audio', maxCount: 1 },
         { name: 'text', maxCount: 1 },
@@ -36,9 +36,11 @@ app.post(
         // Retrieve language parameter
         const language = req.body.recognizer
         //Set a general filename
-        // TODO:  I thought of a fix to this stupidity, involving using the project name from kuk 2 create directories
-        //  in temp. seems smarter. will do later
-        //
+        /* TODO: decide on a way to store the temp files. This method works, but there is likely an improved way
+            of organizing this. We could use the username of the client inputting information alongside something like a
+            given project name, however, I have concerns as to whether or not this would ensure unique temporary
+            directories. We don't want to be accidentally returning incorrect files.
+        */
         const filename = audioFile.filename
         console.log(audioFile, textFile, language)
         // Convert temp file to .txt file
@@ -83,6 +85,7 @@ app.post(
                     fs.unlinkSync(audioPath)
                     fs.unlinkSync(textPath)
                     console.log('inputs deleted, moving to outputs ')
+                    //TODO: figure out where the json file is being written
                     //fs.unlinkSync(`tmp/${filename}.json`)
                     fs.unlinkSync(`tmp/${filename}.txt`)
                     fs.unlinkSync(`tmp/${filename}.mp4`)
