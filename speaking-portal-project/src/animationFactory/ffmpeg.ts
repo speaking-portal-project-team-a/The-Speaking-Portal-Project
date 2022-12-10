@@ -22,7 +22,6 @@ export async function ffmpegProcessor(audio_file: string, text_file: string, out
     const ffmpegProc = spawnSync('ffmpeg', args)
 
     //TODO: Need to fix ffmpeg Error Handling
-
     if (ffmpegProc.stderr) {
         throw Error(`${ffmpegProc.stderr}`)
     } else {

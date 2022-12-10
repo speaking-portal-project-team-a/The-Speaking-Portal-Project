@@ -2,7 +2,6 @@ import express, { Request, Response } from 'express'
 import multer from 'multer'
 import fs from 'fs'
 import { main } from './index'
-import { cwd } from 'node:process'
 const app = express()
 const ffmpeg = require('fluent-ffmpeg')
 const upload = multer({
@@ -26,31 +25,34 @@ app.post(
             return res.status(400).send('No files were uploaded.')
         }
 
-        // Retrieve the uploaded files from the Request object
+        // Retrieve the uploaded files from the Request object... Couldn't get typescript to be happy with this :(
         // @ts-ignore
         const audioFile = req.files['audio'][0]
-        const audioPath = `./tmp/${audioFile.filename}.wav`
         // @ts-ignore
         const textFile = req.files['text'][0]
+        // Could do this once files are generated, but i think its fine to define here.
+        const audioPath = `./tmp/${audioFile.filename}.wav`
         const textPath = `./tmp/${textFile.filename}.txt`
         // Retrieve language parameter
-        const language = req.body.recognizer
-        //Set a general filename
+        // TODO: Maybe add some input validation? But its coming from kukarella so... should be fine
+        const recognizer = req.body.recognizer ? req.body.recognizer : 'English (U.S.)'
+        // Set a general filename for temp files to be generated as
         /* TODO: decide on a way to store the temp files. This method works, but there is likely an improved way
             of organizing this. We could use the username of the client inputting information alongside something like a
             given project name, however, I have concerns as to whether or not this would ensure unique temporary
             directories. We don't want to be accidentally returning incorrect files.
         */
         const filename = audioFile.filename
-        console.log(audioFile, textFile, language)
-        // Convert temp file to .txt file
-        await fs.readFile(textFile.path, (err: any, data: string | NodeJS.ArrayBufferView) => {
+        console.log(audioFile, textFile, recognizer)
+
+        // Convert received temp file to .txt file for rhubarb
+        fs.readFile(textFile.path, (err: any, data: string | NodeJS.ArrayBufferView) => {
             if (err) {
                 // Handle any errors that occur
                 console.error(err)
                 res.status(500).send('Text File was unreadable')
             } else {
-                // Use fs.writeFile to write the file data to a new TXT file
+                // rewrite temp file into format readable for rhubarb
                 fs.writeFile(textPath, data, (writeErr) => {
                     if (writeErr) {
                         // Handle any errors that occur
@@ -60,7 +62,7 @@ app.post(
                 })
             }
         })
-        // Use ffmpeg's fluent-ffmpeg module to convert the file to WAV
+        // Convert the received temp file into wav format for rhubarb & ffmpeg
         ffmpeg(audioFile.path)
             .format('wav')
             .save(audioPath)
@@ -70,25 +72,26 @@ app.post(
                 res.status(500).send('An error occurred while converting the file to WAV.')
             })
             .on('end', async () => {
-                // Start rhubarb process
-                console.log('Processing')
-                const videoFile = await main(audioPath, textPath, language, filename)
-                console.log(videoFile)
-                res.set('Content-Type', 'video/mp4')
+                // Once all files have been converted we can start the rhubarb process
+                // Return not required
+                await main(audioPath, textPath, recognizer, filename)
 
+                res.set('Content-Type', 'video/mp4')
                 // Read the video file from the file system and return it as the response
                 res.sendFile(`${filename}.mp4`, { root: './tmp' })
                 // Cleanup
                 res.on('finish', () => {
-                    fs.unlinkSync(audioFile.path)
-                    fs.unlinkSync(textFile.path)
-                    fs.unlinkSync(audioPath)
-                    fs.unlinkSync(textPath)
-                    console.log('inputs deleted, moving to outputs ')
-                    //TODO: figure out where the json file is being written
+                    //TODO: Add the JSON file when we figure out where it is, unless its being deleted elsewhere
                     //fs.unlinkSync(`tmp/${filename}.json`)
-                    fs.unlinkSync(`tmp/${filename}.txt`)
-                    fs.unlinkSync(`tmp/${filename}.mp4`)
+                    const temp_files = [
+                        audioFile.path,
+                        textFile.path,
+                        audioPath,
+                        textPath,
+                        `tmp/${filename}.txt`,
+                        `tmp/${filename}.mp4`,
+                    ]
+                    temp_files.forEach((file) => fs.unlinkSync(file))
                     console.log('all files removed')
                 })
             })

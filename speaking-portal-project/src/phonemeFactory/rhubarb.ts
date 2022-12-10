@@ -42,8 +42,8 @@ export async function rhubarbProcessor(
     const rhubarbProc = spawnSync('./rhubarb', args)
 
     if (rhubarbProc.stderr) {
-        // Rhubarb returns this as an error, but it's just a status message, so do NOT throw this as an error
-        if (rhubarbProc.stderr.includes(`Generating lip sync data for ${audio_file_name}.`)) {
+        // Rhubarb failures are tagged with [Fatal], marking a failed attempt to run, log these.
+        if (rhubarbProc.stderr.includes(`[Fatal]`)) {
             throw Error(`${rhubarbProc.stderr}`)
         }
     }
