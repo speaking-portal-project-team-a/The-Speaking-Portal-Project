@@ -36,6 +36,9 @@ app.post(
         // Retrieve language parameter
         const language = req.body.recognizer
         //Set a general filename
+        // TODO:  I thought of a fix to this stupidity, involving using the project name from kuk 2 create directories
+        //  in temp. seems smarter. will do later
+        //
         const filename = audioFile.filename
         console.log(audioFile, textFile, language)
         // Convert temp file to .txt file
