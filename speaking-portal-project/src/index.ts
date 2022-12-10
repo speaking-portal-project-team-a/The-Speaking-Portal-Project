@@ -15,6 +15,7 @@ const text_file_options: string[] = [
     'en-text.txt',
     'en-text.txt',
     'en-text.txt',
+    'peer_test.txt',
 ]
 const audio_file_options: string[] = [
     'en-Amber.wav',
@@ -26,14 +27,15 @@ const audio_file_options: string[] = [
     'reverse.wav',
     'signalloss.wav',
     'cursed.wav',
+    'peer_test_1.wav',
 ]
-const recognizer_options: string[] = ['English (U.S.)', 'French', 'Japanese','English (U.S.)','English (U.S.)','English (U.S.)','English (U.S.)','English (U.S.)','English (U.S.)']
+const recognizer_options: string[] = ['English (U.S.)', 'French', 'Japanese','English (U.S.)','English (U.S.)','English (U.S.)','English (U.S.)','English (U.S.)','English (U.S.)','English (U.S.)']
 
 // Main Function
 async function main() {
     // TODO: Change case number during peer testing
     // English = 0, French = 1, Japanese = 2, Wrong file = 3, Corrupted file = 4, Unique files = 5|6|7|8
-    const case_number: number = 0
+    const case_number: number = 9
 
     // Received files are saved in the Rhubarb directory
     // The following variables will also be received:
