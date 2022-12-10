@@ -9,7 +9,7 @@ Starts the application in development via Nodemon
 Builds the app at build, cleaning the folder first.
 ## `npm run start`
 Starts the app in production by first building the project with npm run build, and then executing the compiled 
-JavaScript at build/index.js.
+JavaScript at build/api.js.
 ## `npm run test`
 Once tests are built into the project, this script will run tests. Currently, it is not in use.
 ## `npm run lint`

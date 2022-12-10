@@ -74,11 +74,14 @@ app.post(
             .on('end', async () => {
                 // Once all files have been converted we can start the rhubarb process
                 // Return not required
-                await main(audioPath, textPath, recognizer, filename)
-
-                res.set('Content-Type', 'video/mp4')
-                // Read the video file from the file system and return it as the response
-                res.sendFile(`${filename}.mp4`, { root: './tmp' })
+                try {
+                    await main(audioPath, textPath, recognizer, filename)
+                    res.set('Content-Type', 'video/mp4')
+                    // Read the video file from the file system and return it as the response
+                    res.sendFile(`${filename}.mp4`, { root: './tmp' })
+                } catch (err: any) {
+                    res.status(500).send('An error occurred with the main process.')
+                }
                 // Cleanup
                 res.on('finish', () => {
                     //TODO: Add the JSON file when we figure out where it is, unless its being deleted elsewhere
@@ -91,7 +94,17 @@ app.post(
                         `tmp/${filename}.txt`,
                         `tmp/${filename}.mp4`,
                     ]
-                    temp_files.forEach((file) => fs.unlinkSync(file))
+                    temp_files.forEach((file) => {
+                        try {
+                            fs.unlinkSync(file)
+                        } catch (error: any) {
+                            if (error.code != 'ENOENT') {
+                                // If we run into an error deleting a file that is not of the Error No Entity type,
+                                // throw it!
+                                throw error
+                            }
+                        }
+                    })
                     console.log('all files removed')
                 })
             })
