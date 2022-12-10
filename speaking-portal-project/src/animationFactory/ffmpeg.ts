@@ -3,7 +3,7 @@ import util from 'node:util'
 import { MouthCue, MouthCueArray } from '../types'
 import { spawnSync } from 'node:child_process'
 
-export async function ffmpegProcessor(audio_file: string, text_file: string) {
+export async function ffmpegProcessor(audio_file: string, text_file: string, output_name: string) {
     const args = [
         '-f',
         'concat',
@@ -17,7 +17,7 @@ export async function ffmpegProcessor(audio_file: string, text_file: string) {
         '24',
         '-pix_fmt',
         'yuv420p',
-        './tmp/output.mp4',
+        `./tmp/${output_name}.mp4`,
     ]
     const ffmpegProc = spawnSync('ffmpeg', args)
 
@@ -30,7 +30,7 @@ export async function ffmpegProcessor(audio_file: string, text_file: string) {
     }
 
     // TODO: Change return type to the generated video file
-    return 'output.mp4'
+    return
 }
 
 // export async function ffmpegAPI(audio_file: string, text_file: string) {

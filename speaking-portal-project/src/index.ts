@@ -39,7 +39,7 @@ const recognizer_options: string[] = [
 ]
 
 // Main Function
-export async function main(audio_path: string, text_path: string, language: string) {
+export async function main(audio_path: string, text_path: string, language: string, filename: string) {
     //const case_number: number = 0
 
     // Received files are saved in the Rhubarb directory
@@ -53,15 +53,15 @@ export async function main(audio_path: string, text_path: string, language: stri
         console.log(`Validating Files...`)
         await checkFiles(audio_file_name, text_file_name)
         console.log('Running Rhubarb Processor...')
-        const phonemeContents = await rhubarbProcessor(selected_language, audio_file_name, text_file_name)
+        const phonemeContents = await rhubarbProcessor(selected_language, audio_file_name, text_file_name, filename)
 
         console.log('Printing phoneme timings from json file...')
         console.log(phonemeContents)
 
         console.log('Converting timings to input file...')
-        await mouthCuesToInputFile({ mouthCues: phonemeContents, outputPath: 'tmp/input.txt' })
+        await mouthCuesToInputFile({ mouthCues: phonemeContents, outputPath: `tmp/${filename}.txt` })
         console.log('Generating output video...')
-        return await ffmpegProcessor(`${audio_file_name}`, './tmp/input.txt')
+        return await ffmpegProcessor(`${audio_file_name}`, `./tmp/${filename}.txt`, filename)
     } catch (err: any) {
         console.log(`${err}`)
     }

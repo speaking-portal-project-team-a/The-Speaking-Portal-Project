@@ -7,7 +7,12 @@ import { MouthCue, MouthCueArray } from '../types'
 const exec = util.promisify(require('node:child_process').exec)
 
 // Rhubarb Processor takes audio and text file, produces json file with phoneme timings
-export async function rhubarbProcessor(selected_language: string, audio_file_name: string, text_file_name: string) {
+export async function rhubarbProcessor(
+    selected_language: string,
+    audio_file_name: string,
+    text_file_name: string,
+    output_file_name: string,
+) {
     // Runs in the Rhubarb directory
     try {
         chdir('./rhubarb')
@@ -22,7 +27,7 @@ export async function rhubarbProcessor(selected_language: string, audio_file_nam
     // Arguments for Rhubarb command
     const args = [
         '-o ',
-        '../tmp/output.json',
+        `../tmp/${output_file_name}`,
         '--exportFormat',
         'json',
         '-r ',
@@ -45,7 +50,7 @@ export async function rhubarbProcessor(selected_language: string, audio_file_nam
 
     // Convert JSON to mouth cues
     console.log(rhubarbProc.status)
-    const json = JSON.parse(fs.readFileSync('../tmp/output.json', 'utf8'))
+    const json = JSON.parse(fs.readFileSync(`../tmp/${output_file_name}`, 'utf8'))
     const mouthCues: MouthCue[] = json.mouthCues as MouthCue[]
 
     // Return to original directory

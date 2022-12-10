@@ -35,6 +35,8 @@ app.post(
         const textPath = `./tmp/${textFile.filename}.txt`
         // Retrieve language parameter
         const language = req.body.recognizer
+        //Set a general filename
+        const filename = audioFile.filename
         console.log(audioFile, textFile, language)
         // Convert temp file to .txt file
         await fs.readFile(textFile.path, (err: any, data: string | NodeJS.ArrayBufferView) => {
@@ -65,20 +67,24 @@ app.post(
             .on('end', async () => {
                 // Start rhubarb process
                 console.log('Processing')
-                const videoFile = await main(audioPath, textPath, language)
+                const videoFile = await main(audioPath, textPath, language, filename)
                 console.log(videoFile)
                 res.set('Content-Type', 'video/mp4')
 
                 // Read the video file from the file system and return it as the response
-                res.sendFile('output.mp4', { root: './tmp' })
+                res.sendFile(`${filename}.mp4`, { root: './tmp' })
                 // Cleanup
-                fs.unlinkSync(audioFile.path)
-                fs.unlinkSync(textFile.path)
-                fs.unlinkSync(audioPath)
-                fs.unlinkSync(textPath)
-                console.log('inputs deleted, moving to outputs ')
-                fs.unlinkSync('tmp/output.json')
-                fs.unlinkSync('tmp/input.txt')
+                res.on('finish', () => {
+                    fs.unlinkSync(audioFile.path)
+                    fs.unlinkSync(textFile.path)
+                    fs.unlinkSync(audioPath)
+                    fs.unlinkSync(textPath)
+                    console.log('inputs deleted, moving to outputs ')
+                    //fs.unlinkSync(`tmp/${filename}.json`)
+                    fs.unlinkSync(`tmp/${filename}.txt`)
+                    fs.unlinkSync(`tmp/${filename}.mp4`)
+                    console.log('all files removed')
+                })
             })
     },
 )
