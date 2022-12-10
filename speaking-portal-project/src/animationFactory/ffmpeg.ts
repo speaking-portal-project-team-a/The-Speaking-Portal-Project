@@ -4,14 +4,11 @@ import { MouthCue, MouthCueArray } from '../types'
 import { spawnSync } from 'node:child_process'
 
 export async function ffmpegProcessor(audio_file: string, text_file: string) {
-    try {
-        chdir('./ffmpeg')
-    } catch (error) {
-        console.log(`Error message: ${error}`)
-    }
     const args = [
         '-f',
         'concat',
+        '-safe',
+        '0',
         '-i',
         `${text_file}`,
         '-i',
@@ -20,24 +17,23 @@ export async function ffmpegProcessor(audio_file: string, text_file: string) {
         '24',
         '-pix_fmt',
         'yuv420p',
-        'output.mp4',
+        './tmp/output.mp4',
     ]
     const ffmpegProc = spawnSync('ffmpeg', args)
-    
-    //TODO: Need to fix ffmpeg Error Handeling
-    
-    // if (ffmpegProc.stderr) {
-         //throw Error(`${ffmpegProc.stderr}`)
-    // } else {
-    //     console.log("Output video generated sucessfully")
-    // }
 
-    try {
-        chdir('../')
-    } catch (error) {
-        console.log(`Error message: ${error}`)
+    //TODO: Need to fix ffmpeg Error Handling
+
+    if (ffmpegProc.stderr) {
+        throw Error(`${ffmpegProc.stderr}`)
+    } else {
+        console.log('Output video generated sucessfully')
     }
 
     // TODO: Change return type to the generated video file
-    return
+    return 'output.mp4'
 }
+
+// export async function ffmpegAPI(audio_file: string, text_file: string) {
+//     const ffmpeg = require('fluent-ffmpeg')
+//
+// }

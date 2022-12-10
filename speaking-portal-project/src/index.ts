@@ -1,4 +1,3 @@
-import { chdir, cwd, kill } from 'node:process'
 import { rhubarbProcessor } from './phonemeFactory/rhubarb'
 import { checkFiles } from './test/file_check'
 import { mouthCuesToInputFile } from './phonemeFactory/mouthCueProcessor'
@@ -27,26 +26,28 @@ const audio_file_options: string[] = [
     'signalloss.wav',
     'cursed.wav',
 ]
-const recognizer_options: string[] = ['English (U.S.)', 'French', 'Japanese','English (U.S.)','English (U.S.)','English (U.S.)','English (U.S.)','English (U.S.)','English (U.S.)']
+const recognizer_options: string[] = [
+    'English (U.S.)',
+    'French',
+    'Japanese',
+    'English (U.S.)',
+    'English (U.S.)',
+    'English (U.S.)',
+    'English (U.S.)',
+    'English (U.S.)',
+    'English (U.S.)',
+]
 
 // Main Function
-async function main() {
-    // TODO: Change case number during peer testing
-    // English = 0, French = 1, Japanese = 2, Wrong file = 3, Corrupted file = 4, Unique files = 5|6|7|8
-    const case_number: number = 0
+export async function main(audio_path: string, text_path: string, language: string) {
+    //const case_number: number = 0
 
     // Received files are saved in the Rhubarb directory
     // The following variables will also be received:
-    let audio_file_name: string = audio_file_options[case_number]
-    let text_file_name: string = text_file_options[case_number]
-    let selected_language: string = recognizer_options[case_number]
+    let audio_file_name: string = audio_path
+    let text_file_name: string = text_path
+    let selected_language: string = language
 
-    if (!audio_file_name || !text_file_name || !selected_language) {
-        console.log('Language Selection out of bounds\nLanguage set to English (U.S.)')
-        audio_file_name = audio_file_options[0]
-        text_file_name = text_file_options[0]
-        selected_language = recognizer_options[0]
-    }
     try {
         // TODO: Check the files FIRST, THEN run Rhubarb
         console.log(`Validating Files...`)
@@ -58,12 +59,10 @@ async function main() {
         console.log(phonemeContents)
 
         console.log('Converting timings to input file...')
-        await mouthCuesToInputFile({ mouthCues: phonemeContents })
+        await mouthCuesToInputFile({ mouthCues: phonemeContents, outputPath: 'tmp/input.txt' })
         console.log('Generating output video...')
-        await ffmpegProcessor(`../rhubarb/${audio_file_name}`, 'input.txt')
+        return await ffmpegProcessor(`${audio_file_name}`, './tmp/input.txt')
     } catch (err: any) {
         console.log(`${err}`)
     }
 }
-
-main()

@@ -3,7 +3,7 @@ import fs from 'fs'
 
 export async function mouthCuesToInputFile({
     mouthCues,
-    outputPath = './ffmpeg/input.txt',
+    outputPath = './tmp/input.txt',
 }: {
     mouthCues: MouthCue[]
     outputPath?: string
@@ -20,7 +20,7 @@ export async function mouthCuesToInputFile({
         */
     } catch (err) {
         console.log(err)
-        return Error("MouthCuesFileError")
+        return Error('MouthCuesFileError')
     }
 }
 
@@ -31,7 +31,7 @@ export function generateMouthData(mouthCues: MouthCue[]) {
     let data = ''
     for (const mouthCuesKey in mouthCues) {
         let dur = (mouthCues[mouthCuesKey].end - mouthCues[mouthCuesKey].start).toFixed(2)
-        let tempStr = `file ${mouthCues[mouthCuesKey].value}.png\noutpoint ${dur}\n`
+        let tempStr = `file ../images/${mouthCues[mouthCuesKey].value}.png\noutpoint ${dur}\n`
         data = data.concat(tempStr)
     }
     return data

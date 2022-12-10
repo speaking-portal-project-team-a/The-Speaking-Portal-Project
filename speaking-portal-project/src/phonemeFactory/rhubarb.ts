@@ -22,29 +22,30 @@ export async function rhubarbProcessor(selected_language: string, audio_file_nam
     // Arguments for Rhubarb command
     const args = [
         '-o ',
-        'output.json',
+        '../tmp/output.json',
         '--exportFormat',
         'json',
         '-r ',
         `${recognizer}`,
         '-d',
-        `${text_file_name}`,
+        `.${text_file_name}`,
         '--extendedShapes',
         'GX',
-        `${audio_file_name}`,
+        `.${audio_file_name}`,
     ]
 
     const rhubarbProc = spawnSync('./rhubarb', args)
 
     if (rhubarbProc.stderr) {
-        // Rhubarb returns this as an error but it's just a status message, so do NOT throw this as an error
-        if(!rhubarbProc.stderr.includes(`Generating lip sync data for ${audio_file_name}.`)){
+        // Rhubarb returns this as an error, but it's just a status message, so do NOT throw this as an error
+        if (rhubarbProc.stderr.includes(`Generating lip sync data for ${audio_file_name}.`)) {
             throw Error(`${rhubarbProc.stderr}`)
         }
     }
 
     // Convert JSON to mouth cues
-    const json = JSON.parse(fs.readFileSync('output.json', 'utf8'))
+    console.log(rhubarbProc.status)
+    const json = JSON.parse(fs.readFileSync('../tmp/output.json', 'utf8'))
     const mouthCues: MouthCue[] = json.mouthCues as MouthCue[]
 
     // Return to original directory
