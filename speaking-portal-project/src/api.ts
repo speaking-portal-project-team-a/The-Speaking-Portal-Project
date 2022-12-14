@@ -3,6 +3,9 @@ import multer from 'multer'
 import fs from 'fs'
 import { main } from './index'
 const app = express()
+const PORT = 3000
+const HOST = '0.0.0.0'
+
 const ffmpeg = require('fluent-ffmpeg')
 const upload = multer({
     storage: multer.diskStorage({
@@ -14,14 +17,15 @@ const upload = multer({
 })
 const cluster = require('cluster')
 const numCPUs = require('os').cpus().length
+
 if (cluster.isPrimary) {
+    /* Create as many workers as there are CPUs on the system.
+    This allows for multiple processes to run at once
+     */
     for (let i = 0; i < numCPUs; i++) {
         cluster.fork()
     }
 } else {
-    const express = require('express')
-    const app = express()
-
     app.post(
         '/kukarella/generate-video',
         upload.fields([
@@ -48,9 +52,9 @@ if (cluster.isPrimary) {
             const recognizer = req.body.recognizer ? req.body.recognizer : 'English (U.S.)'
             // Set a general filename for temp files to be generated as
             /* TODO: decide on a way to store the temp files. This method works, but there is likely an improved way
-                of organizing this. We could use the username of the client inputting information alongside something like a
-                given project name, however, I have concerns as to whether or not this would ensure unique temporary
-                directories. We don't want to be accidentally returning incorrect files.
+                of organizing this. We could use the username of the client inputting information alongside something
+                like a given project name, however, I have concerns as to whether or not this would ensure unique
+                temporary directories. We don't want to be accidentally returning incorrect files.
             */
             const filename = audioFile.filename
             console.log(audioFile, textFile, recognizer)
@@ -94,13 +98,12 @@ if (cluster.isPrimary) {
                     }
                     // Cleanup
                     res.on('finish', () => {
-                        //TODO: Add the JSON file when we figure out where it is, unless its being deleted elsewhere
-                        //fs.unlinkSync(`tmp/${filename}.json`)
                         const temp_files = [
                             audioFile.path,
                             textFile.path,
                             audioPath,
                             textPath,
+                            `tmp/${filename}.json`,
                             `tmp/${filename}.txt`,
                             `tmp/${filename}.mp4`,
                         ]
@@ -121,7 +124,7 @@ if (cluster.isPrimary) {
         },
     )
 
-    app.listen(3000, () => {
-        console.log('API listening on port 3000')
+    app.listen(PORT, HOST, () => {
+        console.log(`API listening on ${HOST}:${PORT}`)
     })
 }

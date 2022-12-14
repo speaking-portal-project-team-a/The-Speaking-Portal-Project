@@ -20,13 +20,16 @@ export async function ffmpegProcessor(audio_file: string, text_file: string, out
         `./tmp/${output_name}.mp4`,
     ]
     const ffmpegProc = spawnSync('ffmpeg', args)
-
-    //TODO: Need to fix ffmpeg Error Handling
-    if (!ffmpegProc.stderr.includes('Output #0, mp4')) {
+    if (ffmpegProc.stderr) {
         throw Error(`${ffmpegProc.stderr}`)
-    } else {
-        console.log('Output video generated sucessfully')
     }
+
+    // //TODO: Need to fix ffmpeg Error Handling
+    // if (!ffmpegProc.stderr.includes('Output #0, mp4')) {
+    //     throw Error(`${ffmpegProc.stderr}`)
+    // } else {
+    //     console.log('Output video generated sucessfully')
+    // }
 
     // TODO: Do we want to try to use fluent ffmpeg? Seems like a bit of a pain and this does work currently.
     return `./tmp/${output_name}.mp4`

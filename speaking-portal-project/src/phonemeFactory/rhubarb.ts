@@ -27,7 +27,7 @@ export async function rhubarbProcessor(
     // Arguments for Rhubarb command
     const args = [
         '-o ',
-        `../tmp/${output_file_name}`,
+        `../tmp/${output_file_name}.json`,
         '--exportFormat',
         'json',
         '-r ',
@@ -42,20 +42,20 @@ export async function rhubarbProcessor(
     const rhubarbProc = spawnSync('./rhubarb', args)
 
     if (rhubarbProc.stderr) {
+        // throw Error(`${rhubarbProc.stderr}`)
         // Rhubarb failures are tagged with [Fatal], marking a failed attempt to run, log these.
         if (rhubarbProc.stderr.includes(`[Fatal]`)) {
             throw Error(`${rhubarbProc.stderr}`)
         }
     }
-
-    // Convert JSON to mouth cues
-    const json = JSON.parse(fs.readFileSync(`../tmp/${output_file_name}`, 'utf8'))
-    const mouthCues: MouthCue[] = json.mouthCues as MouthCue[]
     // Return to original directory
     try {
         chdir('../')
     } catch (err) {
         console.log(`Error message: ${err}`)
     }
-    return mouthCues
+
+    // Convert JSON to mouth cues
+    const json = await JSON.parse(fs.readFileSync(`${cwd()}/tmp/${output_file_name}.json`, 'utf8'))
+    return json.mouthCues as MouthCue[]
 }
