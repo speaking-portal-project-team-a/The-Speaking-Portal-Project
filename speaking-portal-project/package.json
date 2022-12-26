@@ -6,6 +6,8 @@
   "scripts": {
     "start:dev": "nodemon",
     "start": "npm run build && node build/index.js",
+    "clean": "npm run remove && npm run build",
+    "remove": "rimraf build",
     "build": "tsc",
     "test": "jest --maxWorkers 2",
     "lint": "eslint . --ext .ts,.tsx",
