@@ -7,7 +7,7 @@
     "start:dev": "nodemon",
     "start": "npm run build && node build/index.js",
     "build": "tsc",
-    "test": "jest",
+    "test": "jest --maxWorkers 2",
     "lint": "eslint . --ext .ts,.tsx",
     "format": "eslint . --ext .ts,.tsx --fix"
   },
@@ -36,7 +36,8 @@
     "rimraf": "^3.0.2",
     "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
-    "typescript": "^4.8.4"
+    "typescript": "^4.8.4",
+    "wav-file-info": "^0.0.10"
   },
   "husky": {
     "hooks": {
