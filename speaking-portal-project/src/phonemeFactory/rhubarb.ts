@@ -7,7 +7,12 @@ import { MouthCue, MouthCueArray } from '../types'
 const exec = util.promisify(require('node:child_process').exec)
 
 // Rhubarb Processor takes audio and text file, produces json file with phoneme timings
-export async function rhubarbProcessor(selected_language: string, audio_file_name: string, text_file_name: string) {
+export async function rhubarbProcessor(
+    selected_language: string,
+    audio_file_name: string,
+    text_file_name: string,
+    output_file_name: string,
+) {
     // Runs in the Rhubarb directory
     try {
         chdir('./rhubarb')
@@ -22,36 +27,35 @@ export async function rhubarbProcessor(selected_language: string, audio_file_nam
     // Arguments for Rhubarb command
     const args = [
         '-o ',
-        'output.json',
+        `../tmp/${output_file_name}.json`,
         '--exportFormat',
         'json',
         '-r ',
         `${recognizer}`,
         '-d',
-        `${text_file_name}`,
+        `.${text_file_name}`,
         '--extendedShapes',
         'GX',
-        `${audio_file_name}`,
+        `.${audio_file_name}`,
     ]
 
     const rhubarbProc = spawnSync('./rhubarb', args)
 
     if (rhubarbProc.stderr) {
-        // Rhubarb returns this as an error but it's just a status message, so do NOT throw this as an error
-        if(!rhubarbProc.stderr.includes(`Generating lip sync data for ${audio_file_name}.`)){
+        // throw Error(`${rhubarbProc.stderr}`)
+        // Rhubarb failures are tagged with [Fatal], marking a failed attempt to run, log these.
+        if (rhubarbProc.stderr.includes(`[Fatal]`)) {
             throw Error(`${rhubarbProc.stderr}`)
         }
     }
-
-    // Convert JSON to mouth cues
-    const json = JSON.parse(fs.readFileSync('output.json', 'utf8'))
-    const mouthCues: MouthCue[] = json.mouthCues as MouthCue[]
-
     // Return to original directory
     try {
         chdir('../')
     } catch (err) {
         console.log(`Error message: ${err}`)
     }
-    return mouthCues
+
+    // Convert JSON to mouth cues
+    const json = await JSON.parse(fs.readFileSync(`${cwd()}/tmp/${output_file_name}.json`, 'utf8'))
+    return json.mouthCues as MouthCue[]
 }
