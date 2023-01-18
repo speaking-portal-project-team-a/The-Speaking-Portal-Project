@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
+    name: node workflow
     runs-on: macos-latest
     strategy:
       matrix:
