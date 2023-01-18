@@ -39,7 +39,7 @@ export function generateMouthData(mouthCues: MouthCue[]) {
          etc etc... Will require some tinkering :)
          */
         let dur = (mouthCues[mouthCuesKey].end - mouthCues[mouthCuesKey].start).toFixed(2)
-        let tempStr = `file ../images/${mouthCues[mouthCuesKey].value}.png\noutpoint ${dur}\n`
+        let tempStr = `file ../images/${mouthCues[mouthCuesKey].value}/${mouthCues[mouthCuesKey].value}.png\noutpoint ${dur}\n`
         data = data.concat(tempStr)
     }
     return data
