@@ -23,4 +23,6 @@ jobs:
         working-directory: ./speaking-portal-project
       - name: Run Jest unit tests
         run: npm test
+        working-directory: ./speaking-portal-project
+
         
