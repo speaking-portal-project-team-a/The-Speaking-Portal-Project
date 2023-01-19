@@ -1,0 +1,72 @@
+openapi: '3.0.0'
+info:
+  version: '1.0.0'
+  title: 'Lip Synch Api'
+  description: This API will serve as an animation-generating add-on for this system so that the user can both listen to and watch their avatar speak the user provided text.
+
+paths:
+  /kukarella/generate-video:
+    post:
+      description: create an animation for the user
+      responses:
+        '200':
+          description: The animated mp4 for the user
+          content:
+            video/mp4:
+              schema:
+                $ref: '#/components/schemas/AnimationFile'
+        404:
+          description: No animation file resource exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    AudioFile:
+      type: object
+      required:
+        - file-contents
+      properties:
+        file-contents:
+          description: .wav file upload 
+    TextFile: 
+      type: object
+      required:
+        - file-contents
+      properties:
+        file-contents:
+          description: .txt file upload
+    Recognizer:
+      type: string 
+      required:
+        - name
+      properties:
+        name:
+          description: a selection of one of the speech Recognizer's for Rhubarb
+    AnimationFile:
+      type: object
+      properties:
+        file-contents:
+          description: an mp4 of an avatar with animation 
+    Error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          description: A human readable error message
+          type: string
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+security:
+  - ApiKey: []
