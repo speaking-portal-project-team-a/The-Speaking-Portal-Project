@@ -48,14 +48,8 @@ if (cluster.isPrimary) {
             const audioPath = `./tmp/${audioFile.filename}.wav`
             const textPath = `./tmp/${textFile.filename}.txt`
             // Retrieve language parameter
-            // TODO: Maybe add some input validation? But its coming from kukarella so... should be fine
             const recognizer = req.body.recognizer ? req.body.recognizer : 'English (U.S.)'
             // Set a general filename for temp files to be generated as
-            /* TODO: decide on a way to store the temp files. This method works, but there is likely an improved way
-                of organizing this. We could use the username of the client inputting information alongside something
-                like a given project name, however, I have concerns as to whether or not this would ensure unique
-                temporary directories. We don't want to be accidentally returning incorrect files.
-            */
             const filename = audioFile.filename
             console.log(audioFile, textFile, recognizer)
 

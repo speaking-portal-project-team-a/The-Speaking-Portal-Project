@@ -142,16 +142,3 @@ export async function isTextEmpty(file: string) {
         })
     })
 }
-
-// TODO: See if rhubarb already checks for this
-
-// export async function isTextEmpty(file: string) {
-//     const data = fs.promises.readFile(file,'utf8')
-
-//     if (data > 0) {
-//             console.log(`Text file ${file} is not empty`)
-//             return true
-//         } else {
-//             throw Error(`EmptyTextFile`)
-//         }
-//     }
