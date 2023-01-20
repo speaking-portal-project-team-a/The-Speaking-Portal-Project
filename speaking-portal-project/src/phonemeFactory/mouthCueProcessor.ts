@@ -2,14 +2,16 @@ import { MouthCue, MouthCueArray } from '../types'
 import fs from 'fs'
 
 export async function mouthCuesToInputFile({
+    characterSelect,
     mouthCues,
     outputPath = './tmp/input.txt',
 }: {
+    characterSelect: string
     mouthCues: MouthCue[]
     outputPath?: string
 }) {
     try {
-        await fs.promises.writeFile(outputPath, generateMouthData(mouthCues), {
+        await fs.promises.writeFile(outputPath, generateMouthData(characterSelect, mouthCues), {
             flag: 'w',
         })
         /* Lines 17-20 for testing purposes only
@@ -27,7 +29,7 @@ export async function mouthCuesToInputFile({
 /*
 This converts  data from the MouthCue type into a format for ffmpeg
 */
-export function generateMouthData(mouthCues: MouthCue[]) {
+export function generateMouthData(characterSelect: string, mouthCues: MouthCue[]) {
     let data = ''
     let lastBlink = -1
     // TODO: Update this with new parameters for animation - things like movements & blinking.
@@ -67,7 +69,7 @@ export function generateMouthData(mouthCues: MouthCue[]) {
             }
         }
 
-        let tempStr = `file ../images/${mouthCues[mouthCuesKey].value}${eyes}.png\noutpoint ${dur}\n`
+        let tempStr = `file ../images/${characterSelect}/${mouthCues[mouthCuesKey].value}${eyes}.png\noutpoint ${dur}\n`
         data = data.concat(tempStr)
     }
     return data
