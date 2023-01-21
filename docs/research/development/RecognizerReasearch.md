@@ -38,3 +38,12 @@ Subject expressed an immense fondness for Kevin model. Subject maybe has a thing
 
 ## Subject 4 
 
+### Animation feedback
+Subject stated phonetic recognizer as better. When asked to grad quality amount on a scale of 1-5 subject stated quality difference was small, giving a score of 3. 
+Felt quality was better. 
+
+### Character design feedback 
+Subject did not like Amber's hands or glasses. Participant noted that Amber's design felt lanky and weird. Said Kevin looked better and was more 'cartoony'. 
+
+### Closing thoughts
+Subject was rather snippy and impatient. I guess not all people are ecstatic to advance science. 
