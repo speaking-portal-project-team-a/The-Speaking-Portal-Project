@@ -50,6 +50,9 @@ if (cluster.isPrimary) {
             // Retrieve language parameter
             // TODO: Maybe add some input validation? But its coming from kukarella so... should be fine
             const recognizer = req.body.recognizer ? req.body.recognizer : 'English (U.S.)'
+            // Retrieve character selection
+            // TODO: replace names with 'official' names for these characters
+            const characterSelect = req.body.characterSelect ? req.body.characterSelect : 'character01'
             // Set a general filename for temp files to be generated as
             /* TODO: decide on a way to store the temp files. This method works, but there is likely an improved way
                 of organizing this. We could use the username of the client inputting information alongside something
@@ -89,7 +92,7 @@ if (cluster.isPrimary) {
                     // Once all files have been converted we can start the rhubarb process
                     // Return not required
                     try {
-                        await Promise.all([main(audioPath, textPath, recognizer, filename)])
+                        await Promise.all([main(audioPath, textPath, recognizer, filename, characterSelect)])
                         res.set('Content-Type', 'video/mp4')
                         // Read the video file from the file system and return it as the response
                         res.sendFile(`${filename}.mp4`, { root: './tmp' })

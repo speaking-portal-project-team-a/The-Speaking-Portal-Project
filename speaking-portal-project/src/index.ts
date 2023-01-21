@@ -4,7 +4,7 @@ import { mouthCuesToInputFile } from './phonemeFactory/mouthCueProcessor'
 import { ffmpegProcessor } from './animationFactory/ffmpeg'
 
 // Main Function
-export async function main(audio_path: string, text_path: string, language: string, filename: string) {
+export async function main(audio_path: string, text_path: string, language: string, filename: string, characterSelect: string) {
     try {
         // Double check file validity
         console.log(`Validating Files...`)
@@ -16,7 +16,7 @@ export async function main(audio_path: string, text_path: string, language: stri
         // console.log(phonemeContents)
         // Generate ffmpeg image timings
         console.log('Converting timings to input file...')
-        await mouthCuesToInputFile({ mouthCues: phonemeContents, outputPath: `tmp/${filename}.txt` })
+        await mouthCuesToInputFile({ characterSelect, mouthCues: phonemeContents, outputPath: `tmp/${filename}.txt` })
         console.log('Generating output video...')
         return await ffmpegProcessor(`${audio_path}`, `./tmp/${filename}.txt`, filename)
     } catch (err: any) {

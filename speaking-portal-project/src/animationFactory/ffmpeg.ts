@@ -15,6 +15,8 @@ export async function ffmpegProcessor(audio_file: string, text_file: string, out
         `${audio_file}`,
         '-r',
         '24',
+        '-s',
+        '720x480', // added to avoid "width not divisible by 2" error
         '-pix_fmt',
         'yuv420p',
         `./tmp/${output_name}.mp4`,
