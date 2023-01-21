@@ -3,11 +3,25 @@ info:
   version: '1.0.0'
   title: 'Lip Synch Api'
   description: This API will serve as an animation-generating add-on for this system so that the user can both listen to and watch their avatar speak the user provided text.
-
+tags: 
+- name: animation
+  description: Create an interative mp4 animation
+servers:
+  - url: 'localhost:3000'
 paths:
   /kukarella/generate-video:
     post:
-      description: create an animation for the user
+      summary: generate an animation for the user
+      tags:
+      - animation
+      requestBody:
+        required: true 
+        content:
+          video/wav:
+            schema:
+              $ref: '#/components/schemas/AudioFile'
+          
+
       responses:
         '200':
           description: The animated mp4 for the user
@@ -31,6 +45,7 @@ components:
   schemas:
     AudioFile:
       type: object
+      format: binary
       required:
         - file-contents
       properties:
@@ -38,6 +53,7 @@ components:
           description: .wav file upload 
     TextFile: 
       type: object
+      format: binary      
       required:
         - file-contents
       properties:
