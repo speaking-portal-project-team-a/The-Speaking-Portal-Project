@@ -1,13 +1,11 @@
 name: Node.js CI
 
-on:
-  push:
-    branches: [ development ]
-  pull_request:
-    branches: [ developement ]
+on: [pull_request,status]
+  
 
 jobs:
   build:
+    name: node workflow
     runs-on: macos-latest
     strategy:
       matrix:
