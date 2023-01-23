@@ -17,11 +17,19 @@ paths:
       requestBody:
         required: true 
         content:
-          video/wav:
+          multipart/form-data:
             schema:
-              $ref: '#/components/schemas/AudioFile'
-          
-
+              type: object
+              properties:
+                AudioFile:
+                  type: object
+                  description: .wav file upload 
+                TextFile:
+                  type: object 
+                  description: .txt file upload
+                Recognizer:
+                  type: string 
+                  description: a selection of one of the speech Recognizer's for Rhubarb
       responses:
         '200':
           description: The animated mp4 for the user
@@ -43,29 +51,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    AudioFile:
-      type: object
-      format: binary
-      required:
-        - file-contents
-      properties:
-        file-contents:
-          description: .wav file upload 
-    TextFile: 
-      type: object
-      format: binary      
-      required:
-        - file-contents
-      properties:
-        file-contents:
-          description: .txt file upload
-    Recognizer:
-      type: string 
-      required:
-        - name
-      properties:
-        name:
-          description: a selection of one of the speech Recognizer's for Rhubarb
     AnimationFile:
       type: object
       properties:
