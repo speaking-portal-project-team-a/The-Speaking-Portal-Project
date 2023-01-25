@@ -29,7 +29,7 @@ paths:
                   description: .txt file upload
                 Recognizer:
                   type: string 
-                  description: a selection of one of the speech Recognizer's for Rhubarb
+                  description: A selection of the language that the audio and text file are in
       responses:
         '200':
           description: The animated mp4 for the user
