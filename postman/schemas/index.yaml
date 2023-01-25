@@ -21,13 +21,13 @@ paths:
             schema:
               type: object
               properties:
-                AudioFile:
+                audio:
                   type: object
                   description: .wav file upload 
-                TextFile:
+                text:
                   type: object 
                   description: .txt file upload
-                Recognizer:
+                language:
                   type: string 
                   description: A selection of the language that the audio and text file are in
       responses:
@@ -51,7 +51,7 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    AnimationFile:
+    animation:
       type: object
       properties:
         file-contents:
