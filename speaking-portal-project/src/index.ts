@@ -1,6 +1,6 @@
 import { rhubarbProcessor } from './phonemeFactory/rhubarb'
 import { checkFiles } from './test/file_check'
-import { mouthCuesToInputFile } from './animationFactory/mouthCueProcessor'
+import { mouthCuesToInputFile } from './animationFactory/animationProcessor'
 import { ffmpegProcessor, getVideoExport } from './animationFactory/ffmpeg'
 
 // Main Function
