@@ -2,8 +2,8 @@ import {test, describe, expect} from '@jest/globals'
 import {ffmpegProcessor, getVideoExport, getWavFile} from '../animationFactory/ffmpeg'
 import fs from 'fs'
 
-const VALID_AUDIO_FILE_PATH = './src/test/test_files/en-Amber.wav'
-const VALID_TEXT_FILE_PATH = './src/test/test_files/test-input.txt'
+const TEST_AUDIO_FILE_PATH = './src/test/test_files/en-Amber.wav'
+const TEST_FFMPEG_TEXT_FILE_PATH = './src/test/test_files/test-input.txt'
 const TEST_OUTPUT_DIR_PATH = './src/test/test_files/test_output'
 const RANDOM_FILE_NAME = Math.random() 
 
@@ -15,9 +15,9 @@ describe('Animation Factory Tests', () => {
             '-safe',
             '0',
             '-i',
-            `${VALID_TEXT_FILE_PATH}`,
+            `${TEST_FFMPEG_TEXT_FILE_PATH}`,
             '-i',
-            `${VALID_AUDIO_FILE_PATH}`,
+            `${TEST_AUDIO_FILE_PATH}`,
             '-r',
             '24',
             '-s',
@@ -42,7 +42,7 @@ describe('Animation Factory Tests', () => {
 
     // TODO: For this function to work I need access to a tmp audio file, that needs to be converted into a wav file!
     test('valid wav file retreival', async() => {
-        expect(getWavFile(VALID_AUDIO_FILE_PATH,`${TEST_OUTPUT_DIR_PATH}/${RANDOM_FILE_NAME}-test.wav`)).resolves.toBe(`./src/test/test_files/test_output/${RANDOM_FILE_NAME}-test.wav`)
+        expect(getWavFile(TEST_AUDIO_FILE_PATH,`${TEST_OUTPUT_DIR_PATH}/${RANDOM_FILE_NAME}-test.wav`)).resolves.toBe(`./src/test/test_files/test_output/${RANDOM_FILE_NAME}-test.wav`)
         
         // Delete files created from unit test
         try {
