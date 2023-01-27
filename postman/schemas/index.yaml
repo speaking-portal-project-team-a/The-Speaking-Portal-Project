@@ -11,7 +11,7 @@ servers:
 paths:
   /kukarella/generate-video:
     post:
-      summary: generate an animation for the user
+      summary: Generate an animation for the user
       tags:
       - animation
       requestBody:
@@ -30,6 +30,9 @@ paths:
                 language:
                   type: string 
                   description: A selection of the language that the audio and text file are in
+                characterSelect:
+                  type: string 
+                  description: A selection of the avatar for animation
       responses:
         '200':
           description: The animated mp4 for the user
