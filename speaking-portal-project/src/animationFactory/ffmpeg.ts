@@ -7,9 +7,10 @@ export async function ffmpegProcessor(args: string[], fileType: string) {
     const ffmpegProc = spawnSync('ffmpeg', args)
     // This portion of the message is only included when ffmpeg is successful in generating a video
     if (!ffmpegProc.stderr.includes(`Output #0, ${fileType}`)) {
-        throw Error(`${ffmpegProc.stderr}`)
+        throw Error(`ffmpeg Error${ffmpegProc.stderr}`)
     } else {
         console.log('Output generated successfully')
+
     }
 
     return args.pop()
