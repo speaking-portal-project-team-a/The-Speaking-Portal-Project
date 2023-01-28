@@ -45,7 +45,12 @@ export async function rhubarbProcessor(
     try {
         chdir('../')
     } catch (err) {
-        console.log(`Error message: ${err}`)
+        console.log(`Error switching directories: ${err}`)
+    }
+
+    if (rhubarbProc.status != 0) {
+        console.log('exit code (status): ', rhubarbProc.status) // exit code of child process
+        throw Error(`${rhubarbProc.stderr}`)
     }
 
     if (rhubarbProc.status != 0) {
