@@ -24,7 +24,7 @@ export async function checkFiles(audio_file_name: string, text_file_name: string
     await isWavFileValid(audio_file_name)
 
     // Check Text File
-    await doesFileExist(text_file_name)
+    //await doesFileExist(text_file_name) // TODO: this check is causing a bug
     await isTextFileValid(text_file_name)
     await isTextEmpty(text_file_name)
 

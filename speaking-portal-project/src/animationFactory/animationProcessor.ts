@@ -2,16 +2,16 @@ import { MouthCue, MouthCueArray } from '../types'
 import fs from 'fs'
 
 export async function mouthCuesToInputFile({
-    characterSelect,
+    avatar,
     mouthCues,
     outputPath = './tmp/input.txt',
 }: {
-    characterSelect: string
+    avatar: string
     mouthCues: MouthCue[]
     outputPath?: string
 }) {
     try {
-        await fs.promises.writeFile(outputPath, generateFrameData(characterSelect, mouthCues), {
+        await fs.promises.writeFile(outputPath, generateFrameData(avatar, mouthCues), {
             flag: 'w',
         })
         /* Lines 17-20 for testing purposes only
@@ -44,32 +44,35 @@ export function generateFrameData(avatar: string, mouthCues: MouthCue[]) {
         let currentSec = parseInt(mouthCues[mouthCuesKey].start.toFixed(0))
 
         // TODO: use for testing. After confirming that blinking and other realism is good, delete this
-        console.log("t=%d, frameDur: %d, lastBlink: %d, idling? %s, lastPoseChange: %d",
-                    currentSec, frameDur, lastBlink, lastPoseChange, idle, lastPoseChange)
+        console.log("t=%d, frameDur: %d, lastBlink: %d", currentSec, frameDur, lastBlink)
+
+        // TODO: for idle animation testing
+//        console.log("t=%d, frameDur: %d, lastBlink: %d, idling? %s, lastPoseChange: %d",
+//                    currentSec, frameDur, lastBlink, lastPoseChange, idle, lastPoseChange)
 
         // Start building frame's path
-        frameData.concat(`file ../images/${avatar}/${mouthCues[mouthCuesKey].value}`)
+        frameData = frameData.concat(`file ../images/${avatar}/${mouthCues[mouthCuesKey].value}`)
 
         // Blinking
         blink = willBlink(currentSec, frameDur, lastBlink)
         if (blink) {
-            lastBlink += 1
-            frameData.concat('_blink')
+            lastBlink = currentSec
+            frameData = frameData.concat('_blink')
         }
 
         // TODO: determine if avatar will do a body pose or be in idle animation
 
-        // Idling or Posing
-        if(idle){
-            breathPhase = calculateBreathPhase(currentSec, lastPoseChange, breathPhase)
-            frameData.concat(translateBreathFrame(breathPhase))
-        } else {
-            breathPhase = 0
-            // TODO: add poses
-        }
+        // TODO: implmenet idle animation and posing
+        // if(idle){
+        //     breathPhase = calculateBreathPhase(currentSec, lastPoseChange, breathPhase)
+        //     frameData = frameData.concat(translateBreathFrame(breathPhase))
+        // } else {
+        //     breathPhase = 0
+        //     // TODO: add poses
+        // }
 
         // Finish building frame's path
-        frameData.concat(`.png\noutpoint ${frameDur}\n`)
+        frameData = frameData.concat(`.png\noutpoint ${frameDur}\n`)
 
     }
     return frameData
@@ -126,9 +129,9 @@ function calculateBreathPhase(currentSec: number, lastPoseChange: number, breath
     if (lastPoseChange > currentSec) {
         result += 1
     }
-    // check to reset breathPhase; values can only be 0 to 4.
+    // check to reset breathPhase; values can only be 0 to 3.
     // TODO: Should this be a type?
-    if (breathPhase == 5) {
+    if (breathPhase == 4) {
         result = 0
     }
     return result
