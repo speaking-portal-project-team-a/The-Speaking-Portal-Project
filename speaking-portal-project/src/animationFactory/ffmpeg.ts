@@ -5,8 +5,8 @@ import { spawnSync } from 'node:child_process'
 
 export async function ffmpegProcessor(args: string[], fileType: string) {
     const ffmpegProc = spawnSync('ffmpeg', args)
-    // This portion of the message is only included when ffmpeg is successful in generating a video
-    if (!ffmpegProc.stderr.includes(`Output #0, ${fileType}`)) {
+    if (ffmpegProc.status != 0) {
+        console.log('exit code (status): ', ffmpegProc.status) // exit code of child process
         throw Error(`${ffmpegProc.stderr}`)
     } else {
         console.log('Output generated successfully')
