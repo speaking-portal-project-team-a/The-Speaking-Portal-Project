@@ -10,6 +10,7 @@ export async function ffmpegProcessor(args: string[], fileType: string) {
         throw Error(`${ffmpegProc.stderr}`)
     } else {
         console.log('Output generated successfully')
+
     }
     return args.pop()
 }
