@@ -65,6 +65,7 @@ export function generateFrameData(avatar: string, mouthCues: MouthCue[]) {
             frameData.concat(translateBreathFrame(breathPhase))
         } else {
             breathPhase = 0
+            // TODO: add poses
         }
 
         // Finish building frame's path
