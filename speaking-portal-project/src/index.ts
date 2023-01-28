@@ -4,7 +4,7 @@ import { mouthCuesToInputFile } from './animationFactory/animationProcessor'
 import { ffmpegProcessor, getVideoExport } from './animationFactory/ffmpeg'
 
 // Main Function
-export async function main(audio_path: string, text_path: string, language: string, filename: string, characterSelect: string) {
+export async function main(audio_path: string, text_path: string, language: string, filename: string, avatar: string) {
     try {
         // Double check file validity
         console.log(`Validating Files...`)
@@ -12,11 +12,10 @@ export async function main(audio_path: string, text_path: string, language: stri
         // Generate phoneme list
         console.log('Running Rhubarb Processor...')
         const phonemeContents = await rhubarbProcessor(language, audio_path, text_path, filename)
-        // console.log('Printing phoneme timings from json file...')
-        // console.log(phonemeContents)
+        // console.log('Phoneme Timings:',phonemeContents)
         // Generate ffmpeg image timings
         console.log('Converting timings to input file...')
-        await mouthCuesToInputFile({ characterSelect, mouthCues: phonemeContents, outputPath: `tmp/${filename}.txt` })
+        await mouthCuesToInputFile({ avatar: avatar, mouthCues: phonemeContents, outputPath: `tmp/${filename}.txt` })
         console.log('Generating output video...')
         return await getVideoExport(`${audio_path}`, `./tmp/${filename}.txt`, filename)
     } catch (err: any) {

@@ -40,19 +40,20 @@ if (cluster.isPrimary) {
                 return res.status(400).send('No files were uploaded.')
             }
 
-            // Retrieve the uploaded files from the Request object... Couldn't get typescript to be happy with this :(
+            // Retrieve the uploaded files from the Request object
             // @ts-ignore
             const audioFile = req.files['audio'][0]
             // @ts-ignore
             const textFile = req.files['text'][0]
-            // Could do this once files are generated, but i think its fine to define here.
+
             const audioPath = `./tmp/${audioFile.filename}.wav`
             const textPath = `./tmp/${textFile.filename}.txt`
             // Retrieve language parameter
             const recognizer = req.body.recognizer ? req.body.recognizer : 'English (U.S.)'
             // Retrieve character selection
             // TODO: replace names with 'official' names for these characters
-            const characterSelect = req.body.characterSelect ? req.body.characterSelect : 'character01'
+            const avatar = req.body.avatar ? req.body.avatar : 'character01'
+
             // Set a general filename for temp files to be generated as
             const filename = audioFile.filename
             console.log(audioFile, textFile, recognizer)
@@ -82,7 +83,7 @@ if (cluster.isPrimary) {
                 res.status(500).send('An error occurred while converting temp to wav')
             }
             try {
-                await Promise.all([main(audioPath, textPath, recognizer, filename, characterSelect)])
+                await Promise.all([main(audioPath, textPath, recognizer, filename, avatar)])
                 res.set('Content-Type', 'video/mp4')
                 // Read the video file from the file system and return it as the response
                 res.status(200).sendFile(`${filename}.mp4`, { root: './tmp' })

@@ -11,7 +11,6 @@ export async function ffmpegProcessor(args: string[], fileType: string) {
     } else {
         console.log('Output generated successfully')
     }
-
     return args.pop()
 }
 export async function getWavFile(audio_file: string, export_path: string) {
