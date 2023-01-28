@@ -22,7 +22,7 @@ export async function mouthCuesToInputFile({
         */
     } catch (err) {
         console.log(err)
-        return Error('MouthCuesFileError')
+        return Error('animationProcessor Error')
     }
 }
 
@@ -44,8 +44,11 @@ export function generateFrameData(avatar: string, mouthCues: MouthCue[]) {
         let currentSec = parseInt(mouthCues[mouthCuesKey].start.toFixed(0))
 
         // TODO: use for testing. After confirming that blinking and other realism is good, delete this
-        console.log("t=%d, frameDur: %d, lastBlink: %d, idling? %s, lastPoseChange: %d",
-                    currentSec, frameDur, lastBlink, lastPoseChange, idle, lastPoseChange)
+        // TODO: when testing idle animation and poses, add idling? lastPoseChange and breathPhase
+        console.log("t=%d, frameDur: %d, lastBlink: %d",
+                    currentSec,
+                    frameDur,
+                    lastBlink)
 
         // Start building frame's path
         frameData = frameData.concat(`file ../images/${avatar}/${mouthCues[mouthCuesKey].value}`)
@@ -59,18 +62,17 @@ export function generateFrameData(avatar: string, mouthCues: MouthCue[]) {
 
         // TODO: determine if avatar will do a body pose or be in idle animation
 
-        // Idling or Posing
-        if(idle){
-            breathPhase = calculateBreathPhase(currentSec, lastPoseChange, breathPhase)
-            frameData.concat(translateBreathFrame(breathPhase))
-        } else {
-            breathPhase = 0
-            // TODO: add poses
-        }
+        // TODO: Implement Idling or Posing
+        // if(idle){
+        //     breathPhase = calculateBreathPhase(currentSec, lastPoseChange, breathPhase)
+        //     frameData.concat(translateBreathFrame(breathPhase))
+        // } else {
+        //     breathPhase = 0
+        //     // TODO: add poses
+        // }
 
         // Finish building frame's path
-        frameData.concat(`.png\noutpoint ${frameDur}\n`)
-
+        frameData = frameData.concat(`.png\noutpoint ${frameDur}\n`)
     }
     return frameData
 }
