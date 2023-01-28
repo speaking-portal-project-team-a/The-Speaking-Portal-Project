@@ -37,18 +37,15 @@ export function generateFrameData(avatar: string, mouthCues: MouthCue[]) {
     let idle = true
     let breathPhase = 0 // 0 = rest, 1 = inhaling, 2 = lungs full, 3 = exhaling
 
-    console.log("Adding realism...")
+    console.log('Adding realism...')
     for (const mouthCuesKey in mouthCues) {
         // Duration of frame is calculated based on the mouth cue
         let frameDur = (mouthCues[mouthCuesKey].end - mouthCues[mouthCuesKey].start).toFixed(2)
         let currentSec = parseInt(mouthCues[mouthCuesKey].start.toFixed(0))
 
         // TODO: use for testing. After confirming that blinking and other realism is good, delete this
-        console.log("t=%d, frameDur: %d, lastBlink: %d", currentSec, frameDur, lastBlink)
-
-        // TODO: for idle animation testing
-//        console.log("t=%d, frameDur: %d, lastBlink: %d, idling? %s, lastPoseChange: %d",
-//                    currentSec, frameDur, lastBlink, lastPoseChange, idle, lastPoseChange)
+        console.log("t=%d, frameDur: %d, lastBlink: %d, idling? %s, lastPoseChange: %d",
+                    currentSec, frameDur, lastBlink, lastPoseChange, idle, lastPoseChange)
 
         // Start building frame's path
         frameData = frameData.concat(`file ../images/${avatar}/${mouthCues[mouthCuesKey].value}`)
@@ -62,17 +59,17 @@ export function generateFrameData(avatar: string, mouthCues: MouthCue[]) {
 
         // TODO: determine if avatar will do a body pose or be in idle animation
 
-        // TODO: implmenet idle animation and posing
-        // if(idle){
-        //     breathPhase = calculateBreathPhase(currentSec, lastPoseChange, breathPhase)
-        //     frameData = frameData.concat(translateBreathFrame(breathPhase))
-        // } else {
-        //     breathPhase = 0
-        //     // TODO: add poses
-        // }
+        // Idling or Posing
+        if(idle){
+            breathPhase = calculateBreathPhase(currentSec, lastPoseChange, breathPhase)
+            frameData.concat(translateBreathFrame(breathPhase))
+        } else {
+            breathPhase = 0
+            // TODO: add poses
+        }
 
         // Finish building frame's path
-        frameData = frameData.concat(`.png\noutpoint ${frameDur}\n`)
+        frameData.concat(`.png\noutpoint ${frameDur}\n`)
 
     }
     return frameData
@@ -96,8 +93,8 @@ function willBlink(currentSec: number, frameDur: string, lastBlink: number) {
      *
      * @returns A boolean
      *
-    **/
-    let eyes:boolean = false
+     **/
+    let eyes: boolean = false
     if (parseInt(frameDur) < 0.1 && lastBlink != currentSec) {
         let n = Math.random()
         if ((n <= 0.4 && currentSec % 4 == 0) || (n > 0.4 && n <= 0.8 && currentSec % 3 == 0)) {
@@ -105,7 +102,6 @@ function willBlink(currentSec: number, frameDur: string, lastBlink: number) {
         }
     }
     return eyes
-
 }
 
 function calculateBreathPhase(currentSec: number, lastPoseChange: number, breathPhase: number) {
@@ -149,11 +145,12 @@ function translateBreathFrame(breathPhase: number) {
      * @returns A string to indicate the idle breathing frame
      *
      **/
-    if (breathPhase == 0 ){
-        return "_rest" // rest, arms relaxed and down
-    } else if (breathPhase == 1 || breathPhase == 3){
-        return "_breathing" // inhale and exhale (transition between rest and peak)
-    } else { // == 2
-        return "_lungsFull" // lungs are full, arms are out
+    if (breathPhase == 0) {
+        return '_rest' // rest, arms relaxed and down
+    } else if (breathPhase == 1 || breathPhase == 3) {
+        return '_breathing' // inhale and exhale (transition between rest and peak)
+    } else {
+        // == 2
+        return '_lungsFull' // lungs are full, arms are out
     }
 }
