@@ -13,7 +13,7 @@ export async function rhubarbProcessor(
     text_file_name: string,
     output_file_name: string,
 ) {
-    // Runs in the Rhubarb directory
+    // Rhubarb requires it be run in its directory
     try {
         chdir('./rhubarb')
     } catch (err) {
@@ -35,24 +35,21 @@ export async function rhubarbProcessor(
         '-d',
         `.${text_file_name}`,
         '--extendedShapes',
-        'GX',
+        'GHX',
         `.${audio_file_name}`,
     ]
 
     const rhubarbProc = spawnSync('./rhubarb', args)
 
-    if (rhubarbProc.stderr) {
-        // throw Error(`${rhubarbProc.stderr}`)
-        // Rhubarb failures are tagged with [Fatal], marking a failed attempt to run, log these.
-        if (rhubarbProc.stderr.includes(`[Fatal]`)) {
-            throw Error(`${rhubarbProc.stderr}`)
-        }
-    }
     // Return to original directory
     try {
         chdir('../')
     } catch (err) {
         console.log(`Error message: ${err}`)
+    }
+
+    if (rhubarbProc.status != 0) {
+        throw Error(`${rhubarbProc.stderr}`)
     }
 
     // Convert JSON to mouth cues
