@@ -482,6 +482,7 @@ fabric.properties
 
 # Rhubarb Ignore
 **/rhubarb
+docs/research/development/rhubarb-src
 
 # Ignore Build/Dist Dir
 speaking-portal-project/build

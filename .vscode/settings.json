@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.jsp": "java",
+        "*.ddl": "sql",
+        "*.rmd": "markdown",
+        "string": "cpp"
+    }
+}
