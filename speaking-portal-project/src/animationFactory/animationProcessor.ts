@@ -30,7 +30,7 @@ export async function mouthCuesToInputFile({
 This converts  data from the MouthCue type into a format for ffmpeg
 */
 export function generateFrameData(avatar: string, mouthCues: MouthCue[]) {
-    let character = new Avatar()
+    let character = new Avatar(avatar)
 
     let frameData = ''
     let blink = false
