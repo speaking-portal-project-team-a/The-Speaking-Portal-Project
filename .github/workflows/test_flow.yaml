@@ -35,7 +35,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-      - name: Install ffmpeg
       - uses: actions/checkout@v3
       - uses: FedericoCarboni/setup-ffmpeg@v2
         id: setup-ffmpeg
@@ -44,6 +43,13 @@ jobs:
           npm ci
           npm run build --if-present
         working-directory: ./speaking-portal-project
-
+  unittests:
+    name: Running unit tests
+    needs: build
+    steps:
+      - name: Unit tests 
+        uses: actions/checkout@v3
+        run: npm test
+        working-directory: ./speaking-portal-project
 
         
