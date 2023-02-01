@@ -48,8 +48,8 @@ jobs:
     name: Running unit tests
     needs: build
     steps:
-      - uses: actions/checkout@v3
       - name: Unit tests 
+        uses: actions/checkout@v3
         run: npm test
         working-directory: ./speaking-portal-project
 
