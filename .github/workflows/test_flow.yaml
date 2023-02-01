@@ -46,6 +46,7 @@ jobs:
         working-directory: ./speaking-portal-project
   unittests:
     needs: build
+  - uses: actions/checkout@v3
     run: npm test
     working-directory: ./speaking-portal-project
 
