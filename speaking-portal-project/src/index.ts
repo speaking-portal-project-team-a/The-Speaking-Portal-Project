@@ -17,7 +17,7 @@ export async function main(audio_path: string, text_path: string, language: stri
         console.log('Converting timings to input file...')
         await mouthCuesToInputFile({ avatar: avatar, mouthCues: phonemeContents, outputPath: `tmp/${filename}.txt` })
         console.log('Generating output video...')
-        return await getVideoExport(`${audio_path}`, `./tmp/${filename}.txt`, filename)
+        return await getVideoExport(`${audio_path}`, `./tmp/${filename}.txt`, `./tmp/${filename}.mp4`)
     } catch (err: any) {
         console.log(`${err}`)
     }
