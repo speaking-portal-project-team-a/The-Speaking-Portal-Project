@@ -1,0 +1,54 @@
+name: Node.js CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning' 
+        type: choice
+        options:
+        - info
+        - warning
+        - debug 
+      print_tags:
+        description: 'True to print to STDOUT'
+        required: true 
+        type: boolean 
+      tags:
+        description: 'Test scenario tags'
+        required: true 
+        type: string
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true 
+
+jobs:
+  build:
+    name: Creating build
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        node-version: [15.x, 19.x]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - name: Install ffmpeg
+      - uses: actions/checkout@v3
+      - uses: FedericoCarboni/setup-ffmpeg@v2
+        id: setup-ffmpeg
+      - name: Clean install dependencies and build
+        run: | 
+          npm ci
+          npm run build --if-present
+        working-directory: ./speaking-portal-project
+
+  unit-tests: 
+    needs: build
+      - name: Run all unit tests
+        run: npm test
+        working-directory: ./speaking-portal-project
+
+        
