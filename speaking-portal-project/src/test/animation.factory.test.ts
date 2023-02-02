@@ -29,11 +29,11 @@ describe('Animation Factory Tests', () => {
         expect(ffmpegProcessor(test_args,'mp4')).resolves.toEqual(`./src/test/test_files/test_output/${RANDOM_FILE_NAME}-test.mp4`)
         
         // Delete files created from unit test
-        // try {
-        //     fs.unlinkSync(`./src/test/test_files/test_output/${RANDOM_FILE_NAME}-test.mp4`)
-        // } catch (error) {
-        //     throw error
-        // }
+        try {
+            fs.unlinkSync(`./src/test/test_files/test_output/${RANDOM_FILE_NAME}-test.mp4`)
+        } catch (error) {
+            throw error
+        }
         })
     test('failing ffmpeg processor', async() => 
         await expect(() => ffmpegProcessor([''],'')).rejects.toThrowError())
@@ -45,11 +45,11 @@ describe('Animation Factory Tests', () => {
     //     expect(getWavFile(TEST_AUDIO_FILE_PATH,`${TEST_OUTPUT_DIR_PATH}/${RANDOM_FILE_NAME}-test.wav`)).resolves.toBe(`./src/test/test_files/test_output/${RANDOM_FILE_NAME}-test.wav`)
     
         // Delete files created from unit test
-        try {
-            fs.unlinkSync(`./src/test/test_files/test_output/${RANDOM_FILE_NAME}-test.wav`)
-        } catch (error) {
-            throw error
-        }
+        // try {
+        //     fs.unlinkSync(`./src/test/test_files/test_output/${RANDOM_FILE_NAME}-test.wav`)
+        // } catch (error) {
+        //     throw error
+        // }
     })
     
 
