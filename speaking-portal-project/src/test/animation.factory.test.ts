@@ -29,11 +29,11 @@ describe('Animation Factory Tests', () => {
         expect(ffmpegProcessor(test_args,'mp4')).resolves.toEqual(`./src/test/test_files/test_output/${RANDOM_FILE_NAME}-test.mp4`)
         
         // Delete files created from unit test
-        try {
-            fs.unlinkSync(`./src/test/test_files/test_output/${RANDOM_FILE_NAME}-test.mp4`)
-        } catch (error) {
-            throw error
-        }
+        // try {
+        //     fs.unlinkSync(`./src/test/test_files/test_output/${RANDOM_FILE_NAME}-test.mp4`)
+        // } catch (error) {
+        //     throw error
+        // }
         })
     test('failing ffmpeg processor', async() => 
         await expect(() => ffmpegProcessor([''],'')).rejects.toThrowError())
