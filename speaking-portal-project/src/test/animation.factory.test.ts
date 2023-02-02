@@ -26,7 +26,7 @@ describe('Animation Factory Tests', () => {
             'yuv420p',
             `${TEST_OUTPUT_DIR_PATH}/${RANDOM_FILE_NAME}-test.mp4`,
         ]
-        expect(ffmpegProcessor(test_args,'mp4')).resolves.toEqual(`./src/test/test_files/test_output/${RANDOM_FILE_NAME}-test.mp4`)
+        expect( await ffmpegProcessor(test_args,'mp4')).toEqual(`./src/test/test_files/test_output/${RANDOM_FILE_NAME}-test.mp4`)
         
         // Delete files created from unit test
         try {
