@@ -41,15 +41,17 @@ describe('Animation Factory Tests', () => {
     // TODO: Figure out a way to test getVideoExport. Maybe make function more generic rather then hard coding paths
 
     // // TODO: For this function to work I need access to a tmp audio file, that needs to be converted into a wav file!
-    // test('valid wav file retreival', async() => 
-    //     expect(getWavFile(TEST_AUDIO_FILE_PATH,`${TEST_OUTPUT_DIR_PATH}/${RANDOM_FILE_NAME}-test.wav`)).resolves.toBe(`./src/test/test_files/test_output/${RANDOM_FILE_NAME}-test.wav`)
+    test('valid wav file retreival', async() => { 
+        expect(getWavFile(TEST_AUDIO_FILE_PATH,`${TEST_OUTPUT_DIR_PATH}/${RANDOM_FILE_NAME}-test.wav`)).resolves.toBe(`./src/test/test_files/test_output/${RANDOM_FILE_NAME}-test.wav`)
     
-        // Delete files created from unit test
-        // try {
-        //     fs.unlinkSync(`./src/test/test_files/test_output/${RANDOM_FILE_NAME}-test.wav`)
-        // } catch (error) {
-        //     throw error
-        // }
+        //Delete files created from unit test
+        try {
+            fs.unlinkSync(`./src/test/test_files/test_output/${RANDOM_FILE_NAME}-test.wav`)
+        } catch (error) {
+            throw error
+        }
+    
     })
+})
     
 
