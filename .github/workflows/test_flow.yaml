@@ -45,6 +45,7 @@ jobs:
         working-directory: ./speaking-portal-project
   unittests:
     name: Running unit tests
+    run-on: macos-latest
     needs: build
     steps:
       - uses: actions/checkout@v3
