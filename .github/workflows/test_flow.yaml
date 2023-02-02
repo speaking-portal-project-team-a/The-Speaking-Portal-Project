@@ -60,7 +60,7 @@ jobs:
         working-directory: ./speaking-portal-project
 
       - name: Install FFMPEG
-      - uses: FedericoCarboni/setup-ffmpeg@v2
+        uses: FedericoCarboni/setup-ffmpeg@v2
         id: setup-ffmpeg
         
       - name: Running unit tests
