@@ -1,28 +1,5 @@
-name: FFMPEG, Build, Unit Tests (Test)
-on:
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: Log level
-        required: true
-        default: warning
-        type: choice
-        options:
-          - info
-          - warning
-          - debug
-      print_tags:
-        description: True to print to STDOUT
-        required: true
-        type: boolean
-      tags:
-        description: Test scenario tags
-        required: false
-        type: string
-      environment:
-        description: Environment to run tests against
-        type: environment
-        required: false
+name: Build and Test Workflow
+on: [pull_request, status]
 jobs:
   build:
     name: Create build, Install FFMPEG, and run unit tests
@@ -66,5 +43,3 @@ jobs:
       - name: Running unit tests
         run: npm test
         working-directory: ./speaking-portal-project
-
-        
