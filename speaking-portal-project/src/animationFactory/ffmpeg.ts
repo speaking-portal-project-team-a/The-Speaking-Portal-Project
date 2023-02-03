@@ -10,7 +10,6 @@ export async function ffmpegProcessor(args: string[], fileType: string) {
         throw Error(`${ffmpegProc.stderr}`)
     } else {
         console.log('Output generated successfully')
-
     }
     return args.pop()
 }
@@ -34,7 +33,7 @@ export async function getVideoExport(audio_file: string, text_file: string, outp
         '720x480', // added to avoid "width not divisible by 2" error
         '-pix_fmt',
         'yuv420p',
-        `./tmp/${output_name}.mp4`,
+        `${output_name}`,
     ]
     return ffmpegProcessor(args, 'mp4')
 }
