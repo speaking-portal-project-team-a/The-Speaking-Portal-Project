@@ -1,4 +1,4 @@
-import { MouthCue, MouthCueArray } from '../types'
+import { Avatar, MouthCue, MouthCueArray } from '../types'
 import fs from 'fs'
 
 export async function mouthCuesToInputFile({
@@ -30,6 +30,8 @@ export async function mouthCuesToInputFile({
 This converts  data from the MouthCue type into a format for ffmpeg
 */
 export function generateFrameData(avatar: string, mouthCues: MouthCue[]) {
+    let character = new Avatar(avatar)
+
     let frameData = ''
     let blink = false
     let lastBlink = -1
@@ -43,24 +45,16 @@ export function generateFrameData(avatar: string, mouthCues: MouthCue[]) {
         let frameDur = (mouthCues[mouthCuesKey].end - mouthCues[mouthCuesKey].start).toFixed(2)
         let currentSec = parseInt(mouthCues[mouthCuesKey].start.toFixed(0))
 
-        // TODO: use for testing. After confirming that blinking and other realism is good, delete this
         // TODO: when testing idle animation and poses, add idling? lastPoseChange and breathPhase
-        console.log("t=%d, frameDur: %d, lastBlink: %d",
-                    currentSec,
-                    frameDur,
-                    lastBlink)
-
-        // Start building frame's path
-        frameData = frameData.concat(`file ../images/${avatar}/${mouthCues[mouthCuesKey].value}`)
+        //console.log('t=%d, frameDur: %d, lastBlink: %d', currentSec, frameDur, lastBlink)
 
         // Blinking
-        blink = willBlink(currentSec, frameDur, lastBlink)
+        blink = character.willBlink(currentSec, frameDur, lastBlink)
         if (blink) {
             lastBlink = currentSec
-            frameData = frameData.concat('_blink')
         }
 
-        // TODO: determine if avatar will do a body pose or be in idle animation
+        character.updateState(blink, mouthCues[mouthCuesKey].value /*TODO: Add arms param here once updated*/)
 
         // TODO: Implement Idling or Posing
         // if(idle){
@@ -71,39 +65,10 @@ export function generateFrameData(avatar: string, mouthCues: MouthCue[]) {
         //     // TODO: add poses
         // }
 
-        // Finish building frame's path
-        frameData = frameData.concat(`.png\noutpoint ${frameDur}\n`)
+        // Build frame path
+        frameData = frameData.concat(character.generateStateString(frameDur))
     }
     return frameData
-}
-
-function willBlink(currentSec: number, frameDur: string, lastBlink: number) {
-    /**
-     * Determines whether or not the avatar will blink based on frame duration and timings
-     *
-     * @remarks
-     * - 1 blink takes ~0.1s, so we only consider frames less than 0.1s long
-     * - Humans typically blink 15-20 times per min, or once every 3-4 seconds
-     * - We want it to be random and not happen exactly once every 3 seconds, so let's say...
-     *      - there's a 40% chance to blink every 4th second
-     *      - there's a 40% chance to blink every 3rd second
-     *      - and don't blink in the same second
-     *
-     * @param currentSec - the current second (integer) of the animation
-     * @param frameDur - the current frame's duration (decimal)
-     * @param lastBlink - the most recent second (integer) in which the avatar blinked
-     *
-     * @returns A boolean
-     *
-     **/
-    let eyes: boolean = false
-    if (parseInt(frameDur) < 0.1 && lastBlink != currentSec) {
-        let n = Math.random()
-        if ((n <= 0.4 && currentSec % 4 == 0) || (n > 0.4 && n <= 0.8 && currentSec % 3 == 0)) {
-            eyes = true
-        }
-    }
-    return eyes
 }
 
 function calculateBreathPhase(currentSec: number, lastPoseChange: number, breathPhase: number) {
