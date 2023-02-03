@@ -31,7 +31,7 @@ jmeterlog = paste("jlogs/",files,sep="")
 ```{r}
 
 library(anytime)
-install
+library(dplyr)
 
 
 logread = function(filename){ 
@@ -45,21 +45,40 @@ return(data)
 }
 
 
-jmeterlog = sapply(jmeterlog, function(x) logread(x))
 
-jmeterlog[,3]
+
+
 ```
 
 
+```{r}
+jmeterlog = sapply(jmeterlog, function(x) logread(x))
+
+
+avgLatency = sapply(c(1:4), function(x) mean(as.numeric(unlist(jmeterlog[15,x]))))*0.001
+avgMinutes = sapply(c(1:4), function(x) mean(as.numeric(unlist(jmeterlog[2,x])))) 
+avgBytes = sapply(c(1:4), function(x) mean(as.numeric(unlist(jmeterlog[10,x])))) * 0.001
+avgSentBytes = sapply(c(1:4), function(x) mean(as.numeric(unlist(jmeterlog[11,x])))) * 0.001
+avgConnect = sapply(c(1:4), function(x) mean(as.numeric(unlist(jmeterlog[17,x])))) * 0.001
+
+df = data.frame(coreCount = files,avgMinutes, avgLatency, avgConnect, avgBytes, avgSentBytes)
+
+write.csv(df, "TestingTotals.csv", row.names=FALSE)
+print(df)
+
+```
+
 ```{r , echo=FALSE}
 library(anytime)
+library(stringr)
+
 generatePerfGraph = function(filename){
 log = as.data.frame(read.csv(filename))
 colnames(log) = c("time","memory","cpu0","cpu1","cpu2","cpu3","cpu4","cpu5","cpu6","cpu7","cpuTotal")
 time = utctime(log[,1])
 
 colors = c("red","orange","yellow","darkgreen","blue", "violet", "cyan", "green", "brown")
-plot(time,log[,11], xlab = "Time Elapsed", ylab = "Logical Core Utilization", main = filename, type = "l", lwd =5, ylim = c(0,100))
+plot(time,log[,11], xlab = "Time Elapsed", ylab = "Logical Core Utilization", main = str_remove(filename,c("perflogs/")), type = "l", lwd =5, ylim = c(0,100))
 for( i in c(3:10)){lines(time, log[,i], col = colors[i-3], type = "l", lwd = 1 )}
 legend(x="bottomright",legend = colnames(log)[3:11], col = colors, lty=1:2, cex=0.8)
 }
@@ -84,12 +103,13 @@ log = as.data.frame(read.csv(file))
 colnames(log) = c("time","memory","cpu0","cpu1","cpu2","cpu3","cpu4","cpu5","cpu6","cpu7","cpuTotal")
 time = utctime(log[,1])
 log[,1] = as.numeric(time)
-plot = scatterplot(cpuTotal ~ time, data = log)
-plot = scatterplot(memory ~ time, data = log)
-plot = scatterplot(cpuTotal ~ memory, data = log)
+title = main = str_remove(file,c("perflogs/"))
+plot = scatterplot(cpuTotal ~ time, data = log, main = title)
+plot = scatterplot(memory ~ time, data = log, main = title)
+plot = scatterplot(cpuTotal ~ memory, data = log, main = title)
 }
 
-
+?scatterplot
 
 sapply(perflog, function(x) regressionPlot(x))
 
