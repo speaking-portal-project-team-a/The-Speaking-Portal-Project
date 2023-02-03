@@ -1,0 +1,98 @@
+---
+title: "Data Processing"
+author: "Mattew Kuelker"
+date: "2023-02-03"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+## Data Log 1
+
+
+
+## Performance Log
+
+You can also embed plots, for example:
+
+```{r}
+files = c("singlecoretest.csv", "duocoretest.csv", "duocoretest2.csv", "quadcoretest.csv")
+perflog = paste("perflogs/",files,sep="")
+jmeterlog = paste("jlogs/",files,sep="")
+
+
+
+```
+
+```{r}
+
+library(anytime)
+install
+
+
+logread = function(filename){ 
+data = data.frame(read.csv(filename))
+
+typeof(data)
+
+data[,1] = anytime(data[,1]/1000)
+data[,2] = (data[,2]/(60000))
+return(data)
+}
+
+
+jmeterlog = sapply(jmeterlog, function(x) logread(x))
+
+jmeterlog[,3]
+```
+
+
+```{r , echo=FALSE}
+library(anytime)
+generatePerfGraph = function(filename){
+log = as.data.frame(read.csv(filename))
+colnames(log) = c("time","memory","cpu0","cpu1","cpu2","cpu3","cpu4","cpu5","cpu6","cpu7","cpuTotal")
+time = utctime(log[,1])
+
+colors = c("red","orange","yellow","darkgreen","blue", "violet", "cyan", "green", "brown")
+plot(time,log[,11], xlab = "Time Elapsed", ylab = "Logical Core Utilization", main = filename, type = "l", lwd =5, ylim = c(0,100))
+for( i in c(3:10)){lines(time, log[,i], col = colors[i-3], type = "l", lwd = 1 )}
+legend(x="bottomright",legend = colnames(log)[3:11], col = colors, lty=1:2, cex=0.8)
+}
+
+sapply(perflog, function(x) generatePerfGraph(x))
+
+
+
+
+
+
+
+
+```
+
+
+```{r}
+library("car")
+#calculates a regression line for the data. Don't read too into this, as the R^2 coefs are likely all garbage. Except for plot three. 
+regressionPlot = function(file){
+log = as.data.frame(read.csv(file))
+colnames(log) = c("time","memory","cpu0","cpu1","cpu2","cpu3","cpu4","cpu5","cpu6","cpu7","cpuTotal")
+time = utctime(log[,1])
+log[,1] = as.numeric(time)
+plot = scatterplot(cpuTotal ~ time, data = log)
+plot = scatterplot(memory ~ time, data = log)
+plot = scatterplot(cpuTotal ~ memory, data = log)
+}
+
+
+
+sapply(perflog, function(x) regressionPlot(x))
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
