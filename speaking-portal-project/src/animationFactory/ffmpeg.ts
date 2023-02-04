@@ -30,7 +30,7 @@ export async function getVideoExport(audio_file: string, text_file: string, outp
         '-r',
         '24',
         '-s',
-        '720x480', // added to avoid "width not divisible by 2" error
+        '420x594', // added to avoid "width not divisible by 2" error. also, files are 842x1191 so it's scaled appropriately
         '-pix_fmt',
         'yuv420p',
         `${output_name}`,
