@@ -3,6 +3,7 @@ import { getWavFile } from './animationFactory/ffmpeg'
 import multer from 'multer'
 import fs from 'fs'
 import { main } from './index'
+import { AvatarNames } from './types'
 
 const app = express()
 const PORT = 3000
@@ -49,10 +50,9 @@ if (cluster.isPrimary) {
             const audioPath = `./tmp/${audioFile.filename}.wav`
             const textPath = `./tmp/${textFile.filename}.txt`
             // Retrieve language parameter
-            const recognizer = req.body.recognizer ? req.body.recognizer : 'English (U.S.)'
+            const recognizer = req.body.recognizer ? req.body.recognizer : 'english'
             // Retrieve character selection
-            // TODO: replace names with 'official' names for these characters
-            const avatar = req.body.avatar ? req.body.avatar : 'character01'
+            const avatar = req.body.avatar ? req.body.avatar.toLowerCase() : AvatarNames[0]
 
             // Set a general filename for temp files to be generated as
             const filename = audioFile.filename
