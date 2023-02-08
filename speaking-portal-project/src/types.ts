@@ -27,6 +27,73 @@ enum Pose {
     __LENGTH
 }
 
+enum ProcName {
+    'File Validation',
+    'Rhubarb Lip Sync',
+    'Timing Conversion',
+    'Realism Addition',
+    'Generate ouptut MP4'
+}
+
+export class Timer {
+    private startTime : Date
+    private currentTime : Date
+    private process: ProcName[]
+    private processStart: Date[]
+    private processEnd: Date[]
+    private processID: number
+
+    public constructor(){
+        this.startTime = new Date()
+        this.currentTime = new Date()
+        this.process = []
+        this.processStart = []
+        this.processEnd = []
+        this.processID = 0
+    }
+
+    public setProcessStart(procName: ProcName) {
+        this.processStart[procName] = new Date()
+        this.processID++
+    }
+
+    public setProcessEnd(procName: ProcName) {
+        this.processEnd[procName] = new Date()
+    }
+
+    // Use this when adding to log file
+    public getCurrentTime(): string {
+        this.currentTime = new Date()
+        let hrs = String(this.currentTime.getHours()).padStart(2,"0")
+        let min = String(this.currentTime.getMinutes()).padStart(2,"0")
+        let sec = String(this.currentTime.getSeconds()).padStart(2,"0")
+        let ms = String(this.currentTime.getMilliseconds()).padStart(2,"0")
+        return `${hrs}:${min}:${sec}:${ms} (H:m:s:ms)`
+    }
+
+    private getDiff(startDate: Date, endDate: Date) {
+        let diff = Math.abs(endDate.getTime() - startDate.getTime())
+        let diffHrs = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,"0")
+        let diffMins = String(Math.round(((diff % 86400000) % 3600000) / 60000)).padStart(2,"0")
+        let diffSecs = String(Math.round(((diff % 86400000) % 3600000) % 60000 / 1000)).padStart(2,"0")
+        let diffMs = String(Math.round(((diff % 86400000) % 3600000) % 60000 % 1000)).padStart(2,"0")
+        return `${diffHrs}H ${diffMins}m ${diffSecs}s ${diffMs}ms`
+    }
+
+    public getProcessSummary(): string {
+        let summ = '---------------------------------------------\n'
+        for (let i = 0; i < this.processID; i++) {
+            summ = summ.concat(`${ProcName[i]} \t | ${this.getDiff(this.processStart[i], this.processEnd[i])} \n`)
+        }
+        return summ.concat('---------------------------------------------')
+    }
+
+    public getTotalTimeElapsed(): string{
+        this.currentTime = new Date()
+        return this.getDiff(this.startTime, this.currentTime)
+    }
+}
+
 // Eyes Class for updating during runtime
 class Eyes {
     areClosed : boolean
