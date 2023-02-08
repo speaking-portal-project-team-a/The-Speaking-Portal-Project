@@ -31,11 +31,11 @@ https://www.altexsoft.com/blog/api-testing/
 
 - Three tier API structure: Client, Server, and Databas
 
-- REST: Most popular architecture for data transfe
+- REST: Most popular architecture for data transfer
 - Client make HTTP requests to the server
 - The server receives requested data from a database, transforms data according to logic, and returns a response in JSON, XML, and other formates.
 
-Automated Testing Framework
+### Automated Testing Framework
 
 1. Unit Testing
    - Code Testing performed while developers are working on it
@@ -63,7 +63,7 @@ Automated Testing Framework
 
 - Stress Testing: Gradually increase the count of users until API begins throwing error or slows down
 
-- Spike Testing: Test to see if API with function after high stress periods 
+- Spike Testing: Test to see if API with function after high stress periods
 
 - Scalability Testing: System should scale according to the changing load. Increase the number of incoming requests in monitor if there is a proportional change in response time
 
