@@ -2,7 +2,7 @@ import { stdout, chdir, cwd, exitCode } from 'node:process'
 import { spawnSync } from 'node:child_process'
 import util from 'node:util'
 import fs from 'fs'
-import { MouthCue, MouthCueArray } from '../types'
+import { MouthCue } from '../types'
 
 const exec = util.promisify(require('node:child_process').exec)
 

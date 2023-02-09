@@ -9,8 +9,6 @@ export type MouthCue = {
     value: Phoneme
 }
 
-export type MouthCueArray = Array<MouthCue>
-
 export type Phoneme = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'X'
 
 // TODO: update when more avatars added
