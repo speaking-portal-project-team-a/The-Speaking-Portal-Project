@@ -4,7 +4,6 @@ import multer from 'multer'
 import fs from 'fs'
 import { main } from './index'
 import { AvatarNames } from './types'
-
 const app = express()
 const PORT = 3000
 const HOST = '0.0.0.0'
