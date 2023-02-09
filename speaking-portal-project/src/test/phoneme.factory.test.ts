@@ -17,11 +17,8 @@ describe('Phoneme Factory Unit Tests', () => {
             end: expect.any(Number),
             value: expect.any(String)
         }))
-            
-
-         //Delete files created from unit test
-         try {
-            fs.unlinkSync(`../tmp/${RANDOM_FILE_NAME}.json`)
+        try {
+            fs.unlinkSync(__dirname + `/../../tmp/${RANDOM_FILE_NAME}.json`)
         } catch (error) {
             throw error
         }
