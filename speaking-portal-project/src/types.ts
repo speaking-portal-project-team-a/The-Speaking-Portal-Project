@@ -13,17 +13,20 @@ export type MouthCueArray = Array<MouthCue>
 
 export type Phoneme = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'X'
 
-// TODO: update when more avatars added
+// TODO: when updating avatars, update its name here
 export enum AvatarNames {
     barb,
     boy,
     __LENGTH
 }
 
-// TODO: update when more poses added
+// TODO: when updating body poses, update pose names here
+// TODO: remove temporary poses and add artist poses once received
 enum Pose {
     default,
     relaxed,
+    pos1,
+    pos2,
     __LENGTH
 }
 
@@ -112,6 +115,7 @@ class Eyes {
 }
 
 class Mouth {
+    // TODO: update if mouth expressions are added by artist
     expression: string
     phoneme: Phoneme
     constructor(expression: string = '', phoneme: Phoneme = 'A') {
@@ -149,10 +153,12 @@ export class Avatar {
         this.body = body
     }
 
+    // updates mouth based on phoneme
     updateMouth(phoneme: Phoneme = this.mouth.phoneme): void {
         this.mouth.phoneme = phoneme
     }
 
+    // default state is eyes open, calculates when to blink
     updateEyes(currentSec: number, frameDur: number): void {
         this.eyes.open()
         if (frameDur < 0.08 && this.eyes.lastBlink != currentSec) {
@@ -166,16 +172,15 @@ export class Avatar {
     // Randomly chooses a new pose that is different from current pose
     chooseNewPose(): string{
         let i = Math.floor((Math.random() * Pose.__LENGTH))
-        if (Pose[i] === this.body.currentPose){
-            this.chooseNewPose()
-        }
-        return Pose[i]
+        let newPose = Pose[i];
+        (Pose[i] === this.body.currentPose) ? newPose = this.chooseNewPose() : newPose = Pose[i]
+        return newPose
     }
 
-    // Updates the body's position based on timings and mouth cues
-    updateBody(currentSec: number, frameDur: number): void{
+    // Updates the body's position based on timings and idle mouth cue
+    updateBody(currentSec: number): void{
         let poseDur = currentSec - this.body.lastPoseChange
-        if (poseDur >= 2 || (poseDur >= 1 && this.mouth.phoneme == 'X') || (poseDur >= 1 && this.mouth.phoneme == 'A')) {
+        if (poseDur >= 2 || (poseDur >= 1.5 && this.mouth.phoneme === 'X')) {
             this.body.currentPose = this.chooseNewPose()
             this.body.lastPoseChange = currentSec
         }
@@ -185,7 +190,7 @@ export class Avatar {
     updateState(currentSec: number, frameDur: number, phoneme: Phoneme = this.mouth.phoneme): void{
         this.updateEyes(currentSec, frameDur)
         this.updateMouth(phoneme)
-        this.updateBody(currentSec, frameDur)
+        this.updateBody(currentSec)
     }
 
     // Returns the filepath of the image representation the character state
