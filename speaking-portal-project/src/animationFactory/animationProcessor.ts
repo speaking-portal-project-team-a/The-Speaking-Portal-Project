@@ -1,4 +1,4 @@
-import { Avatar, MouthCue, MouthCueArray } from '../types'
+import { Avatar, MouthCue } from '../types'
 import fs from 'fs'
 
 export async function mouthCuesToInputFile({
