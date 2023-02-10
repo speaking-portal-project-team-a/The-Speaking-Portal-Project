@@ -8,22 +8,23 @@
 - console.time()
 - performance.now() <- most precise option!!
 - Unit Tests
+- @vnajack has set up timers into the codebase, we might need to update it a bit more
 
-Measuring API Response Time
+### Measuring API Response Time
 
-- The amount of time it takes for an API to process a request and send a response back to the client
+The amount of time it takes for an API to process a request and send a response back to the client
 
-Response Time: Refers to the amount of time it takes for a web API to receive, process, and respond to a client’s request 
+- **Response Time**: Refers to the amount of time it takes for a web API to receive, process, and respond to a client’s request 
 
-Latency: Measure of time it takes for both the response and request to travel between the client and the server
+- **Latency**: Measure of time it takes for both the response and request to travel between the client and the server
 
-Response time measurements:
+### Response time measurements:
 
-- Average Response time: the amount of time it takes to respond from a sample of requests. (e.g. take 10,000 requests, and average the response time)
-- Peak Response time: The max API response time taken from a sample of API requests
-- If the peak response time is much higher then the average response time, there might be a problem…. Lowering peak will increase average
+- **Average Response time**: the amount of time it takes to respond from a sample of requests. (e.g. take 10,000 requests, and average the response time)
+- **Peak Response time**: The max API response time taken from a sample of API requests
+- *If the peak response time is much higher then the average response time, there might be a problem…. Lowering peak will increase average*
 
-High performing APIs have an average response time between 0.1 and 1 second.
+- *High performing APIs have an average response time between 0.1 and 1 second*
 
 ## API Testing Approaches and Tools: Postman, Rest Assured, JMeter…
 
@@ -41,9 +42,12 @@ https://www.altexsoft.com/blog/api-testing/
    - Code Testing performed while developers are working on it
 
 2. Server layer
+
    - Automated API testing
 
 3. UI layer
+
+   - We will not be doing this
 
 ## Type of API Testing and What they focus on
 
