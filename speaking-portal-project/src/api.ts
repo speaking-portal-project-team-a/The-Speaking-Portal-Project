@@ -7,7 +7,7 @@ import { AvatarNames } from './types'
 
 const app = express()
 const PORT = 3000
-const HOST = '0.0.0.0'
+const HOST = '34.216.38.184'
 
 const upload = multer({
     storage: multer.diskStorage({
