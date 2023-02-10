@@ -23,5 +23,8 @@ describe('Phoneme Factory Unit Tests', () => {
             throw error
         }
     })
+    
+    // TODO: add error handling tests
+
 
 })
