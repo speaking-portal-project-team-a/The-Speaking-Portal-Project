@@ -38,7 +38,6 @@ enum ProcName {
 export class Timer {
     private startTime : Date
     private currentTime : Date
-    private process: ProcName[]
     private processStart: Date[]
     private processEnd: Date[]
     private processID: number
@@ -46,7 +45,6 @@ export class Timer {
     public constructor(){
         this.startTime = new Date()
         this.currentTime = new Date()
-        this.process = []
         this.processStart = []
         this.processEnd = []
         this.processID = 0
@@ -76,7 +74,7 @@ export class Timer {
         let diffHrs = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,"0")
         let diffMins = String(Math.round(((diff % 86400000) % 3600000) / 60000)).padStart(2,"0")
         let diffSecs = String(Math.round(((diff % 86400000) % 3600000) % 60000 / 1000)).padStart(2,"0")
-        let diffMs = String(Math.round(((diff % 86400000) % 3600000) % 60000 % 1000)).padStart(2,"0")
+        let diffMs = String(Math.round(((diff % 86400000) % 3600000) % 60000 % 1000)).padStart(3,"0")
         return `${diffHrs}H ${diffMins}m ${diffSecs}s ${diffMs}ms`
     }
 
