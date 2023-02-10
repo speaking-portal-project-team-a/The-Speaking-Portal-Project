@@ -5,6 +5,8 @@ import { spawnSync } from 'node:child_process'
 
 export async function ffmpegProcessor(args: string[], fileType: string) {
     const ffmpegProc = spawnSync('ffmpeg', args)
+
+    //TODO: Make sure error is being captured / Set up FFMPEG error type
     if (ffmpegProc.status != 0) {
         console.log('exit code (status): ', ffmpegProc.status) // exit code of child process
         throw Error(`${ffmpegProc.stderr}`)
