@@ -82,9 +82,14 @@ Steps to follow for API Testing
 
 2. Establish API test environment
    - Configuration of servers any other resources API interacts with
+   - @mkuelker is working on getting an AWS server to host our project
 
 3. Make API test Call
 
 4. Define input parameters
 
+- Currently have an API definition set-up that includes the format of a multi-part form data request. Might need re-work
+
 5. Create API test cases
+  
+- We have already accomplished this, maybe can come up with more elborate test cases in the future
