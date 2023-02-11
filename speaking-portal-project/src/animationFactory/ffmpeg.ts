@@ -1,6 +1,3 @@
-import { stdout, chdir, cwd } from 'node:process'
-import util from 'node:util'
-import { MouthCue, MouthCueArray } from '../types'
 import { spawnSync } from 'node:child_process'
 
 export async function ffmpegProcessor(args: string[], fileType: string) {
