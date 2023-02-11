@@ -3,6 +3,10 @@ import fs from 'fs'
 
 var wavFileInfo = require('wav-file-info')
 
+
+// TODO: Update File Checks process, add File Error Type
+
+
 export async function checkFiles(audio_file_name: string, text_file_name: string) {
     /**
      * Checks the file in the Rhubarb directory: existence, read permissions, valid files .wav and .txt
@@ -12,11 +16,7 @@ export async function checkFiles(audio_file_name: string, text_file_name: string
      *
      * @param file_name - The name of the file to check
      */
-    // try {
-    //     chdir('./tmp')
-    // } catch (err) {
-    //     console.log(`Error message: ${err}`)
-    // }
+  
     console.log(audio_file_name, text_file_name)
     // Check Audio File
     await doesFileExist(audio_file_name)
@@ -27,13 +27,6 @@ export async function checkFiles(audio_file_name: string, text_file_name: string
     //await doesFileExist(text_file_name) // TODO: this check is causing a bug
     await isTextFileValid(text_file_name)
     await isTextEmpty(text_file_name)
-
-    // // Return to original directory
-    // try {
-    //     chdir('../')
-    // } catch (err) {
-    //     console.log(`Error message: ${err}`)
-    // }
 
     // Promise cannot be void
     return true

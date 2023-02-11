@@ -1,0 +1,99 @@
+# API Testing Research
+
+## Measuring Node Runtime Performance
+
+1. Using performance Timers within codebase
+
+- Date.now()
+- console.time()
+- performance.now() <- most precise option!!
+- Unit Tests
+- @vnajack has set up timers into the codebase, we might need to update it a bit more
+
+### Measuring API Response Time
+
+The amount of time it takes for an API to process a request and send a response back to the client
+
+- **Response Time**: Refers to the amount of time it takes for a web API to receive, process, and respond to a client’s request 
+
+- **Latency**: Measure of time it takes for both the response and request to travel between the client and the server
+
+### Response time measurements:
+
+- **Average Response time**: the amount of time it takes to respond from a sample of requests. (e.g. take 10,000 requests, and average the response time)
+- **Peak Response time**: The max API response time taken from a sample of API requests
+- *If the peak response time is much higher then the average response time, there might be a problem…. Lowering peak will increase average*
+
+- *High performing APIs have an average response time between 0.1 and 1 second*
+
+## API Testing Approaches and Tools: Postman, Rest Assured, JMeter…
+
+https://www.altexsoft.com/blog/api-testing/
+
+- Three tier API structure: Client, Server, and Databas
+
+- REST: Most popular architecture for data transfer
+- Client make HTTP requests to the server
+- The server receives requested data from a database, transforms data according to logic, and returns a response in JSON, XML, and other formates.
+
+### Automated Testing Framework
+
+1. Unit Testing
+   - Code Testing performed while developers are working on it
+
+2. Server layer
+
+   - Automated API testing
+
+3. UI layer
+
+   - We will not be doing this
+
+## Type of API Testing and What they focus on
+
+1. Functional API Tests
+
+- Assessment of functions within the code base
+  - Returns desired output from given input
+  - Handles errors when results are outside expected parameters
+- Positive tests: Verifies correct functioning of the API when input conforms to norm
+- Negative Tests: Check how the API responds to every kind of wrong input
+
+1. API Performance Testing
+
+- Load testing: To measure where the limit of the system performance under a high load. Measurement of response time, throughput, server conditions
+
+- Soak testing: Load test that runs over several day, reveals system memory leaks
+
+- Stress Testing: Gradually increase the count of users until API begins throwing error or slows down
+
+- Spike Testing: Test to see if API with function after high stress periods
+
+- Scalability Testing: System should scale according to the changing load. Increase the number of incoming requests in monitor if there is a proportional change in response time
+
+Steps to follow for API Testing
+
+1. Create API testing Requirements
+   - Purpose for the API and Target consumer
+   - The workflow of the application
+   - Features and functions of the API
+   - Other APIs this Api interacts with
+   - Aspects of testing
+   - Problems were testing for
+   - Priorities for testing
+   - Desired output
+   - And definition of Pass or Fail
+
+2. Establish API test environment
+   - Configuration of servers any other resources API interacts with
+   - @mkuelker is working on getting an AWS server to host our project
+
+3. Make API test Call
+
+4. Define input parameters
+
+- Currently have an API definition set-up that includes the format of a multi-part form data request. Might need re-work
+
+5. Create API test cases
+  
+- We have already accomplished this, maybe can come up with more elborate test cases in the future
