@@ -2,6 +2,10 @@
 
 #Just a quick script I wrote of all the commands I used to properly set up our server/codebase so I can quickly create a new instance
 
+#Note! This script will only work on ubuntu systems. It is possible to install ffmpeg and rhubarb manually on other OS's. 
+
+
+
 echo "Begin System Setup. WARNING: Current directory will be used for installation"
 sudo -i
 echo "Installing Git"
