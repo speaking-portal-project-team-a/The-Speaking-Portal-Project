@@ -30,6 +30,6 @@ unzip Rhubarb-Lip-Sync-1.13.0-Linux.zip
 mv Rhubarb-Lip-Sync-1.13.0-Linux rhubarb
 rm Rhubarb-Lip-Sync-1.13.0-Linux.zip
 echo "Install app dependencies"
-npm install --save-dev
+npm install --production
 echo "Run API"
 npm start
