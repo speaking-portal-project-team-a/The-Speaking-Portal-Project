@@ -6,23 +6,33 @@
 
 echo "Begin System Setup. WARNING: Current directory will be used for installation"
 sudo -i
+cd ..
+cd home/
+mkdir speakingportal
+cd speakingportal
 echo "Installing Git"
-sudo apt update
+sudo apt update && sudo apt upgrade
+echo "Reboot Recommended before proceeding, Use CTRL+C to cancel"
 sudo apt install git
 git --version
 echo "Downloading Repo"
 git clone https://github.com/speaking-portal-project-team-a/The-Speaking-Portal-Project.git
+
 echo "Installing Nodejs v.19"
 sudo apt update
 sudo apt install -y curl
 curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash -
 sudo apt install -y nodejs
 node --version
+echo "Installing Typescript"
+sudo npm install -g typescript
 echo "Installing ffmpeg"
 sudo apt update && sudo apt upgrade
 sudo apt install ffmpeg
 ffmpeg -version
 echo "Installing Rhubarb"
+cd The-Speaking-Portal-Project/
+cd speaking-portal-project/
 sudo apt update
 sudo apt-get install unzip
 curl -LO https://github.com/DanielSWolf/rhubarb-lip-sync/releases/download/v1.13.0/Rhubarb-Lip-Sync-1.13.0-Linux.zip
@@ -30,6 +40,6 @@ unzip Rhubarb-Lip-Sync-1.13.0-Linux.zip
 mv Rhubarb-Lip-Sync-1.13.0-Linux rhubarb
 rm Rhubarb-Lip-Sync-1.13.0-Linux.zip
 echo "Install app dependencies"
-npm install --production
+npm install 
 echo "Run API"
 npm start
