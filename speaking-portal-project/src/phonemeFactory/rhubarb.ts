@@ -2,7 +2,7 @@ import { stdout, chdir, cwd, exitCode } from 'node:process'
 import { spawnSync } from 'node:child_process'
 import util from 'node:util'
 import fs from 'fs'
-import { MouthCue, MouthCueArray } from '../types'
+import { MouthCue } from '../types'
 
 const exec = util.promisify(require('node:child_process').exec)
 
@@ -14,6 +14,8 @@ export async function rhubarbProcessor(
     output_file_name: string,
 ) {
     // Rhubarb requires it be run in its directory
+
+    // TODO: Examine chdir error further
     try {
         chdir('./rhubarb')
     } catch (err) {
@@ -42,18 +44,18 @@ export async function rhubarbProcessor(
     const rhubarbProc = spawnSync('./rhubarb', args)
 
     // Return to original directory
+
+    // TODO: Examine chdir error further
     try {
         chdir('../')
     } catch (err) {
         console.log(`Error switching directories: ${err}`)
     }
 
-    if (rhubarbProc.status != 0) {
-        console.log('exit code (status): ', rhubarbProc.status) // exit code of child process
-        throw Error(`${rhubarbProc.stderr}`)
-    }
+    // TODO: Ensure Error is being captured in Unit Test / Set-up Rhubarb Error Type
 
     if (rhubarbProc.status != 0) {
+        console.log('exit code (status): ', rhubarbProc.status) // exit code of child process
         throw Error(`${rhubarbProc.stderr}`)
     }
 

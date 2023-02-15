@@ -1,6 +1,8 @@
+
 import { Avatar, MouthCue, Timer} from '../types'
 import fs from 'fs'
 
+// TODO: Add a unit test here
 export async function mouthCuesToInputFile({
     avatar,
     mouthCues,
@@ -31,7 +33,9 @@ export async function mouthCuesToInputFile({
 /*
 This converts  data from the MouthCue type into a format for ffmpeg
 */
+
 export function generateFrameData(avatar: string, mouthCues: MouthCue[], timer: Timer) {
+
     let character = new Avatar(avatar)
     let frameData = ''
 
