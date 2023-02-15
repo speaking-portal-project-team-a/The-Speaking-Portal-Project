@@ -1,7 +1,10 @@
 import {test, describe, expect} from '@jest/globals'
-import {ffmpegProcessor, getVideoExport, getWavFile} from '../animationFactory/ffmpeg'
+import {ffmpegProcessor, getWavFile} from '../animationFactory/ffmpeg'
+import {mouthCuesToInputFile,generateFrameData} from '../animationFactory/animationProcessor'
 import fs from 'fs'
 
+
+// TODO: Can we save these paths somewhere else and import them ?? 
 const TEST_AUDIO_FILE_PATH = './src/test/test_files/en-Amber.wav'
 const TEST_FFMPEG_TEXT_FILE_PATH = './src/test/test_files/test-input.txt'
 const TEST_OUTPUT_DIR_PATH = './src/test/test_files/test_output'
@@ -35,12 +38,13 @@ describe('Animation Factory Tests', () => {
             throw error
         }
         })
+
+    // TODO: Capture and FFPEG Error Object 
     test('failing ffmpeg processor', async() => 
         await expect(() => ffmpegProcessor([''],'')).rejects.toThrowError())
 
     // TODO: Figure out a way to test getVideoExport. Maybe make function more generic rather then hard coding paths
 
-    // // TODO: For this function to work I need access to a tmp audio file, that needs to be converted into a wav file!
     test('valid wav file retreival', async() => { 
         expect(getWavFile(TEST_AUDIO_FILE_PATH,`${TEST_OUTPUT_DIR_PATH}/${RANDOM_FILE_NAME}-test.wav`)).resolves.toBe(`./src/test/test_files/test_output/${RANDOM_FILE_NAME}-test.wav`)
     
