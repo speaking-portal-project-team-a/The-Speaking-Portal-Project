@@ -4,7 +4,7 @@
 #Note! This script will only work on ubuntu systems. It is possible to install ffmpeg and rhubarb manually on other OS's. 
 #I recommend however using ubuntu as it is readily supports by rhubarb, ffmpeg, and can run nodejs version 19. (Unlike Amazon linux)
 
-echo "Begin System Setup. WARNING: Current directory will be used for installation"
+echo "Begin System Setup. WARNING: directory will be created for installation"
 sudo -i
 cd ..
 cd home/
