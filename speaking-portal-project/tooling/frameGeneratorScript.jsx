@@ -71,7 +71,7 @@ function includes(array, layerString) {
 function exportFileToPNG24(dest) {
     if (app.documents.length > 0) {
         var exportOptions = new ExportOptionsPNG24()
-        exportOptions.antiAliasing = false
+        exportOptions.antiAliasing = true
         exportOptions.transparency = false
         exportOptions.artBoardClipping = true
         var type = ExportType.PNG24
