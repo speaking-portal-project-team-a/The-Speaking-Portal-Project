@@ -31,8 +31,7 @@ sudo apt update && sudo apt upgrade
 sudo apt install ffmpeg
 ffmpeg -version
 echo "Installing Rhubarb"
-cd The-Speaking-Portal-Project/
-cd speaking-portal-project/
+cd The-Speaking-Portal-Project/speaking-portal-project/
 sudo apt update
 sudo apt-get install unzip
 curl -LO https://github.com/DanielSWolf/rhubarb-lip-sync/releases/download/v1.13.0/Rhubarb-Lip-Sync-1.13.0-Linux.zip
