@@ -157,7 +157,7 @@ export class Avatar {
     // default state is eyes open, calculates when to blink
     updateEyes(currentSec: number, frameDur: number): void {
         this.eyes.open()
-        if (frameDur < 0.08 && this.eyes.lastBlink != currentSec) {
+        if (frameDur < 0.08 && this.eyes.lastBlink != currentSec && this.eyes.lastBlink != currentSec-1) {
             let n = Math.random()
             if ((n <= 0.3 && currentSec % 4 == 0) || (n > 0.3 && n <= 0.6 && currentSec % 3 == 0)) {
                 this.eyes.close(currentSec)
