@@ -67,6 +67,8 @@ Milestone 4:
 This program was created with the following tech stack and packages:
 
 - Node.Js 19.0.0
+- Express 4.18.1
+- Multer 1.4.5
 - Rhubarb Lip Sync 1.13.0
 - ffmpeg 5.1.2
 
