@@ -100,7 +100,7 @@ charge of mapping spoken language from an audio file into a series of phonemes, 
 distinguish one word from another. In order to make this process as accurate as possible, the phoneme factory also
 receives the user text file and language selection.
 
-Once the phoneme file is created, it is sent off to a secondary process called the phoneme processor. This processor maps phonemes from the phoneme file 
+Once the phoneme file is created, it is sent to the secondary process called the phoneme processor. This processor maps phonemes from the phoneme file 
 to a specific timestamp, and associates that timestamp with an asset file containing the phoneme, an avatar pose, and state of blinking. There is a 1:1 
 mapping between phonemes and mouth assets. These assets are then compiled and rendered into a video file using ffmpeg. The video file is then returned to 
 the front end, and is available for the user to download onto their local machine.
