@@ -2,7 +2,7 @@
 
 ## What does this API Do? 
 
-Speaking Portal API creats an MP4 output animation from a synthesized speech file and text input based on Kukarella TTS. Text input is first read and generated into phonemes output file via the rhubarb librarby. (Phonemes are the smallest unit of sounds that uniquely identifies words from one another.) Once a phoneme file is created, it is processed in a phoneme processeor, which maps phonemes to a mouth assets. The mouth assets are then added onto an avatar and rendered in a video file through ffmepg.
+Speaking Portal API creates an MP4 output animation from a synthesized speech file and text input based on Kukarella TTS. Text input is first read and generated into phonemes output file via the rhubarb library. (Phonemes are the smallest unit of sounds that uniquely identifies words from one another.) Once a phoneme file is created, it is processed in a phoneme processor, which maps phonemes to  mouth assets. The mouth assets are then added onto an avatar and rendered in a video file through ffmepg.
 
 Here's a typical example of the JSON used in a POST request.
 
@@ -37,9 +37,9 @@ Request data will be equal to the listed call in JSON posted above. Here are the
 
 | Field      | Type | Description     |
 | :---:       |    :----:  |        :---:   |
-| Audio      | Wav file       | A file containing audio of the voice the  user wishes to use for the generated mp4 output |
+| Audio      | Wav file       | A file containing audio of the voice the user wishes to use for the generated mp4 output |
 | Text   | Txt file       | A file containing a textual script of what is being communicated in the Wav file      |
-| Recognizer   | String        | Specifies if language processor should use english recognizer, (which is slower, but more accurate, and only works for english),<br> or the phonetic recognizer (which is faster, but not as acurate,  and supports over 200 languages,)       |
+| Recognizer   | String        | Specifies if language processor should use English recognizer, (which is slower, but more accurate, and only works for English),<br> or the phonetic recognizer (which is faster, but not as accurate,  and supports over 200 languages,)       |
 
 <br>
 The response will return an MP4 file of the newly generated animation, which could resemble the following image below: 
