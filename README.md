@@ -109,4 +109,4 @@ the front end, and is available for the user to download onto their local machin
 
 - The phoneme generation process controlled via Rhubarb can be quite computationally intensive, and is the current bottleneck for performance.
 - Blink frequency is chosen using a random probability
-- Avatar poses are chosen at random.
+- Avatar poses are chosen at random. A suggestion for future development would be to include sentiment analysis on the text and choose appropriate poses: however, this also depends on which poses are provided by the artist.
