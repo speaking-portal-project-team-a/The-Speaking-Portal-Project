@@ -6,8 +6,7 @@
 
 echo "Begin System Setup. WARNING: directory will be created for installation"
 sudo -i
-cd ..
-cd home/
+cd ../home
 mkdir speakingportal
 cd speakingportal
 echo "Installing Git"
@@ -17,7 +16,6 @@ sudo apt install git
 git --version
 echo "Downloading Repo"
 git clone https://github.com/speaking-portal-project-team-a/The-Speaking-Portal-Project.git
-
 echo "Installing Nodejs v.19"
 sudo apt update
 sudo apt install -y curl
