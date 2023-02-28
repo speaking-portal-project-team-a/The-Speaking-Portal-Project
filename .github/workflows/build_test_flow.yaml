@@ -41,7 +41,7 @@ jobs:
         id: setup-ffmpeg
         
       - name: Install Rhubarb
-      - run: |
+        run: |
           sudo apt update
           sudo apt-get install unzip
           curl -LO https://github.com/DanielSWolf/rhubarb-lip-sync/releases/download/v1.13.0/Rhubarb-Lip-Sync-1.13.0-Linux.zip
