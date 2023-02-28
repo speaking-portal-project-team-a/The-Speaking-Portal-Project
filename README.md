@@ -11,12 +11,17 @@ Team A:
 
 ## Table of Contents
 
-- [General Information](#general-information)
-- [Project Timeline](#project-timeline)
-- [Tech Stack](#tech-stack)
-- [Setup](#setup)
-- [How it Works](#how-it-works)
-- [Limitations](#limitations)
+- [The Speaking Portal Project](#the-speaking-portal-project)
+  - [Table of Contents](#table-of-contents)
+  - [General Information](#general-information)
+  - [Project Timeline](#project-timeline)
+    - [Deliverables](#deliverables)
+  - [Tech Stack](#tech-stack)
+  - [Setup](#setup)
+  - [How it Works](#how-it-works)
+    - [Overview](#overview)
+    - [The Phoneme Factory](#the-phoneme-factory)
+  - [Limitations](#limitations)
 
 ## General Information
 
@@ -81,6 +86,12 @@ npm package versions:
 
 ## Setup
 
+```typescript
+//TODO: Finalize a local configuration plan before final delivery
+
+//TODO: Decide if Ruhbarb-Lip-Sync should installed into project
+```
+
 1. Install [Node.Js](https://nodejs.org/en/)
 2. Download the repository
 3. Receive Kukarella files
@@ -98,15 +109,40 @@ npm package versions:
 
 ## How it Works
 
-The Kurkarella TTS app creates the synthesized speech file from the user’s voice and text input. The Animation Add-On
-is broken down into two main components: the phoneme factory and the animation processor. The phoneme factory is in
-charge of mapping spoken language from an audio file into a series of phonemes, which are units of sound that
-distinguish one word from another. In order to make this process as accurate as possible, the phoneme factory also
-receives the user text file and language selection.
+### Overview
 
-Once the phoneme file is created, it is sent off to a secondary process called the phoneme processor. This processor
+The Kurkarella TTS app creates the synthesized speech file from the user’s `audio file` and `text file`. The Animation Add-On
+is broken down into two main components: the **Phoneme Factory** and the **Animation Factory**.
+
+The Phoneme Factory is in
+charge of mapping spoken language from the users `audio file` and `text file` into a series of phonemes, which are units of sound that
+distinguish one word from another. The output is a set of phonemes in a JSON format.
+
+The Animation Factory uses the phoeneme data from the Phoneme Factory to map phonemes with animation frames which are then rendered into an `mp4 output`.
+
+### The Phoneme Factory
+
+The Phoneme Factory is the first step. Data is passed to the **Phoneme processor** which sends the user's `audio file`, `text file`, `language selection` data to an external command-line process called [**Rhubarb Lip Sync**](INSERT-LINK). This process creates a set of phoneme mappings represented as a `MouthCue` type.
+
+```typescript
+export type MouthCue = {
+    start: number
+    end: number
+    value: Phoneme
+} 
+```
+
+A MouthCue type contains a `start` and `end`, representing the interval at which the `Phoneme` should exist appear. 
+
+Once the phoneme contents are created, they are sent off to a secondary process called the phoneme processor. This processor
 maps phonemes from the phoneme file to mouth assets received from a directory. There will be 1:1 mapping between
-phonemes and mouth assets. These assets will be added onto the avatar and rendered into a video file. The video file
+phonemes and mouth assets. The output of this 
+
+```mardown
+Need to add here
+```
+
+These assets will be added onto the avatar and rendered into a video file. The video file
 will be sent back to the front end and will be available for the user to download onto their local machine.
 
 ## Limitations
