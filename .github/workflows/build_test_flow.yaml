@@ -26,6 +26,7 @@ on:
   pull_request:
     branches:
       - developement
+  status:
   
 jobs:
   build:
