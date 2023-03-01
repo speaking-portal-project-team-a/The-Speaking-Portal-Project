@@ -1,9 +1,37 @@
 name: Build and Test Workflow
-on: [pull_request, status]
+on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: Log level
+        required: true
+        default: warning
+        type: choice
+        options:
+          - info
+          - warning
+          - debug
+      print_tags:
+        description: True to print to STDOUT
+        required: true
+        type: boolean
+      tags:
+        description: Test scenario tags
+        required: false
+        type: string
+      environment:
+        description: Environment to run tests against
+        type: environment
+        required: false
+  pull_request:
+    branches:
+      - developement
+  status:
+  
 jobs:
   build:
     name: Create build, Install FFMPEG, and run unit tests
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
@@ -40,6 +68,16 @@ jobs:
         uses: FedericoCarboni/setup-ffmpeg@v2
         id: setup-ffmpeg
         
+      - name: Install Rhubarb
+        run: |
+          sudo apt update
+          sudo apt-get install unzip
+          curl -LO https://github.com/DanielSWolf/rhubarb-lip-sync/releases/download/v1.13.0/Rhubarb-Lip-Sync-1.13.0-Linux.zip
+          unzip Rhubarb-Lip-Sync-1.13.0-Linux.zip
+          mv Rhubarb-Lip-Sync-1.13.0-Linux rhubarb
+          rm Rhubarb-Lip-Sync-1.13.0-Linux.zip
+        working-directory: ./speaking-portal-project
+
       - name: Running unit tests
         run: npm test
         working-directory: ./speaking-portal-project
