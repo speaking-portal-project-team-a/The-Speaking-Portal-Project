@@ -1,5 +1,6 @@
 name: Build and Test Workflow
 on:
+  status:
   workflow_dispatch:
     inputs:
       logLevel:
@@ -26,7 +27,6 @@ on:
   pull_request:
     branches:
       - developement
-  status:
   
 jobs:
   build:
