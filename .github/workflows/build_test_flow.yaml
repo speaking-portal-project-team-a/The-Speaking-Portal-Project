@@ -1,5 +1,6 @@
 name: Build and Test Workflow
 on:
+  status:
   workflow_dispatch:
     inputs:
       logLevel:
@@ -24,10 +25,6 @@ on:
         type: environment
         required: false
   pull_request:
-    branches:
-      - developement
-  status:
-  
 jobs:
   build:
     name: Create build, Install FFMPEG, and run unit tests
