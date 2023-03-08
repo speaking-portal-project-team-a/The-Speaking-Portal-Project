@@ -43,15 +43,39 @@ export function generateFrameData(avatar: string, mouthCues: MouthCue[], timer: 
     timer.setProcessStart(3)
     for (const mouthCuesKey in mouthCues) {
         // Duration of frame is calculated based on the mouth cue
-        let frameDur = (mouthCues[mouthCuesKey].end - mouthCues[mouthCuesKey].start).toFixed(2)
+        let frameDurStr = (mouthCues[mouthCuesKey].end - mouthCues[mouthCuesKey].start).toFixed(2)
+        let frameDur = Number(frameDurStr)
         let currentSec = parseInt(mouthCues[mouthCuesKey].start.toFixed(0))
-
+        let phoneme = mouthCues[mouthCuesKey].value
+        let dat = ''
         // TODO: when testing idle animation and poses, add idling? lastPoseChange and breathPhase
         //console.log('t=%d, frameDur: %d, lastBlink: %d, lastPoseChange: %d', currentSec, frameDur, character.eyes.lastBlink, character.body.lastPoseChange)
 
-        character.updateState(currentSec, parseInt(frameDur), mouthCues[mouthCuesKey].value)
-        // Build frame path
-        frameData = frameData.concat(character.generateStateString(frameDur))
+        // For long pauses
+        if (phoneme === 'X' && frameDur > 2) {
+            console.log("Pause occurring: " + frameDurStr + " seconds")
+            // split long frame into multiple smaller ones
+            const miniFrameDur = 0.07 // because blinking requires frames less than 0.8 seconds
+            let numMiniFrames = Math.floor(frameDur/miniFrameDur)
+            let lastMiniFrameDur = Number((frameDur - (numMiniFrames*miniFrameDur)).toFixed(2))
+
+            console.log("Number of mini frames: " + numMiniFrames +" of 0.07 seconds")
+            console.log("last mini frame dur: " + lastMiniFrameDur)
+
+            // call updateState for each small frame
+            for (let i = 1; i < numMiniFrames; i++){
+                character.updateState(currentSec+Math.floor(i*miniFrameDur), miniFrameDur, phoneme, true)
+                dat = dat.concat(character.generateStateString(String(miniFrameDur)))
+            }
+            // last frame (less than 0.07 seconds)
+            character.updateState(currentSec+Math.floor(numMiniFrames*miniFrameDur), lastMiniFrameDur, phoneme, true)
+            dat = dat.concat(character.generateStateString(String(lastMiniFrameDur)))
+            frameData = frameData.concat(dat)
+
+        } else {
+            character.updateState(currentSec, frameDur, phoneme, false)
+            frameData = frameData.concat(character.generateStateString(frameDurStr))
+        }
     }
     timer.setProcessEnd(3)
     console.log(`${timer.getTotalTimeElapsed()} - Adding Realism Complete `)
