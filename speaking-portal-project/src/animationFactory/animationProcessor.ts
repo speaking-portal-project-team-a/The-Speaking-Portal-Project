@@ -52,14 +52,10 @@ export function generateFrameData(avatar: string, mouthCues: MouthCue[], timer: 
 
         // For long pauses
         if (phoneme === 'X' && frameDur > 2) {
-            console.log("Pause occurring: " + frameDurStr + " seconds")
             // split long frame into multiple smaller ones
             const miniFrameDur = 0.07 // because blinking requires frames less than 0.8 seconds
             let numMiniFrames = Math.floor(frameDur/miniFrameDur)
             let lastMiniFrameDur = Number((frameDur - (numMiniFrames*miniFrameDur)).toFixed(2))
-
-            console.log("Number of mini frames: " + numMiniFrames +" of 0.07 seconds")
-            console.log("last mini frame dur: " + lastMiniFrameDur)
 
             // call updateState for each small frame
             for (let i = 1; i < numMiniFrames; i++){
