@@ -196,6 +196,7 @@ export class Avatar {
     updateState(currentSec: number, frameDur: number, phoneme: Phoneme = this.mouth.phoneme, isIdle: boolean): void{
         this.updateEyes(currentSec, frameDur)
         this.updateMouth(phoneme)
+        // TODO: for future idle animation, implement here
         if (isIdle) {
             this.idleBody(currentSec)
         } else{
