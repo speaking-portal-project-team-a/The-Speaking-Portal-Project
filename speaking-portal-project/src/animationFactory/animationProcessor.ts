@@ -47,7 +47,6 @@ export function generateFrameData(avatar: string, mouthCues: MouthCue[], timer: 
         let frameDur = Number(frameDurStr)
         let currentSec = parseInt(mouthCues[mouthCuesKey].start.toFixed(0))
         let phoneme = mouthCues[mouthCuesKey].value
-        let dat = ''
         // TODO: when testing idle animation and poses, add idling? lastPoseChange and breathPhase
         //console.log('t=%d, frameDur: %d, lastBlink: %d, lastPoseChange: %d', currentSec, frameDur, character.eyes.lastBlink, character.body.lastPoseChange)
 
@@ -65,12 +64,11 @@ export function generateFrameData(avatar: string, mouthCues: MouthCue[], timer: 
             // call updateState for each small frame
             for (let i = 1; i < numMiniFrames; i++){
                 character.updateState(currentSec+Math.floor(i*miniFrameDur), miniFrameDur, phoneme, true)
-                dat = dat.concat(character.generateStateString(String(miniFrameDur)))
+                frameData = frameData.concat(character.generateStateString(String(miniFrameDur)))
             }
             // last frame (less than 0.07 seconds)
             character.updateState(currentSec+Math.floor(numMiniFrames*miniFrameDur), lastMiniFrameDur, phoneme, true)
-            dat = dat.concat(character.generateStateString(String(lastMiniFrameDur)))
-            frameData = frameData.concat(dat)
+            frameData = frameData.concat(character.generateStateString(String(lastMiniFrameDur)))
 
         } else {
             character.updateState(currentSec, frameDur, phoneme, false)
