@@ -42,3 +42,5 @@ The test cases will be as follows:
 ***Tests were run using 30 sec audio file only***
 
 ## Results
+
+Output is formatted a JMeter Listener (JTL) files. More infomation on JMeter JTL logs can be found [here](https://www.tutorialspoint.com/jmeter/jmeter_listeners.htm).
