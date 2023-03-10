@@ -167,7 +167,7 @@ export class Avatar {
 
     // if character is idle (e.g., during a long pause), then the body position will be relaxed
     idleBody(currentSec: number): void{
-        // TODO: decide if we want to implement breathing animation here
+        // Can add different idle body animation here, if desired
         let poseDur = currentSec - this.body.lastPoseChange
         if (poseDur >= 1){
             this.body.currentPose = this.body.currentPose = Pose[1]
