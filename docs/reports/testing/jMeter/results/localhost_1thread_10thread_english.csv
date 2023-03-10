@@ -1,12 +1,15 @@
 timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
-1.67816E+12,21277,English Recognizer POST ,200,OK,localhost 1 1-1,bin,TRUE,,870157,1069449,1,1,http://localhost:3000/kukarella/generate-video,21270,0,27
-1.67816E+12,196663,English Recognizer POST ,200,OK,localhost 10 2-2,bin,TRUE,,881090,1069407,10,10,http://localhost:3000/kukarella/generate-video,196646,0,2
-1.67816E+12,197214,English Recognizer POST ,200,OK,localhost 10 2-1,bin,TRUE,,870065,1069443,9,9,http://localhost:3000/kukarella/generate-video,197209,0,2
-1.67816E+12,197007,English Recognizer POST ,200,OK,localhost 10 2-9,bin,TRUE,,854635,1069449,8,8,http://localhost:3000/kukarella/generate-video,197003,0,2
-1.67816E+12,198562,English Recognizer POST ,200,OK,localhost 10 2-10,bin,TRUE,,859404,1069449,7,7,http://localhost:3000/kukarella/generate-video,198557,0,2
-1.67816E+12,199563,English Recognizer POST ,200,OK,localhost 10 2-5,bin,TRUE,,870859,1069443,6,6,http://localhost:3000/kukarella/generate-video,199555,0,2
-1.67816E+12,199851,English Recognizer POST ,200,OK,localhost 10 2-3,bin,TRUE,,859848,1069413,5,5,http://localhost:3000/kukarella/generate-video,199845,0,2
-1.67816E+12,199803,English Recognizer POST ,200,OK,localhost 10 2-4,bin,TRUE,,861817,1069395,4,4,http://localhost:3000/kukarella/generate-video,199796,0,2
-1.67816E+12,199714,English Recognizer POST ,200,OK,localhost 10 2-6,bin,TRUE,,863275,1069395,3,3,http://localhost:3000/kukarella/generate-video,199710,0,4
-1.67816E+12,199626,English Recognizer POST ,200,OK,localhost 10 2-7,bin,TRUE,,871547,1069389,2,2,http://localhost:3000/kukarella/generate-video,199600,0,2
-1.67816E+12,199543,English Recognizer POST ,200,OK,localhost 10 2-8,bin,TRUE,,865648,1069407,1,1,http://localhost:3000/kukarella/generate-video,199535,0,3
+1.68E+12,21277,English Recognizer POST ,200,OK,localhost 1 1-1,bin,TRUE,,870157,1069449,1,1,http://localhost:3000/kukarella/generate-video,21270,0,27
+1.68E+12,196663,English Recognizer POST ,200,OK,localhost 10 2-2,bin,TRUE,,881090,1069407,10,10,http://localhost:3000/kukarella/generate-video,196646,0,2
+1.68E+12,197214,English Recognizer POST ,200,OK,localhost 10 2-1,bin,TRUE,,870065,1069443,9,9,http://localhost:3000/kukarella/generate-video,197209,0,2
+1.68E+12,197007,English Recognizer POST ,200,OK,localhost 10 2-9,bin,TRUE,,854635,1069449,8,8,http://localhost:3000/kukarella/generate-video,197003,0,2
+1.68E+12,198562,English Recognizer POST ,200,OK,localhost 10 2-10,bin,TRUE,,859404,1069449,7,7,http://localhost:3000/kukarella/generate-video,198557,0,2
+1.68E+12,199563,English Recognizer POST ,200,OK,localhost 10 2-5,bin,TRUE,,870859,1069443,6,6,http://localhost:3000/kukarella/generate-video,199555,0,2
+1.68E+12,199851,English Recognizer POST ,200,OK,localhost 10 2-3,bin,TRUE,,859848,1069413,5,5,http://localhost:3000/kukarella/generate-video,199845,0,2
+1.68E+12,199803,English Recognizer POST ,200,OK,localhost 10 2-4,bin,TRUE,,861817,1069395,4,4,http://localhost:3000/kukarella/generate-video,199796,0,2
+1.68E+12,199714,English Recognizer POST ,200,OK,localhost 10 2-6,bin,TRUE,,863275,1069395,3,3,http://localhost:3000/kukarella/generate-video,199710,0,4
+1.68E+12,199626,English Recognizer POST ,200,OK,localhost 10 2-7,bin,TRUE,,871547,1069389,2,2,http://localhost:3000/kukarella/generate-video,199600,0,2
+1.68E+12,199543,English Recognizer POST ,200,OK,localhost 10 2-8,bin,TRUE,,865648,1069407,1,1,http://localhost:3000/kukarella/generate-video,199535,0,3
+,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,
+,198754.6,,,,,,,,,,,,,,,
