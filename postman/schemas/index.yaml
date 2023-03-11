@@ -1,0 +1,76 @@
+openapi: '3.0.0'
+info:
+  version: '1.0.0'
+  title: 'Lip Synch Api'
+  description: This API will serve as an animation-generating add-on for this system so that the user can both listen to and watch their avatar speak the user provided text.
+tags: 
+- name: animation
+  description: Create an interative mp4 animation
+servers:
+  - url: 'localhost:3000'
+paths:
+  /kukarella/generate-video:
+    post:
+      summary: Generate an animation for the user
+      tags:
+      - animation
+      requestBody:
+        required: true 
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                audio:
+                  type: object
+                  description: .wav file upload 
+                text:
+                  type: object 
+                  description: .txt file upload
+                language:
+                  type: string 
+                  description: A selection of the language that the audio and text file are in
+                characterSelect:
+                  type: string 
+                  description: A selection of the avatar for animation
+      responses:
+        '200':
+          description: The animated mp4 for the user
+          content:
+            video/mp4:
+              schema:
+                $ref: '#/components/schemas/AnimationFile'
+        404:
+          description: No animation file resource exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    animation:
+      type: object
+      properties:
+        file-contents:
+          description: an mp4 of an avatar with animation 
+    Error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          description: A human readable error message
+          type: string
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+security:
+  - ApiKey: []

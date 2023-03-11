@@ -482,9 +482,16 @@ fabric.properties
 
 # Rhubarb Ignore
 **/rhubarb
+docs/research/development/rhubarb-src
 
 # Ignore Build/Dist Dir
 speaking-portal-project/build
 
 speaking-portal-project/package-lock.json
 speaking-portal-project/tsconfig.tsbuildinfo
+speaking-portal-project/ffmpeg/output.mp4
+speaking-portal-project/ffmpeg/input.txt
+
+speaking-portal-project/coverage
+speaking-portal-project/coverage/clover.xml
+

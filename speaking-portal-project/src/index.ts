@@ -1,31 +1,45 @@
-import { chdir, cwd, kill } from 'node:process'
-import { rhubarbProcessor } from "./phonemeFactory/rhubarb"
-import { checkFiles } from "./test/file_check"
+import { rhubarbProcessor } from './phonemeFactory/rhubarb'
+import { checkFiles } from './test/file_check'
+import { mouthCuesToInputFile } from './animationFactory/animationProcessor'
+import { getVideoExport } from './animationFactory/ffmpeg'
+import { Timer } from './types'
 
 // Main Function
-async function main () {
+export async function main(audio_path: string, text_path: string, language: string, filename: string, avatar: string) {
+    try {
+        const t = new Timer()
 
-    // Received files will be saved in the Rhubarb directory
-    // The following variables will also be received:
-    const audio_file_name:string = 'en-Amber.wav'
-    const text_file_name:string = 'en-text.txt'
-    const selected_language:string = 'English (U.S.)'
+        console.log(`${t.getTotalTimeElapsed()} - Validating Files...`)
+        t.setProcessStart(0)
+        await checkFiles(audio_path, text_path)
+        t.setProcessEnd(0)
+        console.log(`${t.getTotalTimeElapsed()} - File Validation complete`)
 
-    try{
-        // TODO: Check the files FIRST, THEN run Rhubarb
-        console.log(`Validating Files...`)
-        await checkFiles(audio_file_name, text_file_name)
+        console.log(`${t.getTotalTimeElapsed()} - Running Rhubarb Processor...`)
+        t.setProcessStart(1)
+        const phonemeContents = await rhubarbProcessor(language, audio_path, text_path, filename)
+        t.setProcessEnd(1)
+        console.log(`${t.getTotalTimeElapsed()} - Rhubarb Lip Sync complete`)
 
-        console.log("Running Rhubarb Processor...")
-        const phonemeContents = await rhubarbProcessor(selected_language, audio_file_name, text_file_name)
+        console.log(`${t.getTotalTimeElapsed()} - Converting timings to input file...`)
+        t.setProcessStart(2)
+        await mouthCuesToInputFile({ avatar: avatar, mouthCues: phonemeContents, outputPath: `tmp/${filename}.txt`, timer:t })
+        t.setProcessEnd(2)
+        console.log(`${t.getTotalTimeElapsed()} - Timing Conversion Complete`)
 
-        console.log("Printing phoneme timings from json file...")
-        console.log(phonemeContents)
+
+        console.log(`${t.getTotalTimeElapsed()} - Generating output video...`)
+        t.setProcessStart(4)
+        let vid = await getVideoExport(`${audio_path}`, `./tmp/${filename}.txt`, `./tmp/${filename}.mp4`)
+        t.setProcessEnd(4)
+        console.log(`${t.getTotalTimeElapsed()} - Generating Output Video Complete`)
+
+        console.log("Time Elapsed per Process:")
+        console.log(t.getProcessSummary())
+
+        return vid
 
     } catch (err: any) {
-        console.log(`Error message: ${err}`)
+        console.log(`${err}`)
     }
-
 }
-
-main()
