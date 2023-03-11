@@ -39,7 +39,7 @@ export async function rhubarbProcessor(
         '--extendedShapes',
         'GHX',
         `.${audio_file_name}`,
-        '--threads 32',
+        '--threads 8',
     ]
 
     const rhubarbProc = spawnSync('./rhubarb', args)
