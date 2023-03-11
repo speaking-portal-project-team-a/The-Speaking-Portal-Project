@@ -19,14 +19,14 @@ const upload = multer({
 const cluster = require('cluster')
 const numCPUs = require('os').cpus().length
 
-//if (cluster.isPrimary) {
+if (cluster.isPrimary) {
     /* Create as many workers as there are CPUs on the system.
     This allows for multiple processes to run at once
      */
-    //for (let i = 0; i < numCPUs; i++) {
-    //    cluster.fork()
-    //}
-//} else {
+    for (let i = 0; i < numCPUs; i++) {
+        cluster.fork()
+    }
+} else {
     app.post(
         '/kukarella/generate-video',
         upload.fields([
@@ -119,4 +119,4 @@ const numCPUs = require('os').cpus().length
     app.listen(PORT, HOST, () => {
         console.log(`API listening on ${HOST}:${PORT}`)
     })
-//}
+}
