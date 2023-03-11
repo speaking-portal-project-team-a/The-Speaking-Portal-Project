@@ -23,9 +23,9 @@ if (cluster.isPrimary) {
     /* Create as many workers as there are CPUs on the system.
     This allows for multiple processes to run at once
      */
-    for (let i = 0; i < numCPUs; i++) {
+    /*for (let i = 0; i < numCPUs; i++) {
         cluster.fork()
-    }
+    }*/
 } else {
     app.post(
         '/kukarella/generate-video',
