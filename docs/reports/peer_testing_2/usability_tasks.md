@@ -130,4 +130,4 @@ Read the README, and then identify:
 2. Does the naming scheme of the character image assets make senese?
 3. What does the naming scheme tell you about the images?
 4. If an artist provided you with the Adobe Illustrator file for a new character, I could add the new character's assets.
-5. Using the README, create and add the image assets for Boy. Did you succeed?
+5. Using the README, create and add the image assets for Boy. Did you succeed?  *Note: this usability task can only be completed if the tester has Adobe Illustrator installed on their computer. Team A only has one computer with this program, so this is dependent on the Peer Testing II schedule.*
