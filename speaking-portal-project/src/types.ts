@@ -95,7 +95,7 @@ export class Timer {
 
 // Eyes Class for updating during runtime
 class Eyes {
-    areClosed : boolean
+    areClosed: boolean
     lastBlink: number
     constructor(areClosed: boolean = false, lastBlink: number = -1) {
         this.areClosed = areClosed
@@ -165,6 +165,16 @@ export class Avatar {
         }
     }
 
+    // if character is idle (e.g., during a long pause), then the body position will be relaxed
+    idleBody(currentSec: number): void{
+        // Can add different idle body animation here, if desired
+        let poseDur = currentSec - this.body.lastPoseChange
+        if (poseDur >= 1){
+            this.body.currentPose = this.body.currentPose = Pose[1]
+            this.body.lastPoseChange = currentSec
+        }
+    }
+
     // Randomly chooses a new pose that is different from current pose
     chooseNewPose(): string{
         let i = Math.floor((Math.random() * Pose.__LENGTH))
@@ -183,10 +193,15 @@ export class Avatar {
     }
 
     // Updates the avatar's state. Order matters! Must update mouth before body
-    updateState(currentSec: number, frameDur: number, phoneme: Phoneme = this.mouth.phoneme): void{
+    updateState(currentSec: number, frameDur: number, phoneme: Phoneme = this.mouth.phoneme, isIdle: boolean): void{
         this.updateEyes(currentSec, frameDur)
         this.updateMouth(phoneme)
-        this.updateBody(currentSec)
+        // TODO: for future idle animation, implement here
+        if (isIdle) {
+            this.idleBody(currentSec)
+        } else{
+            this.updateBody(currentSec)
+        }
     }
 
     // Returns the filepath of the image representation the character state
