@@ -20,6 +20,7 @@ Team A:
   - [Setup](#setup)
   - [How it Works](#how-it-works)
     - [Overview](#overview)
+    - [API](#api)
     - [The Phoneme Factory](#the-phoneme-factory)
   - [Limitations](#limitations)
 
@@ -107,18 +108,36 @@ Tested remotely via an AWS ec2 instance.
 
 ### Overview
 
-The Kurkarella TTS app creates the synthesized speech file from the user’s `audio file` and `text file`. The Animation Add-On
-is broken down into two main components: the **Phoneme Factory** and the **Animation Factory**.
+The Speaking Portal Project (SPP) is built to connect with Kukurella's Text-to-Speech platform as an API. The SPP is broken down into three main components: **API**, **Phoneme Factory**, and the **Animation Factory**.
 
-The Phoneme Factory is in
-charge of mapping spoken language from the users `audio file` and `text file` into a series of phonemes, which are units of sound that
-distinguish one word from another. The output is a set of phonemes in a JSON format.
+### API
 
-The Animation Factory uses the phoeneme data from the Phoneme Factory to map phonemes with animation frames which are then rendered into an `mp4 output`.
+The SPP API is the first step in the animation process. Kukurella requests are sent to the SPP API as a POST with the following required properties:
+
+- `audio`: .wav file upload
+- `text`: .txt file upload
+- `recognizer`: audio and text language selection
+- `characterSelect`: animation avatar choice
+
+The API, once request is recieved, intalizes a node instance, creates a `/tmp` directory for file I/O operations, and begins the animation process by sending all user inputs to main.
 
 ### The Phoneme Factory
 
-The Phoneme Factory is the first step. Data is passed to the **Phoneme processor** which sends the user's `audio file`, `text file`, `language selection` data to an external command-line process called [**Rhubarb Lip Sync**](INSERT-LINK). This process creates a set of phoneme mappings represented as a `MouthCue` type.
+The Phoneme Factory is the first step in the SPP animation process. The factory is in
+charge of mapping spoken language from the `audio` and `text` inputs into a series of phonemes, which are units of sound that
+distinguish one word from another.
+
+How is this done ? 
+
+ The `audio`  file, `text` file, and `recognizer` selection is passed to the **Phoneme processor** which sends the data to an external command-line process called [**Rhubarb Lip Sync**](INSERT-LINK). Rhubarb is an open-source package that is able to create 2d animations given any voice recording. In SPP Rhubarb is used to create key-value file that outlines every phoneme and time interval that exists in the `audio` file. 
+ 
+The output of the Phoneme processor looks like as follows...
+
+ 
+ Rhubarb uses the `recognizer` input to select the engine to use to creating the phoneme logic.
+ 
+  
+ This process creates a set of phoneme mappings represented as a `MouthCue` type.
 
 ```typescript
 export type MouthCue = {
