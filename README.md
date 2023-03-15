@@ -82,7 +82,7 @@ The Speaking Portal Project (SPP) is built to connect with Kukurella's Text-to-S
 ### API
 
 Speaking Portal API creates an MP4 output animation from a synthesized speech file and text input based on Kukarella
-TTS. Text input is first read and generated into phonemes output file via the rhubarb library. (Phonemes are the
+TTS. Text and audio inputs are first processed and converted into a json file containing phonemes and their timings. This processing is done via the [Rhubarb library](https://github.com/DanielSWolf/rhubarb-lip-sync). (Phonemes are the
 smallest unit of sounds that uniquely identifies words from one another.) Once a phoneme file is created, it is
 processed in a phoneme processor, which maps phonemes to  mouth assets. The mouth assets are then added onto an avatar
 and rendered in a video file through ffmepg. The API, once request is received, initializes a node instance, creates a
