@@ -89,8 +89,7 @@ and pose changes are added, and then all image assets are rendered in a video fi
 
 ### API
 
-Once the API receives the request, it initializes a node instance, creates a `/tmp` directory for file I/O operations,
-and begins the animation process by sending all user inputs to main.
+When the API receives a request, the uploaded files are stored in the `/tmp` directory. The API code then reads these inputs and converts them to the appropriate format for Rhubarb and ffmpeg. Upon conversion, the animation process is started by sending all user inputs to the `main.ts` file. 
 
 Here's a typical example of the JSON sent in a POST request.
 
