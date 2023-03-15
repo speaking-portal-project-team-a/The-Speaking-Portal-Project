@@ -115,14 +115,65 @@ The Speaking Portal Project (SPP) is built to connect with Kukurella's Text-to-S
 
 ### API
 
+Speaking Portal API creates an MP4 output animation from a synthesized speech file and text input based on Kukarella TTS. Text input is first read and generated into phonemes output file via the rhubarb library. (Phonemes are the smallest unit of sounds that uniquely identifies words from one another.) Once a phoneme file is created, it is processed in a phoneme processor, which maps phonemes to  mouth assets. The mouth assets are then added onto an avatar and rendered in a video file through ffmepg. The API, once request is received, initializes a node instance, creates a `/tmp` directory for file I/O operations, and begins the animation process by sending all user inputs to main.
+
+Here's a typical example of the JSON used in a POST request.
+
+```
+{
+  fieldname: 'audio',
+  originalname: 'en-Amber.wav',
+  encoding: '7bit',
+  mimetype: 'audio/wave',
+  destination: './tmp',
+  filename: 'f8fc3bc5c3f0fbc70ab0899d0dc0c860',
+  path: 'tmp\\f8fc3bc5c3f0fbc70ab0899d0dc0c860',
+  size: 9049278
+} {
+  fieldname: 'text',
+  originalname: 'en-text.txt',
+  encoding: '7bit',
+  mimetype: 'text/plain',
+  destination: './tmp',
+  filename: 'e05b5794e54ca3810b071b87bc1449e1',
+  path: 'tmp\\e05b5794e54ca3810b071b87bc1449e1',
+  size: 1363
+} phonetic
+```
+
+
+<br/>
+
 The SPP API is the first step in the animation process. Kukurella requests are sent to the SPP API as a POST with the following required properties:
 
-- `audio`: .wav file upload
-- `text`: .txt file upload
-- `recognizer`: audio and text language selection
-- `characterSelect`: animation avatar choice
+<br/>
 
-The API, once request is received, initializes a node instance, creates a `/tmp` directory for file I/O operations, and begins the animation process by sending all user inputs to main.
+| Field      | Type | Description     |
+| :---:       |    :----:  |        :---   |
+| `audio`      | Wav file       | A file containing audio of the voice the user wishes to use for the generated mp4 output |
+| `text`   | Txt file       | A file containing a textual script of what is being communicated in the Wav file      |
+| `recognizer`   | String        | Specifies if language processor should use English recognizer, (which is slower, but more accurate, and only works for English),<br> or the phonetic recognizer (which is faster, but not as accurate,  and supports over 200 languages,)       |
+| `characterSelect` |  String  | Specifies  avatar animation choice for video output. |
+
+Some critical constraints regarding the use of this API: 
+ - This API only responds to POST calls.
+ - This process is computationally intensive, as such expect a wait time between requests. More user requests will result in slower processing times. 
+ - The script text file should match the given audio file as closely as possible in terms of content. Failure to do so could lead to errors. 
+ - Port 3000 must be referenced in addition to the IP address. 
+ - File creation permissions must be allowed, or new files will not be created in `/tmp` directory. 
+
+
+<br/>
+
+Possible errors: 
+
+
+| Error Code | Description |
+| :---      | :-----     |
+| 400 Bad Request | Required fields are specified |
+| 403 Forbidden | Request is recognized by the server but refused. Likely due to connecting to the wrong port |
+| 500 Internal Server Error | The API has not been configured properly on the host server machine | 
+
 
 ### The Phoneme Factory
 
@@ -174,6 +225,11 @@ The [frame data output]((#frame-data-output)) includes a path to the image and d
 
 To create a video, this file is sent to FFMPEG, a highly portable library capable of rendering image frames into an mp4 output.
 
+<br>
+
+<img src = "docs/documentation/Images/AmberAnimated.gif" width="250px" height="300px">
+
+<br>
 Once the video file is created in FFMPEG, it is then returned to the user as a response from the API.
 
 ## Limitations
