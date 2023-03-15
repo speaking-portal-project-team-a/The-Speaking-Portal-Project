@@ -214,4 +214,4 @@ Below is an example of the Barb avatar speaking, blinking, and changing poses.
 bottleneck for performance.
 - Blink frequency is chosen using a random probability
 - Avatar poses are chosen at random. A suggestion for future development would be to include sentiment analysis on the
-text and choose appropriate poses; however, this depends on the poses provided by the artist.
+text to choose appropriate poses.
