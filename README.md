@@ -149,9 +149,7 @@ How is this done ?
 
  Rhubarb uses the `recognizer` input to select the engine to use to during the process of creating a phoneme file. When ```recognizer: english```,  Rhubarb will use the `pocketSphinx` engine to process the english audio. When ```recognizer: phonetic```, Rhubarb will use the `Phonetic` recognizer instead. It has been observed that the `Phonetic` recognizer performs better.
 
-Once the phoneme contents are created, they are sent off to a secondary process.
-
-Now that phoneme tags are mapped with timestamps in the audio file. The next step in the animation process is to map the phonemes with character frames (assets).
+Once the phoneme contents are created, they are sent off to a another process.
 
 ## The Animation Factory
 
@@ -176,7 +174,7 @@ The [frame data output]((#frame-data-output)) includes a path to the image and d
 
 To create a video, this file is sent to FFMPEG, a highly portable library capable of rendering image frames into an mp4 output.
 
-Once the video file is created in FFMPEG, it is then returned to the user a response from the API.
+Once the video file is created in FFMPEG, it is then returned to the user as a response from the API.
 
 ## Limitations
 
