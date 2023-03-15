@@ -22,6 +22,9 @@ Team A:
     - [Overview](#overview)
     - [API](#api)
     - [The Phoneme Factory](#the-phoneme-factory)
+      - [Rhubarb Output](#rhubarb-output)
+  - [The Animation Factory](#the-animation-factory)
+    - [Frame Data Output](#frame-data-output)
   - [Limitations](#limitations)
 
 ## General Information
@@ -83,10 +86,10 @@ Tested remotely via an AWS ec2 instance.
 
 ## Setup
 
-```typescript
-//TODO: Finalize a local configuration plan before final delivery
+```markdown
+TODO: Finalize a local configuration plan before final delivery
 
-//TODO: Decide if Ruhbarb-Lip-Sync should installed into project
+TODO: Decide if Ruhbarb-Lip-Sync should installed into project
 ```
 
 1. Install [Node.Js](https://nodejs.org/en/)
@@ -119,7 +122,7 @@ The SPP API is the first step in the animation process. Kukurella requests are s
 - `recognizer`: audio and text language selection
 - `characterSelect`: animation avatar choice
 
-The API, once request is recieved, intalizes a node instance, creates a `/tmp` directory for file I/O operations, and begins the animation process by sending all user inputs to main.
+The API, once request is received, initializes a node instance, creates a `/tmp` directory for file I/O operations, and begins the animation process by sending all user inputs to main.
 
 ### The Phoneme Factory
 
@@ -127,43 +130,53 @@ The Phoneme Factory is the first step in the SPP animation process. The factory 
 charge of mapping spoken language from the `audio` and `text` inputs into a series of phonemes, which are units of sound that
 distinguish one word from another.
 
-How is this done ? 
+How is this done ?
 
- The `audio`  file, `text` file, and `recognizer` selection is passed to the **Phoneme processor** which sends the data to an external command-line process called [**Rhubarb Lip Sync**](INSERT-LINK). Rhubarb is an open-source package that is able to create 2d animations given any voice recording. In SPP Rhubarb is used to create key-value file that outlines every phoneme and time interval that exists in the `audio` file. 
- 
-The output of the Phoneme processor looks like as follows...
+ The `audio`  file, `text` file, and `recognizer` selection is passed to the **Phoneme processor** which sends the data to an external command-line process called [**Rhubarb Lip Sync**](INSERT-LINK). Rhubarb is an open-source package that can create 2d animations given any voice recording. In SPP, Rhubarb processes the `audio` and `text` file to create a JSON [output](#rhubarb-output) that outlines every phoneme along with a `start` and `end` time interval tag.
 
- 
- Rhubarb uses the `recognizer` input to select the engine to use to creating the phoneme logic.
- 
-  
- This process creates a set of phoneme mappings represented as a `MouthCue` type.
+#### Rhubarb Output
 
-```typescript
-export type MouthCue = {
-    start: number
-    end: number
-    value: Phoneme
-} 
+```JSON
+"mouthCues": [
+    { "start": 0.00, "end": 0.08, "value": "X" },
+    { "start": 0.08, "end": 0.23, "value": "B" },
+    { "start": 0.23, "end": 0.37, "value": "C" },
+    { "start": 0.37, "end": 0.44, "value": "G" },
+    { "start": 0.44, "end": 1.42, "value": "B" },
+    ... ]
+    
 ```
 
-A MouthCue type contains a `start` and `end`, representing the interval at which the `Phoneme` should exist appear. 
+ Rhubarb uses the `recognizer` input to select the engine to use to during the process of creating a phoneme file. When ```recognizer: english```,  Rhubarb will use the `pocketSphinx` engine to process the english audio. When ```recognizer: phonetic```, Rhubarb will use the `Phonetic` recognizer instead. It has been observed that the `Phonetic` recognizer performs better.
 
-Once the phoneme contents are created, they are sent off to a secondary process called the phoneme processor. This processor
-maps phonemes from the phoneme file to mouth assets received from a directory. There will be 1:1 mapping between
-phonemes and mouth assets. The output of this 
+Once the phoneme contents are created, they are sent off to a secondary process.
 
-```mardown
-Need to add here
+Now that phoneme tags are mapped with timestamps in the audio file. The next step in the animation process is to map the phonemes with character frames (assets).
+
+## The Animation Factory
+
+The animation factory uses the [phoneme output](#rhubarb-output) from the phoneme factory to logically select frames from `speaking-portal-project/images` for 2d animation. Each frame corresponds to exactly one phoneme, avatar, blink value, and body position. This frame data is compiled into an [frame data output](#frame-data-output) file.
+
+### Frame Data Output
+
+```JSON
+file ./images/character01/X_eyes2.png
+outpoint 0.08
+file ./images/character01/B_eyes0.png
+outpoint 0.20
+file ./images/character01/C_eyes0.png
+outpoint 0.07
+file ./images/character01/G_eyes0.png
+outpoint 0.07
+file ./images/character01/B_eyes0.png
+outpoint 0.98
 ```
 
-These assets will be added onto the avatar and rendered into a video file. The video file
-will be sent back to the front end and will be available for the user to download onto their local machine.
+The [frame data output]((#frame-data-output)) includes a path to the image and duration of frame in animation video.
 
-Once the phoneme file is created, it is sent to the secondary process called the phoneme processor. This processor maps phonemes from the phoneme file 
-to a specific timestamp, and associates that timestamp with an asset file containing the phoneme, an avatar pose, and state of blinking. There is a 1:1 
-mapping between phonemes and mouth assets. These assets are then compiled, realism is added for the rest of the body, and it is all rendered into a video file using ffmpeg. The video file is then returned to 
-the front end, and is available for the user to download onto their local machine.
+To create a video, this file is sent to FFMPEG, a highly portable library capable of rendering image frames into an mp4 output.
+
+Once the video file is created in FFMPEG, it is then returned to the user a response from the API.
 
 ## Limitations
 
