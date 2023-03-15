@@ -46,7 +46,7 @@ Tested remotely via an AWS ec2 instance.
 
 ## Setup
 
-If the API is not yet integrated, you can still use the API locally on your machine using the following steps:
+You can use the API locally via the following steps:
 
 1. Download and unzip the repository
 2. Install [Node.Js](https://nodejs.org/en/)
