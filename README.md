@@ -212,6 +212,5 @@ Below is an example of the Barb avatar speaking, blinking, and changing poses.
 
 - The phoneme generation process relies on Rhubarb, which can be quite computationally intensive. This is the current
 bottleneck for performance.
-- Blink frequency is chosen using a random probability
 - Avatar poses are chosen at random. A suggestion for future development would be to include sentiment analysis on the
 text to choose appropriate poses.
