@@ -157,7 +157,7 @@ To map these phonemes, the `audio` file, `text` file, and `recognizer` selection
 which calls [**Rhubarb Lip Sync**](https://github.com/DanielSWolf/rhubarb-lip-sync). Rhubarb returns a JSON
 [output](#rhubarb-output) that outlines every phoneme along with a `start` and `end` time interval tag.
 
-#### Rhubarb Output
+#### Sample Rhubarb Output
 
 ```JSON
 "mouthCues": [
