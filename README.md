@@ -130,7 +130,7 @@ following required properties:
 #### API Constraints
 
 - This API only responds to POST calls
-- This process is computationally intensive, as such expect a wait time etween requests. More user requests will result
+- This process is computationally intensive, which may cause delay between requests. More user requests will result
 in slower processing times
 - The script text file should match the given audio file as closely as possible in terms of content. Failure to do so
 could lead to errors.
