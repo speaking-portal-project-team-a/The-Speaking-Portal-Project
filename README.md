@@ -89,7 +89,9 @@ and pose changes are added, and then all image assets are rendered in a video fi
 
 ### API
 
-When the API receives a request, the uploaded files are stored in the `/tmp` directory. The API code then reads these inputs and converts them to the appropriate format for Rhubarb and ffmpeg. Upon conversion, the animation process is started by sending all user inputs to the `main.ts` file. 
+When the API receives a request, the uploaded files are stored in the `/tmp` directory. The API code then reads these
+inputs and converts them to the appropriate format for Rhubarb and ffmpeg. Upon conversion, the animation process is
+started by sending all user inputs to the `main.ts` file.
 
 Here's a typical example of the JSON sent in a POST request.
 
@@ -134,7 +136,7 @@ following required properties:
 in slower processing times
 - The script text file should match the given audio file as closely as possible in terms of content. Failure to do so
 could lead to lip synchronization errors.
-- Port 3000 must be referenced in addition to the IP address.
+- We recommend referencing Port 3000 in addition to the IP address.
 - File creation permissions must be allowed, or new files will not be created in `/tmp` directory.
 
 #### Possible API Errors
@@ -147,17 +149,13 @@ could lead to lip synchronization errors.
 
 ### The Phoneme Factory
 
-The Phoneme Factory is the first step in the SPP animation process. The factory is in
-charge of mapping spoken language from the `audio` and `text` inputs into a series of phonemes, which are units of sound
-that distinguish one word from another.
+The Phoneme Factory is the first step in the SPP animation process. The factory is in charge of mapping spoken language
+from the `audio` and `text` inputs into a series of phonemes. Phonemes represent the smallest units of sound within
+words and help us distinguish when the mouth should change shape.
 
-#### Rhubarb Lip Sync
-
- The `audio`  file, `text` file, and `recognizer` selection is passed to the **Phoneme processor** which sends the data
- to an external command-line process called [**Rhubarb Lip Sync**](https://github.com/DanielSWolf/rhubarb-lip-sync).
- Rhubarb is an open-source command-line tool that can create 2D animations given any voice recording. In SPP, Rhubarb
- processes the `audio` and `text` file to create a JSON [output](#rhubarb-output) that outlines every phoneme along
- with a `start` and `end` time interval tag.
+To map these phonemes, the `audio` file, `text` file, and `recognizer` selection is passed to the **Phoneme processor**,
+which calls [**Rhubarb Lip Sync**](https://github.com/DanielSWolf/rhubarb-lip-sync). Rhubarb returns a JSON
+[output](#rhubarb-output) that outlines every phoneme along with a `start` and `end` time interval tag.
 
 #### Rhubarb Output
 
