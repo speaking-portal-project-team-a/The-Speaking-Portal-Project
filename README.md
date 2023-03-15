@@ -77,7 +77,7 @@ to the local API that is currently listening for a request from step 7.
 
 ### Overview
 
-The Speaking Portal Project (SPP) is built to connect with Kukurella's Text-to-Speech platform as an API. The SPP is broken down into three main components: **API**, **Phoneme Factory**, and the **Animation Factory**.
+The Speaking Portal Project (SPP) is built to connect with Kukurella's Text-to-Speech platform as an API. The SPP is broken down into three main components: *The *API**, **The Phoneme Factory**, and **The Animation Factory**.
 
 ### API
 
