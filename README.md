@@ -29,7 +29,7 @@ Team A
 
 The objective of the Speaking Portal Project is to design, develop, and deploy an API for the
 [Kukarella text-to-speech (TTS) web application](https://www.kukarella.com/). This API will serve as an
-animation-generating add-on for this system so that the user can both listen to and watch an avatar speak the
+animation-generating add-on for this system. The generated animation will allow a user to watch an avatar speak the
 provided text.
 
 ## Tech Stack
