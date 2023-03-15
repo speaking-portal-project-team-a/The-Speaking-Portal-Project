@@ -155,7 +155,7 @@ words and help us distinguish when the mouth should change shape.
 
 To map these phonemes, the `audio` file, `text` file, and `recognizer` selection is passed to the **Phoneme processor**,
 which calls [**Rhubarb Lip Sync**](https://github.com/DanielSWolf/rhubarb-lip-sync). Rhubarb returns a JSON
-[output](#rhubarb-output) that outlines every phoneme along with a `start` and `end` time interval tag.
+[output](#sample-rhubarb-output) that outlines every phoneme along with a `start` and `end` time interval tag.
 
 #### Sample Rhubarb Output
 
@@ -179,7 +179,7 @@ Once the phoneme contents are created, they are sent to the next process.
 
 ## The Animation Factory
 
-The animation factory uses the [phoneme output](#rhubarb-output) from the phoneme factory to logically select frames
+The animation factory uses the [phoneme output](#sample-rhubarb-output) from the phoneme factory to logically select frames
 from `speaking-portal-project/images` to generate the 2D animation. Each frame corresponds to exactly one phoneme,
 avatar, blink value, and body position. This frame data is compiled into a [frame data output](#frame-data-output) file.
 
