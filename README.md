@@ -133,7 +133,7 @@ following required properties:
 - This process is computationally intensive, which may cause delay between requests. More user requests will result
 in slower processing times
 - The script text file should match the given audio file as closely as possible in terms of content. Failure to do so
-could lead to errors.
+could lead to lip synchronization errors.
 - Port 3000 must be referenced in addition to the IP address.
 - File creation permissions must be allowed, or new files will not be created in `/tmp` directory.
 
