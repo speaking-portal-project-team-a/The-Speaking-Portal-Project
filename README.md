@@ -48,24 +48,30 @@ Tested remotely via an AWS ec2 instance.
 
 If the API is not yet integrated, you can still use the API locally on your machine using the following steps:
 
-1. Install [Node.Js](https://nodejs.org/en/)
-2. Install [ffmpeg](https://ffmpeg.org/)
+1. Download and unzip the repository
+2. Install [Node.Js](https://nodejs.org/en/)
+3. Install [ffmpeg](https://ffmpeg.org/)
    - We recommend following the steps on [adamtheautomator.com](https://adamtheautomator.com/install-ffmpeg/) for your
    corresponding operating system. We also recommend the Powershell approach for Windows users.
-3. Download and unzip the repository
-4. In the terminal, navigate to `speaking-portal-project`
-5. Run `npm install` to ensure all packages are installed
-6. Run `npm start` to start the API
-7. Check in the terminal that the API is listening
-8. Create the user's Kukarella files:
+4. Add the appropriate Rhubarb files to the repository
+    1. Download [Rhubarb Lip Sync v1.13.0](https://github.com/DanielSWolf/rhubarb-lip-sync/releases/tag/v1.13.0) for
+    your corresponding operating system
+    2. Unzip and rename the folder to `rhubarb`
+    3. Move the folder into the `speaking-portal-project` directory
+    4. Delete the `extras` folder which is currently located at `speaking-portal-project\rhubarb\extras`
+5. In the terminal, navigate to `speaking-portal-project`
+6. Run `npm install` to ensure all packages are installed
+7. Run `npm start` to start the API
+8. Check in the terminal that the API is listening
+9. Create the user's Kukarella files:
     1. Go to [Kukarella](https://www.kukarella.com/)
     2. Enter text, select a language, select a voice, and convert the text to audio
     3. Download the audio as a .wav file
     4. Download the text file
-9. Use Postman or a similar platform to send a POST request (see [POST Request Properties](#post-request-properties))
+10. Use Postman or a similar platform to send a POST request (see [POST Request Properties](#post-request-properties))
 to the local API that is currently listening for a request from step 7.
-10. Wait for the API to process the request and return the video
-11. Enjoy the animation!
+11. Wait for the API to process the request and return the video
+12. Enjoy the animation!
 
 ## How it Works
 
