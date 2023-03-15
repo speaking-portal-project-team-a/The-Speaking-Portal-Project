@@ -92,7 +92,7 @@ and pose changes are added, and then all image assets are rendered in a video fi
 Once the API receives the request, it initializes a node instance, creates a `/tmp` directory for file I/O operations,
 and begins the animation process by sending all user inputs to main.
 
-Here's a typical example of the JSON used in a POST request.
+Here's a typical example of the JSON sent in a POST request.
 
 ```markdown
 {
