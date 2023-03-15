@@ -173,7 +173,7 @@ which calls [**Rhubarb Lip Sync**](https://github.com/DanielSWolf/rhubarb-lip-sy
 Rhubarb uses the `recognizer` input to select the engine to use to during the process of creating a phoneme file. When
 ```recognizer: english```,  Rhubarb will use the `pocketSphinx` engine to process the english audio. When
 ```recognizer: phonetic```, Rhubarb will use the `Phonetic` recognizer instead. It has been observed that the `Phonetic`
-recognizer performs better.
+recognizer generates a response quicker, but provides a lower quality lip synchronization for the English language.
 
 Once the phoneme contents are created, they are sent to the next process.
 
