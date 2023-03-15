@@ -2,7 +2,7 @@
 
 COSC 499 Capstone Software Engineering Project
 
-Team A:
+Team A
 
 - Veronica Jack (PM/Scrum Master)
 - Edouard Eltherington (QA Lead)
@@ -14,8 +14,6 @@ Team A:
 - [The Speaking Portal Project](#the-speaking-portal-project)
   - [Table of Contents](#table-of-contents)
   - [General Information](#general-information)
-  - [Project Timeline](#project-timeline)
-    - [Deliverables](#deliverables)
   - [Tech Stack](#tech-stack)
   - [Setup](#setup)
   - [How it Works](#how-it-works)
@@ -29,47 +27,10 @@ Team A:
 
 ## General Information
 
-The objective of the Speaking Portal Project is to design, develop, and deploy a lip-sync animation API for the
+The objective of the Speaking Portal Project is to design, develop, and deploy an API for the
 [Kukarella text-to-speech (TTS) web application](https://www.kukarella.com/). This API will serve as an
-animation-generating add-on for this system so that the user can both listen to and watch their avatar speak the user
+animation-generating add-on for this system so that the user can both listen to and watch an avatar speak the
 provided text.
-
-## Project Timeline
-
-| Milestones                             | Due Date      |
-|----------------------------------------|---------------|
-| 1. Requirements Report & Presentation  | Oct. 21, 2022 |
-| 2. Peer Testing Report I & Video Demo  | Dec. 02, 2022 |
-| 3. Peer Testing Report II & Video Demo | Mar. 8, 2023 |
-| 4. Final Report & Presentation         | Apr. 1st, 2023 |
-
-### Deliverables
-
-Milestone 1 (completed):
-
-1. Preliminary research ✅
-2. Feasibility report for client ✅
-3. Requirements presentation ✅
-4. Requirements report ✅
-
-Milestone 2 (completed):
-
-1. Program receives inputs from local machine ✅
-2. Program generates output file with phoneme timings ✅
-3. Program returns a corresponding series of mouth images ✅
-4. Creation of testing procedure for peer testing ✅
-
-Milestone 3 (completed):
-
-1. Convert program to an API to be hosted and tested ✅
-2. API generates video (MP4) from series of mouth images ✅
-3. Confirmation of possible integration with Kukarella's environment ✅
-
-Milestone 4:
-
-1. Improve the animation (realism with eye, head, and body motion) ✅ (awaiting artist art)
-2. Final codebase refactoring
-3. Final integration into Kukarella's environment (to be completed by Kukarella)
 
 ## Tech Stack
 
@@ -83,29 +44,28 @@ This program was created with the following tech stack and packages:
 
 Tested remotely via an AWS ec2 instance.
 
-
 ## Setup
 
-```markdown
-TODO: Finalize a local configuration plan before final delivery
-
-TODO: Decide if Ruhbarb-Lip-Sync should installed into project
-```
+If the API is not yet integrated, you can still use the API locally on your machine using the following steps:
 
 1. Install [Node.Js](https://nodejs.org/en/)
-2. Download the repository
-3. Receive Kukarella files
+2. Install [ffmpeg](https://ffmpeg.org/)
+   - We recommend following the steps on [adamtheautomator.com](https://adamtheautomator.com/install-ffmpeg/) for your
+   corresponding operating system. We also recommend the Powershell approach for Windows users.
+3. Download and unzip the repository
+4. In the terminal, navigate to `speaking-portal-project`
+5. Run `npm install` to ensure all packages are installed
+6. Run `npm start` to start the API
+7. Check in the terminal that the API is listening
+8. Create the user's Kukarella files:
     1. Go to [Kukarella](https://www.kukarella.com/)
-    2. Enter text, select a language, select a voice, and convert to audio
+    2. Enter text, select a language, select a voice, and convert the text to audio
     3. Download the audio as a .wav file
     4. Download the text file
-4. Move the Kukarella files to `speaking-portal-project\rhubarb`
-5. In the terminal, navigate to `speaking-portal-project`
-6. Install ffmpeg
-   1. Follow the steps on [adamtheautomator.com](https://adamtheautomator.com/install-ffmpeg/) for your corresponding
-   operating system. We recommend the Powershell approach for Windows users.
-7. Run `npm install`
-8. Run `npm start`
+9. Use Postman or a similar platform to send a POST request (see [POST Request Properties](#post-request-properties))
+to the local API that is currently listening for a request from step 7.
+10. Wait for the API to process the request and return the video
+11. Enjoy the animation!
 
 ## How it Works
 
@@ -115,11 +75,16 @@ The Speaking Portal Project (SPP) is built to connect with Kukurella's Text-to-S
 
 ### API
 
-Speaking Portal API creates an MP4 output animation from a synthesized speech file and text input based on Kukarella TTS. Text input is first read and generated into phonemes output file via the rhubarb library. (Phonemes are the smallest unit of sounds that uniquely identifies words from one another.) Once a phoneme file is created, it is processed in a phoneme processor, which maps phonemes to  mouth assets. The mouth assets are then added onto an avatar and rendered in a video file through ffmepg. The API, once request is received, initializes a node instance, creates a `/tmp` directory for file I/O operations, and begins the animation process by sending all user inputs to main.
+Speaking Portal API creates an MP4 output animation from a synthesized speech file and text input based on Kukarella
+TTS. Text input is first read and generated into phonemes output file via the rhubarb library. (Phonemes are the
+smallest unit of sounds that uniquely identifies words from one another.) Once a phoneme file is created, it is
+processed in a phoneme processor, which maps phonemes to  mouth assets. The mouth assets are then added onto an avatar
+and rendered in a video file through ffmepg. The API, once request is received, initializes a node instance, creates a
+`/tmp` directory for file I/O operations, and begins the animation process by sending all user inputs to main.
 
 Here's a typical example of the JSON used in a POST request.
 
-```
+```markdown
 {
   fieldname: 'audio',
   originalname: 'en-Amber.wav',
@@ -141,49 +106,49 @@ Here's a typical example of the JSON used in a POST request.
 } phonetic
 ```
 
+#### POST Request Properties
 
-<br/>
-
-The SPP API is the first step in the animation process. Kukurella requests are sent to the SPP API as a POST with the following required properties:
-
-<br/>
+The SPP API is the first step in the animation process. Kukurella requests are sent to the SPP API as a POST with the
+following required properties:
 
 | Field      | Type | Description     |
 | :---:       |    :----:  |        :---   |
 | `audio`      | Wav file       | A file containing audio of the voice the user wishes to use for the generated mp4 output |
 | `text`   | Txt file       | A file containing a textual script of what is being communicated in the Wav file      |
-| `recognizer`   | String        | Specifies if language processor should use English recognizer, (which is slower, but more accurate, and only works for English),<br> or the phonetic recognizer (which is faster, but not as accurate,  and supports over 200 languages,) Options include default as `english` or non-default `phonetic`.     |
+| `recognizer`   | String        | The recognizer for the language processor. Options include default as `english` and non-default `phonetic`. The English-only recognizer is slower but more accurate. The phonetic recognizer is faster but not as accurate, and it supports over 200 languages.      |
 | `avatar` |  String  | Specifies  avatar animation choice for video output. Options include default `barb` or non-default `boy` |
 
-Some critical constraints regarding the use of this API: 
- - This API only responds to POST calls.
- - This process is computationally intensive, as such expect a wait time between requests. More user requests will result in slower processing times. 
- - The script text file should match the given audio file as closely as possible in terms of content. Failure to do so could lead to errors. 
- - Port 3000 must be referenced in addition to the IP address. 
- - File creation permissions must be allowed, or new files will not be created in `/tmp` directory. 
+#### API Constraints
 
+- This API only responds to POST calls
+- This process is computationally intensive, as such expect a wait time etween requests. More user requests will result
+in slower processing times
+- The script text file should match the given audio file as closely as possible in terms of content. Failure to do so
+could lead to errors.
+- Port 3000 must be referenced in addition to the IP address.
+- File creation permissions must be allowed, or new files will not be created in `/tmp` directory.
 
-<br/>
-
-Possible errors: 
-
+#### Possible API Errors
 
 | Error Code | Description |
 | :---      | :-----     |
 | 400 Bad Request | Required fields are specified |
 | 403 Forbidden | Request is recognized by the server but refused. Likely due to connecting to the wrong port |
-| 500 Internal Server Error | The API has not been configured properly on the host server machine | 
-
+| 500 Internal Server Error | The API has not been configured properly on the host server machine |
 
 ### The Phoneme Factory
 
 The Phoneme Factory is the first step in the SPP animation process. The factory is in
-charge of mapping spoken language from the `audio` and `text` inputs into a series of phonemes, which are units of sound that
-distinguish one word from another.
+charge of mapping spoken language from the `audio` and `text` inputs into a series of phonemes, which are units of sound
+that distinguish one word from another.
 
-How is this done ?
+#### Rhubarb Lip Sync
 
- The `audio`  file, `text` file, and `recognizer` selection is passed to the **Phoneme processor** which sends the data to an external command-line process called [**Rhubarb Lip Sync**](INSERT-LINK). Rhubarb is an open-source package that can create 2d animations given any voice recording. In SPP, Rhubarb processes the `audio` and `text` file to create a JSON [output](#rhubarb-output) that outlines every phoneme along with a `start` and `end` time interval tag.
+ The `audio`  file, `text` file, and `recognizer` selection is passed to the **Phoneme processor** which sends the data
+ to an external command-line process called [**Rhubarb Lip Sync**](https://github.com/DanielSWolf/rhubarb-lip-sync).
+ Rhubarb is an open-source command-line tool that can create 2D animations given any voice recording. In SPP, Rhubarb
+ processes the `audio` and `text` file to create a JSON [output](#rhubarb-output) that outlines every phoneme along
+ with a `start` and `end` time interval tag.
 
 #### Rhubarb Output
 
@@ -195,16 +160,21 @@ How is this done ?
     { "start": 0.37, "end": 0.44, "value": "G" },
     { "start": 0.44, "end": 1.42, "value": "B" },
     ... ]
-    
+
 ```
 
- Rhubarb uses the `recognizer` input to select the engine to use to during the process of creating a phoneme file. When ```recognizer: english```,  Rhubarb will use the `pocketSphinx` engine to process the english audio. When ```recognizer: phonetic```, Rhubarb will use the `Phonetic` recognizer instead. It has been observed that the `Phonetic` recognizer performs better.
+Rhubarb uses the `recognizer` input to select the engine to use to during the process of creating a phoneme file. When
+```recognizer: english```,  Rhubarb will use the `pocketSphinx` engine to process the english audio. When
+```recognizer: phonetic```, Rhubarb will use the `Phonetic` recognizer instead. It has been observed that the `Phonetic`
+recognizer performs better.
 
-Once the phoneme contents are created, they are sent off to a another process.
+Once the phoneme contents are created, they are sent to the next process.
 
 ## The Animation Factory
 
-The animation factory uses the [phoneme output](#rhubarb-output) from the phoneme factory to logically select frames from `speaking-portal-project/images` for 2d animation. Each frame corresponds to exactly one phoneme, avatar, blink value, and body position. This frame data is compiled into an [frame data output](#frame-data-output) file.
+The animation factory uses the [phoneme output](#rhubarb-output) from the phoneme factory to logically select frames
+from `speaking-portal-project/images` to generate the 2D animation. Each frame corresponds to exactly one phoneme,
+avatar, blink value, and body position. This frame data is compiled into a [frame data output](#frame-data-output) file.
 
 ### Frame Data Output
 
@@ -221,19 +191,20 @@ file ./images/character01/B_eyes0.png
 outpoint 0.98
 ```
 
-The [frame data output]((#frame-data-output)) includes a path to the image and duration of frame in animation video.
+The [frame data output](#frame-data-output) includes a path to the image and the duration of the frame for the animation
+video. This file is then sent to FFMPEG, a highly portable library capable of rendering image frames into an mp4
+output. Once the video file is created, it is then returned to the user as a response from the API.
 
-To create a video, this file is sent to FFMPEG, a highly portable library capable of rendering image frames into an mp4 output.
+## Example
 
-<br>
+Below is an example of the Barb avatar speaking, blinking, and changing poses.
 
 <img src = "docs/documentation/Images/AmberAnimated.gif" width="250px" height="300px">
 
-<br>
-Once the video file is created in FFMPEG, it is then returned to the user as a response from the API.
-
 ## Limitations
 
-- The phoneme generation process controlled via Rhubarb can be quite computationally intensive, and is the current bottleneck for performance.
+- The phoneme generation process controlled via Rhubarb can be quite computationally intensive, and is the current
+bottleneck for performance.
 - Blink frequency is chosen using a random probability
-- Avatar poses are chosen at random. A suggestion for future development would be to include sentiment analysis on the text and choose appropriate poses: however, this also depends on which poses are provided by the artist.
+- Avatar poses are chosen at random. A suggestion for future development would be to include sentiment analysis on the
+text and choose appropriate poses; however, this depends on the poses provided by the artist.
