@@ -117,7 +117,7 @@ Here's a typical example of the JSON sent in a POST request.
 
 #### POST Request Properties
 
-The SPP API is the first step in the animation process. Kukurella requests are sent to the SPP API as a POST with the
+Kukurella requests are sent to the SPP API as a POST with the
 following required properties:
 
 | Field      | Type | Description     |
