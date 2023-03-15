@@ -152,8 +152,8 @@ The SPP API is the first step in the animation process. Kukurella requests are s
 | :---:       |    :----:  |        :---   |
 | `audio`      | Wav file       | A file containing audio of the voice the user wishes to use for the generated mp4 output |
 | `text`   | Txt file       | A file containing a textual script of what is being communicated in the Wav file      |
-| `recognizer`   | String        | Specifies if language processor should use English recognizer, (which is slower, but more accurate, and only works for English),<br> or the phonetic recognizer (which is faster, but not as accurate,  and supports over 200 languages,)       |
-| `characterSelect` |  String  | Specifies  avatar animation choice for video output. |
+| `recognizer`   | String        | Specifies if language processor should use English recognizer, (which is slower, but more accurate, and only works for English),<br> or the phonetic recognizer (which is faster, but not as accurate,  and supports over 200 languages,) Options include default as `english` or non-default `phonetic`.     |
+| `avatar` |  String  | Specifies  avatar animation choice for video output. Options include default `barb` or non-default `boy` |
 
 Some critical constraints regarding the use of this API: 
  - This API only responds to POST calls.
