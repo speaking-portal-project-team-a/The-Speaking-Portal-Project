@@ -77,16 +77,20 @@ to the local API that is currently listening for a request from step 7.
 
 ### Overview
 
-The Speaking Portal Project (SPP) is built to connect with Kukurella's Text-to-Speech platform as an API. The SPP is broken down into three main components: *The *API**, **The Phoneme Factory**, and **The Animation Factory**.
+The Speaking Portal Project (SPP) is built to connect with Kukurella's Text-to-Speech platform as an API. The SPP is
+broken down into three main components: **The API**, **The Phoneme Factory**, and **The Animation Factory**.
+
+The Speaking Portal API generates an MP4 animation from the speech file and text file received from Kukarella's
+TTS process. Text and audio inputs are first processed and converted into a json file containing phonemes and their
+timings. This processing is done via the [Rhubarb library](https://github.com/DanielSWolf/rhubarb-lip-sync). (Phonemes
+are the smallest unit of sounds that uniquely identify distinct sounds within words.) Once a phoneme file is created,
+the animation process then identifies which avatar assets to use based on the phoneme. Other features, such as blinks
+and pose changes are added, and then all image assets are rendered in a video file through ffmepg.
 
 ### API
 
-Speaking Portal API creates an MP4 output animation from a synthesized speech file and text input based on Kukarella
-TTS. Text and audio inputs are first processed and converted into a json file containing phonemes and their timings. This processing is done via the [Rhubarb library](https://github.com/DanielSWolf/rhubarb-lip-sync). (Phonemes are the
-smallest unit of sounds that uniquely identifies words from one another.) Once a phoneme file is created, it is
-processed in a phoneme processor, which maps phonemes to  mouth assets. The mouth assets are then added onto an avatar
-and rendered in a video file through ffmepg. The API, once request is received, initializes a node instance, creates a
-`/tmp` directory for file I/O operations, and begins the animation process by sending all user inputs to main.
+Once the API receives the request, it initializes a node instance, creates a `/tmp` directory for file I/O operations,
+and begins the animation process by sending all user inputs to main.
 
 Here's a typical example of the JSON used in a POST request.
 
