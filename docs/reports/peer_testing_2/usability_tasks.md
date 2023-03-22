@@ -9,7 +9,7 @@ Examiner notes for setup:
 
 ## Users
 
-As a user, you are a member of the general public who is using the Kukarella web application; you are someone who would
+As a user, you are a member of the general-public who is using the Kukarella web application; you are someone who would
 like to have a more immersive text-to-speech experience where an animated avatar reads your text aloud.
 
 In your pursuit of having an animated text-to-speech experience, you will use our team's premium Kukarella account,
