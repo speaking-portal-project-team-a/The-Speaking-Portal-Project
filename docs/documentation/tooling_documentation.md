@@ -12,7 +12,7 @@ to update the file path based on your system. This update is to be done on line 
 In order for the illustrator script to run properly, it is necessary that the layers are set up in a similar fashion to
 what is shown in the attached image [!](../IMAGE UPLOAD REQUIRED). Once that is completed, your illustrator file is 
 considered properly setup. If you require additional clarity, please view the illustrator file within the repository and
-set up your file in an identical manner. The file can be found at **LINK FILE HERE**.
+set up your file in an identical manner. The file can be found at **speaking-portal-project/images/barb-tooling.ai**.
 
 ## Running the script
 This script can be run by going to Illustrator -> File -> Scripts -> Browse & selecting this script.
