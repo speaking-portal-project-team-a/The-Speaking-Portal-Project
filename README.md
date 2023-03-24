@@ -139,11 +139,12 @@ could lead to lip synchronization errors.
 - We recommend referencing Port 3000 in addition to the IP address.
 - File creation permissions must be allowed, or new files will not be created in `/tmp` directory.
 
-#### Possible API Errors
+#### API Response Codes
 
 | Error Code | Description |
 | :---      | :-----     |
-| 400 Bad Request | Required fields are specified |
+| 200 OK  | Request has been recieved and is being processed |
+| 400 Bad Request | Required fields aren't specified |
 | 403 Forbidden | Request is recognized by the server but refused. Likely due to connecting to the wrong port |
 | 500 Internal Server Error | The API has not been configured properly on the host server machine |
 
