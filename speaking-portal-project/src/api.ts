@@ -51,8 +51,11 @@ if (cluster.isPrimary) {
             // Retrieve language parameter
             const recognizer = req.body.recognizer ? req.body.recognizer : 'english'
             // Retrieve character selection
-            const avatar = req.body.avatar ? req.body.avatar.toLowerCase() : AvatarNames[0]
 
+            const avatar =
+                req.body.avatar && Object.keys(AvatarNames).includes(req.body.avatar.toLowerCase())
+                    ? req.body.avatar.toLowerCase()
+                    : AvatarNames[0]
             // Set a general filename for temp files to be generated as
             const filename = audioFile.filename
             console.log(audioFile, textFile, recognizer)

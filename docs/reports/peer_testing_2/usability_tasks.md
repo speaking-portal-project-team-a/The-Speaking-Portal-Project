@@ -9,7 +9,7 @@ Examiner notes for setup:
 
 ## Users
 
-As a user, you are a member of the general public who is using the Kukarella web application; you are someone who would
+As a user, you are a member of the general-public who is using the Kukarella web application; you are someone who would
 like to have a more immersive text-to-speech experience where an animated avatar reads your text aloud.
 
 In your pursuit of having an animated text-to-speech experience, you will use our team's premium Kukarella account,
@@ -130,4 +130,4 @@ Read the README, and then identify:
 2. Does the naming scheme of the character image assets make senese?
 3. What does the naming scheme tell you about the images?
 4. If an artist provided you with the Adobe Illustrator file for a new character, I could add the new character's assets.
-5. Using the README, create and add the image assets for Boy. Did you succeed?
+5. Using the README, create and add the image assets for Boy. Did you succeed?  *Note: this usability task can only be completed if the tester has Adobe Illustrator installed on their computer. Team A only has one computer with this program, so this is dependent on the Peer Testing II schedule.*
