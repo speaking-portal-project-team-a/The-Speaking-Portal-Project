@@ -20,9 +20,10 @@ Team A
     - [Overview](#overview)
     - [API](#api)
     - [The Phoneme Factory](#the-phoneme-factory)
-      - [Rhubarb Output](#rhubarb-output)
-  - [The Animation Factory](#the-animation-factory)
+      - [Sample Rhubarb Output](#sample-rhubarb-output)
+    - [The Animation Factory](#the-animation-factory)
     - [Frame Data Output](#frame-data-output)
+  - [Additional Documentation](#additional-documentation)
   - [Limitations](#limitations)
 
 ## General Information
@@ -78,7 +79,7 @@ to the local API that is currently listening for a request from step 7.
 ### Overview
 
 The Speaking Portal Project (SPP) is built to connect with Kukurella's Text-to-Speech platform as an API. The SPP is
-broken down into three main components: **The API**, **The Phoneme Factory**, and **The Animation Factory**.
+broken down into three main components: [The API](#api), [The Phoneme Factory](#the-phoneme-factory), and [The Animation Factory](#the-animation-factory).
 
 The Speaking Portal API generates an MP4 animation from the speech file and text file received from Kukarella's
 TTS process. Text and audio inputs are first processed and converted into a json file containing phonemes and their
@@ -155,7 +156,7 @@ from the `audio` and `text` inputs into a series of phonemes. Phonemes represent
 words and help us distinguish when the mouth should change shape.
 
 To map these phonemes, the `audio` file, `text` file, and `recognizer` selection is passed to the **Phoneme processor**,
-which calls [**Rhubarb Lip Sync**](https://github.com/DanielSWolf/rhubarb-lip-sync). Rhubarb returns a JSON
+which calls [Rhubarb Lip Sync](https://github.com/DanielSWolf/rhubarb-lip-sync). Rhubarb returns a JSON
 [output](#sample-rhubarb-output) that outlines every phoneme along with a `start` and `end` time interval tag.
 
 #### Sample Rhubarb Output
@@ -208,6 +209,12 @@ output. Once the video file is created, it is then returned to the user as a res
 Below is an example of the Barb avatar speaking, blinking, and changing poses.
 
 <img src = "docs/documentation/Images/AmberAnimated.gif" width="250px" height="300px">
+
+## Additional Documentation
+
+For more information about the API, please refer to our additional documentation: [Working with Speaking Portal REST API](/docs/documentation/API_documentation.md).
+
+When adding a new avatar, if using Adobe Illustrator, please refer to our [tooling documentation](docs/documentation/tooling_documentation.md) for how to set up the layers, and then use the [script](/speaking-portal-project/tooling/frameGeneratorScript.jsx) to automatically export each frame.
 
 ## Limitations
 

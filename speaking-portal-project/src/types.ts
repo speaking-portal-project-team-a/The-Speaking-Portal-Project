@@ -165,6 +165,9 @@ export class Avatar {
             if ((n <= 0.3 && currentSec % 4 == 0) || (n > 0.3 && n <= 0.6 && currentSec % 3 == 0)) {
                 this.eyes.close(currentSec)
             }
+        // maximum amount of time for no blinking
+        } else if (frameDur < 0.08 && currentSec - this.eyes.lastBlink > 6) {
+            this.eyes.close(currentSec)
         }
     }
 
@@ -186,7 +189,7 @@ export class Avatar {
         return newPose
     }
 
-    // Updates the body's position based on timings and idle mouth cue
+    // Updates the body's position based on timings and phoneme
     updateBody(currentSec: number): void {
         let poseDur = currentSec - this.body.lastPoseChange
         if (poseDur >= 2 || (poseDur >= 1.5 && this.mouth.phoneme === 'X')) {
