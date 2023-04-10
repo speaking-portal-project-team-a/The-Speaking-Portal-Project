@@ -140,7 +140,9 @@ could lead to lip synchronization errors.
 - We recommend referencing Port 3000 in addition to the IP address.
 - File creation permissions must be allowed, or new files will not be created in `/tmp` directory.
 
-#### API Response Codes
+#### Common Errors
+
+If you are encountering errors, please see below for common API error codes and other common error outputs.
 
 | Error Code | Description |
 | :---      | :-----     |
@@ -148,6 +150,10 @@ could lead to lip synchronization errors.
 | 400 Bad Request | Required fields aren't specified |
 | 403 Forbidden | Request is recognized by the server but refused. Likely due to connecting to the wrong port |
 | 500 Internal Server Error | The API has not been configured properly on the host server machine |
+
+If Rhubarb is not installed correctly or fails to read the audio and text files, the output may include a file not found error for `./rhubarb`, an `exit code (status): null`, and a file not found error for the .MP4 output file. Please ensure Rhubarb is installed correctly (refer to [setup](#setup)), check that the audio file is a valid .WAV file, and that the text file is a valid .txt file.
+
+If ffmpeg is not installed correctly, the output may include an `exit code (status): null` as well as the code `ERR_HTTP_HEADERS_SENT`. There may also be a path that indicates the location of an error is `The-Speaking-Portal-Project\speaking-portal-project\build\animationFactory\ffmpeg.js`. To ensure ffmpeg is installed correctly, please refer to [setup](#setup).
 
 ### The Phoneme Factory
 
@@ -204,11 +210,15 @@ The [frame data output](#frame-data-output) includes a path to the image and the
 video. This file is then sent to FFMPEG, a highly portable library capable of rendering image frames into an mp4
 output. Once the video file is created, it is then returned to the user as a response from the API.
 
-## Example
+## Output Examples
 
-Below is an example of the Barb avatar speaking, blinking, and changing poses.
+<video width="250" controls>
+  <source src="docs/documentation/Videos/example-barb.mp4" type="video/mp4">
+</video>
 
-<img src = "docs/documentation/Images/AmberAnimated.gif" width="250px" height="300px">
+<video width="250" controls>
+  <source src="docs/documentation/Videos/example-boy.mp4" type="video/mp4">
+</video>
 
 ## Additional Documentation
 
