@@ -212,13 +212,11 @@ output. Once the video file is created, it is then returned to the user as a res
 
 ## Output Examples
 
-<video width="250" controls>
-  <source src="docs/documentation/Videos/example-barb.mp4" type="video/mp4">
-</video>
+To view output examples, please view the [Barb](docs/documentation/Videos/example-barb.mp4) and [Boy](docs/documentation//Videos/example-boy.mp4) example videos.
 
-<video width="250" controls>
-  <source src="docs/documentation/Videos/example-boy.mp4" type="video/mp4">
-</video>
+An example gif is presented below.
+
+<img src = "docs/documentation/Images/BarbAnimated.gif" width="250px" height="300px">
 
 ## Additional Documentation
 
