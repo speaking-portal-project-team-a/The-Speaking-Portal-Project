@@ -20,9 +20,10 @@ Team A
     - [Overview](#overview)
     - [API](#api)
     - [The Phoneme Factory](#the-phoneme-factory)
-      - [Rhubarb Output](#rhubarb-output)
-  - [The Animation Factory](#the-animation-factory)
+      - [Sample Rhubarb Output](#sample-rhubarb-output)
+    - [The Animation Factory](#the-animation-factory)
     - [Frame Data Output](#frame-data-output)
+  - [Additional Documentation](#additional-documentation)
   - [Limitations](#limitations)
 
 ## General Information
@@ -78,7 +79,7 @@ to the local API that is currently listening for a request from step 7.
 ### Overview
 
 The Speaking Portal Project (SPP) is built to connect with Kukurella's Text-to-Speech platform as an API. The SPP is
-broken down into three main components: **The API**, **The Phoneme Factory**, and **The Animation Factory**.
+broken down into three main components: [The API](#api), [The Phoneme Factory](#the-phoneme-factory), and [The Animation Factory](#the-animation-factory).
 
 The Speaking Portal API generates an MP4 animation from the speech file and text file received from Kukarella's
 TTS process. Text and audio inputs are first processed and converted into a json file containing phonemes and their
@@ -139,7 +140,9 @@ could lead to lip synchronization errors.
 - We recommend referencing Port 3000 in addition to the IP address.
 - File creation permissions must be allowed, or new files will not be created in `/tmp` directory.
 
-#### API Response Codes
+#### Common Errors
+
+If you are encountering errors, please see below for common API error codes and other common error outputs.
 
 | Error Code | Description |
 | :---      | :-----     |
@@ -148,6 +151,10 @@ could lead to lip synchronization errors.
 | 403 Forbidden | Request is recognized by the server but refused. Likely due to connecting to the wrong port |
 | 500 Internal Server Error | The API has not been configured properly on the host server machine |
 
+If Rhubarb is not installed correctly or fails to read the audio and text files, the output may include a file not found error for `./rhubarb`, an `exit code (status): null`, and a file not found error for the .MP4 output file. Please ensure Rhubarb is installed correctly (refer to [setup](#setup)), check that the audio file is a valid .WAV file, and that the text file is a valid .txt file.
+
+If ffmpeg is not installed correctly, the output may include an `exit code (status): null` as well as the code `ERR_HTTP_HEADERS_SENT`. There may also be a path that indicates the location of an error is `The-Speaking-Portal-Project\speaking-portal-project\build\animationFactory\ffmpeg.js`. To ensure ffmpeg is installed correctly, please refer to [setup](#setup).
+
 ### The Phoneme Factory
 
 The Phoneme Factory is the first step in the SPP animation process. The factory is in charge of mapping spoken language
@@ -155,7 +162,7 @@ from the `audio` and `text` inputs into a series of phonemes. Phonemes represent
 words and help us distinguish when the mouth should change shape.
 
 To map these phonemes, the `audio` file, `text` file, and `recognizer` selection is passed to the **Phoneme processor**,
-which calls [**Rhubarb Lip Sync**](https://github.com/DanielSWolf/rhubarb-lip-sync). Rhubarb returns a JSON
+which calls [Rhubarb Lip Sync](https://github.com/DanielSWolf/rhubarb-lip-sync). Rhubarb returns a JSON
 [output](#sample-rhubarb-output) that outlines every phoneme along with a `start` and `end` time interval tag.
 
 #### Sample Rhubarb Output
@@ -203,11 +210,19 @@ The [frame data output](#frame-data-output) includes a path to the image and the
 video. This file is then sent to FFMPEG, a highly portable library capable of rendering image frames into an mp4
 output. Once the video file is created, it is then returned to the user as a response from the API.
 
-## Example
+## Output Examples
 
-Below is an example of the Barb avatar speaking, blinking, and changing poses.
+To view output examples, please view the [Barb](docs/documentation/Videos/example-barb.mp4) and [Boy](docs/documentation//Videos/example-boy.mp4) example videos.
 
-<img src = "docs/documentation/Images/AmberAnimated.gif" width="250px" height="300px">
+An example gif is presented below.
+
+<img src = "docs/documentation/Images/BarbAnimated.gif" width="250px" height="300px">
+
+## Additional Documentation
+
+For more information about the API, please refer to our additional documentation: [Working with Speaking Portal REST API](/docs/documentation/API_documentation.md).
+
+When adding a new avatar, if using Adobe Illustrator, please refer to our [tooling documentation](docs/documentation/tooling_documentation.md) for how to set up the layers, and then use the [script](/speaking-portal-project/tooling/frameGeneratorScript.jsx) to automatically export each frame.
 
 ## Limitations
 
